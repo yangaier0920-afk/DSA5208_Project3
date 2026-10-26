@@ -1,8 +1,8 @@
 {
   "prepared_on": "2026-10-26",
-  "purpose": "initial member-A sharing baseline for a new private GitHub repository",
+  "purpose": "member-A sharing baseline with complete Atlas onboarding instructions",
   "file_count_excluding_this_manifest": 45,
-  "total_bytes_excluding_this_manifest": 96104,
+  "total_bytes_excluding_this_manifest": 109111,
   "source_files_copied_byte_for_byte": [
     "jacobi.cpp",
     "mpi_hello.cpp",
@@ -13,7 +13,7 @@
     "atlas_serial.pbs",
     "atlas_parallel_smoke.pbs"
   ],
-  "notes": "Initial baseline only. Manifest excludes itself. Generated binaries, local runs and original private diagnostic archives are outside this sharing directory.",
+  "notes": "Manifest excludes itself. Refreshed for a documentation-only Atlas onboarding update; algorithm, scripts and numerical evidence are unchanged. Previous manifest remains in the recorded base Git commit.",
   "files": [
     {
       "path": ".gitattributes",
@@ -24,6 +24,11 @@
       "path": ".gitignore",
       "bytes": 336,
       "sha256": "87fa7ef49b3c802ff98e2b7d76a32865111026432c5303c58057f79471c58167"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5294,
+      "sha256": "f780bdb948641af4cbfd8e62a4a5fbc294d3a65e39919a05686ea3f896e53fc7"
     },
     {
       "path": "atlas_parallel_smoke.pbs",
@@ -42,8 +47,8 @@
     },
     {
       "path": "docs/ATLAS.md",
-      "bytes": 1354,
-      "sha256": "6c36ffabd62408b99955a600d4871dd273d66a108940e014c0b26b3d25de82a1"
+      "bytes": 13276,
+      "sha256": "adc9168affb2d380886fdfa60abb49958435afc5f2193c145d6f47bf8095883d"
     },
     {
       "path": "docs/FILES.md",
@@ -52,8 +57,8 @@
     },
     {
       "path": "docs/HANDOFF.md",
-      "bytes": 2191,
-      "sha256": "8c6c88651a7e24ddb293820f27e9e1a81940ac8f511cbae5916da448d45b531f"
+      "bytes": 2962,
+      "sha256": "a04f9bced66932fbb6453eadc5f73ab43083c64ecde00c6f93bc2646c4313c13"
     },
     {
       "path": "docs/PROJECT_REQUIREMENTS.md",
@@ -134,11 +139,6 @@
       "path": "prepare_team_references.py",
       "bytes": 7029,
       "sha256": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6"
-    },
-    {
-      "path": "README.md",
-      "bytes": 4980,
-      "sha256": "cb51e2defa949f8e24df446bd20150de00a2a3ffb673f98b82a1eb829148f67b"
     },
     {
       "path": "reference/cases/converged_n16.stdout.json",
@@ -240,5 +240,8 @@
       "bytes": 2513,
       "sha256": "92ea27b39aab10516aec2390f299d3ea75b908430ac56b235d91a3657820d3d6"
     }
-  ]
+  ],
+  "updated_on": "2026-10-26",
+  "documentation_update_base_commit": "38da1b50e177b24705bda647989ca32425090d92",
+  "previous_manifest_sha256": "85f750a359aa13cddb0b87c57e601606e357003007b82e1191944ea91f90fb7a"
 }

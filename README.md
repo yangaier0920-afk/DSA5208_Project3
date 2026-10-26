@@ -2,6 +2,8 @@
 
 成员 A 的串行基准、OpenMP 入门实现、公共参数约定与验证参考。当前 A 已采纳参数方案，B/C 确认及组员交接复现待补。MPI/混合 Jacobi 算法尚待实现；`mpi_hello.cpp` 是环境检查程序。
 
+**第一次在学校 Atlas 系统操作，请先看 [Atlas 完整操作指南](docs/ATLAS.md)**：包含账号/网络、SSH 登录、Windows/Mac 上传源码、PBS 提交与状态查询、结果验收和下载，每一步标明在本机还是 Atlas 执行。
+
 ## 文件入口
 
 | 文件/目录 | 用途 |
@@ -12,7 +14,7 @@
 | `team_contract_v0.1.json` | 机器可读的参数与输出约定 |
 | [团队参数约定](docs/TEAM_CONTRACT.zh-CN.md) | 推荐数值、MPI 对接约定、计时与验收口径 |
 | [协作与交接](docs/HANDOFF.md) | A/B/C 分工、接收验收及下一步 |
-| [集群运行说明](docs/ATLAS.md) | 两个已有 PBS 脚本的用途与提交位置 |
+| [学校 Atlas 完整操作指南](docs/ATLAS.md) | SSH → SCP 上传 → qsub → qstat → 验收 → SCP 下载，含 Windows/Mac 命令 |
 | `reference/` | 已有本机串行数值参考与单次性能试跑 |
 | `evidence/` | 已有 Atlas 串行小样本及 MPI/OpenMP 环境检查结果 |
 | [AI 使用记录](docs/AI_USAGE.md) | AI 贡献与已有人工操作/验证边界 |

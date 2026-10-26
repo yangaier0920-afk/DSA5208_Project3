@@ -19,6 +19,14 @@
 
 Windows 示例程序为 `build/jacobi_serial.exe`；Linux/Mac 为 `build/jacobi_serial`。不要传递 Windows exe 给 Mac 或集群运行。
 
+## 在学校 Atlas 系统接入
+
+负责集群操作的组员按 [Atlas 完整操作指南](ATLAS.md) 进行首次接入：本机取得源码 → SSH 登录建目录 → 本机 SCP 上传 → Atlas qsub 提交 → qstat 与数值验收 → 本机下载完整原件。
+
+指南分别提供 Windows/Mac 命令，并说明账号/网络、队列/模块核对、作业 ID、预期输出和原始记录保存。现有 PBS 在计算节点自动编译，不依赖集群 Python。B 回传实际作业号、配置、原始结果与验收结论；已有 A 的成功小作业不用为了补文档重复提交。
+
+现有两个 PBS 仍是串行小样本与环境检查；公共约定中的额外小案例和正式性能配置需要后续对应作业脚本，不能视为已经运行。
+
 ## 并行接入约定
 
 - B 先确认一维按行分区、halo 交换、全局最大更新量与 rank 0 JSON 输出。
