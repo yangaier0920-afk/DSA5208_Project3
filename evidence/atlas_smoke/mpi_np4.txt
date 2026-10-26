@@ -1,0 +1,4 @@
+rank=1/4 sum=10
+rank=2/4 sum=10
+rank=3/4 sum=10
+rank=0/4 sum=10

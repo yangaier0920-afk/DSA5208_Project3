@@ -1,0 +1,2 @@
+rank=0/2 sum=3
+rank=1/2 sum=3

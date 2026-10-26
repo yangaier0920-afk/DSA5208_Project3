@@ -1,0 +1,1 @@
+{"mode":"serial","n":1,"threads":1,"iterations":1,"tolerance":0,"status":"fixed_iterations","max_update":1,"max_error":0,"residual_inf":0,"boundary_error":0,"compute_seconds":1.6899999999999999e-07,"grid":[[0,0.5,1],[0.5,1,1.5],[1,1.5,2]]}

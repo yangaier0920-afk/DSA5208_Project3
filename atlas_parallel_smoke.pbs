@@ -1,0 +1,57 @@
+#!/bin/bash
+#PBS -N jsmoke
+#PBS -q parallel
+#PBS -l select=1:ncpus=12:mpiprocs=12:mem=2gb
+#PBS -l walltime=00:05:00
+#PBS -j oe
+#PBS -S /bin/bash
+
+# Run after the serial job succeeds. This checks MPI/OpenMP infrastructure.
+# It does not implement a distributed or hybrid Jacobi solver.
+set -eo pipefail
+: "${PBS_JOBID:?Submit this script with qsub, not bash on a login node}"
+: "${PBS_O_WORKDIR:?Missing PBS working directory}"
+cd "$PBS_O_WORKDIR"
+
+run_dir="$PBS_O_WORKDIR/results/atlas_smoke_${PBS_JOBID}"
+mkdir -p "$run_dir/bin"
+exec > >(tee "$run_dir/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+
+printf 'RUN_DIR=%s\nPBS_JOBID=%s\nPBS_QUEUE=%s\n' "$run_dir" "$PBS_JOBID" "${PBS_QUEUE:-unknown}"
+date -Is
+hostname
+whoami
+pwd
+if [ -n "${PBS_NODEFILE:-}" ] && [ -r "$PBS_NODEFILE" ]; then
+    printf 'PBS_NODEFILE:\n'
+    cat "$PBS_NODEFILE"
+    cp "$PBS_NODEFILE" "$run_dir/pbs_nodefile.txt"
+fi
+cp "$0" "$run_dir/submitted_script.pbs"
+sha256sum mpi_hello.cpp omp_hello.cpp "$run_dir/submitted_script.pbs" > "$run_dir/source_sha256.txt"
+
+source /app1/ebenv
+module load GCC/12.2.0
+module load OpenMPI/4.1.5-GCC-12.2.0
+module list
+command -v g++ mpicxx mpirun
+g++ --version
+mpirun --version
+
+mpicxx -std=c++17 -O2 -Wall -Wextra mpi_hello.cpp -o "$run_dir/bin/mpi_hello"
+g++ -std=c++17 -O2 -Wall -Wextra -fopenmp omp_hello.cpp -o "$run_dir/bin/omp_hello"
+
+export OMP_NUM_THREADS=1
+export OMP_DYNAMIC=FALSE
+for processes in 2 4 12; do
+    mpirun -np "$processes" "$run_dir/bin/mpi_hello" | tee "$run_dir/mpi_np${processes}.txt"
+done
+
+for threads in 4 12; do
+    export OMP_NUM_THREADS="$threads"
+    "$run_dir/bin/omp_hello" | tee "$run_dir/openmp_threads${threads}.txt"
+    grep -qx "threads=$threads sum=5050" "$run_dir/openmp_threads${threads}.txt"
+done
+
+printf 'SMOKE_STATUS=PASSED\n'

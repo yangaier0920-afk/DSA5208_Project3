@@ -1,0 +1,244 @@
+{
+  "prepared_on": "2026-10-26",
+  "purpose": "initial member-A sharing baseline for a new private GitHub repository",
+  "file_count_excluding_this_manifest": 45,
+  "total_bytes_excluding_this_manifest": 96104,
+  "source_files_copied_byte_for_byte": [
+    "jacobi.cpp",
+    "mpi_hello.cpp",
+    "omp_hello.cpp",
+    "verify_small.py",
+    "prepare_team_references.py",
+    "team_contract_v0.1.json",
+    "atlas_serial.pbs",
+    "atlas_parallel_smoke.pbs"
+  ],
+  "notes": "Initial baseline only. Manifest excludes itself. Generated binaries, local runs and original private diagnostic archives are outside this sharing directory.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 192,
+      "sha256": "6cb4ed3f6cf54978c1c310c8b1909df4037107f7da1e96bc3fff362493736ec9"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 336,
+      "sha256": "87fa7ef49b3c802ff98e2b7d76a32865111026432c5303c58057f79471c58167"
+    },
+    {
+      "path": "atlas_parallel_smoke.pbs",
+      "bytes": 1833,
+      "sha256": "ab2079fcc29178305dcca1cd2bb27ffd50ce0294208d80ce8b6a3d533455b3ec"
+    },
+    {
+      "path": "atlas_serial.pbs",
+      "bytes": 1608,
+      "sha256": "d9c49974af685c874da6b90f35b3bc0c73516127e7c6ee90e7d861f47471882f"
+    },
+    {
+      "path": "docs/AI_USAGE.md",
+      "bytes": 1020,
+      "sha256": "88352ae290f706d79aec268ba73d812724a767038e47c1b013b7048bc0dbdd0c"
+    },
+    {
+      "path": "docs/ATLAS.md",
+      "bytes": 1354,
+      "sha256": "6c36ffabd62408b99955a600d4871dd273d66a108940e014c0b26b3d25de82a1"
+    },
+    {
+      "path": "docs/FILES.md",
+      "bytes": 1825,
+      "sha256": "75c200906f51d8512b0fc65587910523132216708dfc58fbe2a64d8034274367"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "bytes": 2191,
+      "sha256": "8c6c88651a7e24ddb293820f27e9e1a81940ac8f511cbae5916da448d45b531f"
+    },
+    {
+      "path": "docs/PROJECT_REQUIREMENTS.md",
+      "bytes": 1759,
+      "sha256": "262378a20e41b89b4cd55f6eee0a0ceb28ce8f8bfb8d0a46ec6ba2ab9a06c62d"
+    },
+    {
+      "path": "docs/TEAM_CONTRACT.zh-CN.md",
+      "bytes": 14557,
+      "sha256": "2f9cbce59d96f8e31160af3c9afa4a5c741896d3c8f940f2c5e608a528bde45d"
+    },
+    {
+      "path": "evidence/atlas_serial/n16.json",
+      "bytes": 284,
+      "sha256": "0b3eb4212c4af557cd833e41fc360b71ce218e56209980161c538980a725a7f9"
+    },
+    {
+      "path": "evidence/atlas_serial/n1_one_step.json",
+      "bytes": 240,
+      "sha256": "b504205f66c77d8077bf9f63e22e7fe6cdb2e4869227b85e2ddce3507030d1f6"
+    },
+    {
+      "path": "evidence/atlas_serial/n2_one_step.json",
+      "bytes": 448,
+      "sha256": "b1b4e64bbf91e669920349838dfbd9f4ef4a43692b4fd695a9104eeefbedbe85"
+    },
+    {
+      "path": "evidence/atlas_serial/n32.json",
+      "bytes": 284,
+      "sha256": "d5c4f5aa00b0d5b0ee884a3e1cefad17a486f31368e9437bbed6b877d1469126"
+    },
+    {
+      "path": "evidence/atlas_smoke/mpi_np12.txt",
+      "bytes": 206,
+      "sha256": "3a02ba85a4c1d717df8c7895f5799fc8aa9cfa0500d5f4a88aa49ddd2cc551b7"
+    },
+    {
+      "path": "evidence/atlas_smoke/mpi_np2.txt",
+      "bytes": 30,
+      "sha256": "aacda4739880dee6d14eece8413642da69ba99f63e941c5ae60dc47b6c8ae760"
+    },
+    {
+      "path": "evidence/atlas_smoke/mpi_np4.txt",
+      "bytes": 64,
+      "sha256": "c7182ad6f58b4adcb02fbb612db4e623542ff36b3e6fe0d1ab61c46a044fb1bc"
+    },
+    {
+      "path": "evidence/atlas_smoke/openmp_threads12.txt",
+      "bytes": 20,
+      "sha256": "42dff268b2b0312bd4a3e5e81b2b4226992e956abfe8e24707766129cbe6fe45"
+    },
+    {
+      "path": "evidence/atlas_smoke/openmp_threads4.txt",
+      "bytes": 19,
+      "sha256": "0c52c1ad618b787889bd83365b3bf740f5d5fba651a0cfc6548e5966f1300598"
+    },
+    {
+      "path": "evidence/atlas_summary.json",
+      "bytes": 1086,
+      "sha256": "b0749d9d4a9cb1d64f27c194cc398af89acbbc3022c7d6c4e3c9f2f51ddea401"
+    },
+    {
+      "path": "jacobi.cpp",
+      "bytes": 5923,
+      "sha256": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9"
+    },
+    {
+      "path": "mpi_hello.cpp",
+      "bytes": 503,
+      "sha256": "b750f2e5a440d80b2c1c5f800e4ea4ca6b3550bc5eec25a697d256840cb9fe70"
+    },
+    {
+      "path": "omp_hello.cpp",
+      "bytes": 389,
+      "sha256": "cb6c15fec84132d8bbe45f7b0016d4ad408acfcfe0de7eefc4c3b9fbb078d810"
+    },
+    {
+      "path": "prepare_team_references.py",
+      "bytes": 7029,
+      "sha256": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4980,
+      "sha256": "cb51e2defa949f8e24df446bd20150de00a2a3ffb673f98b82a1eb829148f67b"
+    },
+    {
+      "path": "reference/cases/converged_n16.stdout.json",
+      "bytes": 296,
+      "sha256": "f69d397f5af8639cc7eec6de9787d58e7637c57500e6dfc871c24006ff5b0524"
+    },
+    {
+      "path": "reference/cases/converged_n31.stdout.json",
+      "bytes": 282,
+      "sha256": "113bbfc7a76172e3f6b2d98074647fb8c833f0ea3d54ff276d5e93b0a76842f7"
+    },
+    {
+      "path": "reference/cases/converged_n32.stdout.json",
+      "bytes": 294,
+      "sha256": "144e166e7b81145190da30e86f67ec6610b3a4cdb272600ecbb85f3e83b22257"
+    },
+    {
+      "path": "reference/cases/fixed_n8_k30.stdout.json",
+      "bytes": 2167,
+      "sha256": "bb1c92724d1a021572c7bf7049518a56698914d0e7f169c420a39cf0bf1040c6"
+    },
+    {
+      "path": "reference/cases/hand_n1.stdout.json",
+      "bytes": 220,
+      "sha256": "3c7d2c6c3764889901a5927d368d42e5e96d77e1c0e1db2d466f0c6ef6546027"
+    },
+    {
+      "path": "reference/cases/hand_n2.stdout.json",
+      "bytes": 428,
+      "sha256": "8d65f71e93a40c66e80addfce320471ea17cd3942b066c4502f018d89f219548"
+    },
+    {
+      "path": "reference/cases/iteration_limit.stdout.json",
+      "bytes": 240,
+      "sha256": "202c2e72d58bad6020cede790b25b69663ed2185a0ac4ec7071b87ae4e5076c7"
+    },
+    {
+      "path": "reference/cases/odd_n7_k1.stdout.json",
+      "bytes": 611,
+      "sha256": "be471183b218a5ecf319583bf39104f8af90d6a5bc7f22406527a8a9c0d15373"
+    },
+    {
+      "path": "reference/cases/odd_n7_k2.stdout.json",
+      "bytes": 747,
+      "sha256": "bc36c7a93aaac5cccdbcfba015bd6643b3d48cac3ccad9dfc639817a1012ea95"
+    },
+    {
+      "path": "reference/cases/odd_n7_k31.stdout.json",
+      "bytes": 1396,
+      "sha256": "e83f280fe62b0274caf954a098e9f396ab6f82acc9ffda3f3634d68bb5f35aa0"
+    },
+    {
+      "path": "reference/cases/pilot_n1024_k1000.stdout.json",
+      "bytes": 257,
+      "sha256": "480c3d8fc81ff9815c37c2da100f64deb213dae25a1ceecd8545ec52b64d7d62"
+    },
+    {
+      "path": "reference/cases/pilot_n2048_k1000.stdout.json",
+      "bytes": 248,
+      "sha256": "0092179075302d041804d54e6c13988ae6e7b0c0c1e955fe595f31d745343eed"
+    },
+    {
+      "path": "reference/cases/pilot_n256_k1000.stdout.json",
+      "bytes": 256,
+      "sha256": "f3f13b16d81ae95acbe103efd715178cbd52864f6bf4d8c5cd3599a900462868"
+    },
+    {
+      "path": "reference/cases/pilot_n512_k1000.stdout.json",
+      "bytes": 257,
+      "sha256": "6281a8a5e96da672c73867f1c8f1149408e416ac6d32ff8ef3a662257e88376d"
+    },
+    {
+      "path": "reference/contract_at_run.json",
+      "bytes": 5232,
+      "sha256": "f928fb637652ae85d1e23fdad6435d364a48b139c8f61927fe327fcaa45a0562"
+    },
+    {
+      "path": "reference/contract_snapshot.json",
+      "bytes": 6921,
+      "sha256": "3e2bce0aaa7d37242a6ee16ac405895766d580ffde613158c7158d845ef3d6d0"
+    },
+    {
+      "path": "reference/local_pilot.json",
+      "bytes": 3446,
+      "sha256": "2c68a4fe2596fba222dd2d4623d74f5886a807b0130e2dba384cf8029c438ce4"
+    },
+    {
+      "path": "reference/reference_results.json",
+      "bytes": 16801,
+      "sha256": "9ec2d7aad6cfbec2bd864debe1e23fcbb7d80ea7e21238e47e790be806d14f5d"
+    },
+    {
+      "path": "team_contract_v0.1.json",
+      "bytes": 5312,
+      "sha256": "26211971a26d05188b53baa817fa398b435bba27f54bd3c39c62d86e0cd7d00f"
+    },
+    {
+      "path": "verify_small.py",
+      "bytes": 2513,
+      "sha256": "92ea27b39aab10516aec2390f299d3ea75b908430ac56b235d91a3657820d3d6"
+    }
+  ]
+}

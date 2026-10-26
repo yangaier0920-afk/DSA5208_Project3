@@ -1,0 +1,116 @@
+{
+  "generated_at_utc": "2026-10-26T05:10:09.153490+00:00",
+  "contract_version": "0.1",
+  "source_sha256": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+  "executable_sha256": "167c90164684436a64e4c1d2ba15cd30bf58fcbe41bce845883c86d3cf6564f9",
+  "contract_sha256": "f928fb637652ae85d1e23fdad6435d364a48b139c8f61927fe327fcaa45a0562",
+  "source_hash_note": "current source file; build command/log must establish the executable was compiled from it",
+  "scope": "local serial correctness and optional local pilot; not an Atlas benchmark",
+  "repeats_per_profile": 1,
+  "convergence_claim": false,
+  "cases": [
+    {
+      "case_id": "pilot_n256_k1000",
+      "command": [
+        "./build/jacobi_serial",
+        "256",
+        "1000",
+        "0.0"
+      ],
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 256,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0006704613034176354,
+        "max_error": 1.524375537750847,
+        "residual_inf": 177.06126793477262,
+        "boundary_error": 0,
+        "compute_seconds": 0.17245
+      },
+      "validation": "PASS",
+      "two_grid_memory_mib": 1.01568603515625
+    },
+    {
+      "case_id": "pilot_n512_k1000",
+      "command": [
+        "./build/jacobi_serial",
+        "512",
+        "1000",
+        "0.0"
+      ],
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 512,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0006952666436033095,
+        "max_error": 1.7387322181048726,
+        "residual_inf": 731.5852218441516,
+        "boundary_error": 0,
+        "compute_seconds": 0.705574
+      },
+      "validation": "PASS",
+      "two_grid_memory_mib": 4.03131103515625
+    },
+    {
+      "case_id": "pilot_n1024_k1000",
+      "command": [
+        "./build/jacobi_serial",
+        "1024",
+        "1000",
+        "0.0"
+      ],
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.009078
+      },
+      "validation": "PASS",
+      "two_grid_memory_mib": 16.06256103515625
+    },
+    {
+      "case_id": "pilot_n2048_k1000",
+      "command": [
+        "./build/jacobi_serial",
+        "2048",
+        "1000",
+        "0.0"
+      ],
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 2048,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007139342056174947,
+        "max_error": 1.9248271994058748,
+        "residual_inf": 11984.433500403773,
+        "boundary_error": 0,
+        "compute_seconds": 13.475341
+      },
+      "validation": "PASS",
+      "two_grid_memory_mib": 64.12506103515625
+    }
+  ],
+  "original_evidence_sha256": "e7cf6fb915764e935a7b613b9773d1299c033d115cafd6419679b3ec188f1c36",
+  "sharing_copy": true,
+  "sharing_note": "Executable command paths made relative; all numerical result objects are unchanged. Original evidence remains in the private local workspace."
+}

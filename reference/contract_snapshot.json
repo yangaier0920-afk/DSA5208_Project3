@@ -1,0 +1,281 @@
+{
+  "contract_version": "0.1",
+  "status": "proposal_pending_team_confirmation",
+  "problem": {
+    "id": "laplace_linear_v1",
+    "domain": [
+      0.0,
+      1.0
+    ],
+    "n_definition": "interior_points_per_dimension",
+    "grid_shape": "(n+2, n+2)",
+    "coordinates": {
+      "x": "j/(n+1)",
+      "y": "i/(n+1)"
+    },
+    "boundary": "u=x+y",
+    "exact_solution": "u=x+y",
+    "initial_interior": 0.0,
+    "dtype": "float64",
+    "random_seed": null
+  },
+  "interface": {
+    "positional_arguments": [
+      "n",
+      "max_iters",
+      "tolerance"
+    ],
+    "current_no_argument_defaults": {
+      "n": 16,
+      "max_iters": 100000,
+      "tolerance": 1e-12
+    },
+    "supported_n": [
+      1,
+      2048
+    ],
+    "supported_max_iters": [
+      1,
+      10000000
+    ],
+    "tolerance_rule": "finite nonnegative; zero means fixed iterations",
+    "stdout": "exactly one JSON object; rank 0 only for MPI/hybrid",
+    "stderr": "diagnostics",
+    "exit_codes": {
+      "completed": 0,
+      "invalid_input_or_runtime_error": 1,
+      "iteration_limit_before_update_tolerance": 2
+    },
+    "existing_required_result_fields": [
+      "mode",
+      "n",
+      "threads",
+      "iterations",
+      "tolerance",
+      "status",
+      "max_update",
+      "max_error",
+      "residual_inf",
+      "boundary_error",
+      "compute_seconds"
+    ],
+    "full_grid_output": "required for n<=8; rows ordered by global i, columns by global j, including physical boundaries",
+    "parallel_result_extensions_pending_implementation": [
+      "mpi_processes",
+      "nodes"
+    ]
+  },
+  "validation": {
+    "boundary_abs_tolerance": 1e-14,
+    "fixed_grid_abs_tolerance": 1e-12,
+    "small_converged_max_error": 1e-08,
+    "small_converged_residual_inf": 1e-07,
+    "convergence_threshold_scope": "this boundary/initialization and n<=32 only; not performance profiles",
+    "iteration_count_on_convergence": "reference only; accept by status, update tolerance, error and residual",
+    "cases": [
+      {
+        "id": "hand_n1",
+        "n": 1,
+        "max_iters": 1,
+        "tolerance": 0.0,
+        "expected_exit_code": 0,
+        "expected_status": "fixed_iterations"
+      },
+      {
+        "id": "hand_n2",
+        "n": 2,
+        "max_iters": 1,
+        "tolerance": 0.0,
+        "expected_exit_code": 0,
+        "expected_status": "fixed_iterations"
+      },
+      {
+        "id": "odd_n7_k1",
+        "n": 7,
+        "max_iters": 1,
+        "tolerance": 0.0,
+        "expected_exit_code": 0,
+        "expected_status": "fixed_iterations"
+      },
+      {
+        "id": "odd_n7_k2",
+        "n": 7,
+        "max_iters": 2,
+        "tolerance": 0.0,
+        "expected_exit_code": 0,
+        "expected_status": "fixed_iterations"
+      },
+      {
+        "id": "odd_n7_k31",
+        "n": 7,
+        "max_iters": 31,
+        "tolerance": 0.0,
+        "expected_exit_code": 0,
+        "expected_status": "fixed_iterations"
+      },
+      {
+        "id": "fixed_n8_k30",
+        "n": 8,
+        "max_iters": 30,
+        "tolerance": 0.0,
+        "expected_exit_code": 0,
+        "expected_status": "fixed_iterations"
+      },
+      {
+        "id": "converged_n16",
+        "n": 16,
+        "max_iters": 100000,
+        "tolerance": 1e-12,
+        "expected_exit_code": 0,
+        "expected_status": "update_tolerance_reached"
+      },
+      {
+        "id": "converged_n31",
+        "n": 31,
+        "max_iters": 100000,
+        "tolerance": 1e-12,
+        "expected_exit_code": 0,
+        "expected_status": "update_tolerance_reached"
+      },
+      {
+        "id": "converged_n32",
+        "n": 32,
+        "max_iters": 100000,
+        "tolerance": 1e-12,
+        "expected_exit_code": 0,
+        "expected_status": "update_tolerance_reached"
+      },
+      {
+        "id": "iteration_limit",
+        "n": 16,
+        "max_iters": 1,
+        "tolerance": 1e-12,
+        "expected_exit_code": 2,
+        "expected_status": "iteration_limit"
+      }
+    ]
+  },
+  "recommended_profiles": {
+    "development_default": {
+      "n": 16,
+      "max_iters": 100000,
+      "tolerance": 1e-12
+    },
+    "shared_correctness": {
+      "n": 32,
+      "max_iters": 100000,
+      "tolerance": 1e-12
+    },
+    "mpi_uneven_full_grid": {
+      "n": 7,
+      "max_iters": 31,
+      "tolerance": 0.0,
+      "process_counts": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "mpi_uneven_convergence": {
+      "n": 31,
+      "max_iters": 100000,
+      "tolerance": 1e-12,
+      "process_counts": [
+        2,
+        3,
+        4
+      ]
+    },
+    "local_openmp_threads": [
+      1,
+      2,
+      4
+    ],
+    "performance_pilot_default": {
+      "n": 1024,
+      "max_iters": 1000,
+      "tolerance": 0.0
+    },
+    "performance_pilot_alternatives_n": [
+      256,
+      512,
+      2048
+    ],
+    "performance_pilot_alternatives_iters": [
+      1000,
+      5000
+    ],
+    "performance_pilot_convergence_claim": false,
+    "formal_repetitions_proposal": {
+      "warmup_runs": 1,
+      "measured_runs": 5,
+      "summary": "median, min, max"
+    },
+    "fixed_12_cpu_process_thread_pairs_proposal": [
+      [
+        1,
+        12
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        12,
+        1
+      ]
+    ],
+    "first_hybrid_pair_proposal": [
+      4,
+      3
+    ],
+    "resource_scope": "single-node proposal; binding and current PBS resources require B's cluster validation",
+    "n_less_than_processes": "unsupported in first proposal; reject clearly and consistently"
+  },
+  "timing": {
+    "compute_seconds": "iteration loop, including update checks and required OpenMP synchronization, MPI halos and global convergence checks",
+    "excludes": [
+      "initialization",
+      "final_error_and_residual_evaluation",
+      "final_grid_gather",
+      "JSON_output",
+      "PBS_queue_wait",
+      "compilation"
+    ],
+    "parallel_report": "elapsed time of the slowest rank after a synchronized start; output only from rank 0",
+    "comparison": "same cluster, n, max_iters, tolerance, initial/boundary values, precision, compiler settings and algorithmic work"
+  },
+  "run_metadata_required_in_experiment_records": [
+    "contract_version",
+    "case_id",
+    "complete_command",
+    "source_sha256_or_commit",
+    "compiler_and_flags",
+    "cluster",
+    "job_id",
+    "allocated_cpus",
+    "nodes",
+    "mpi_processes",
+    "threads_per_process",
+    "affinity",
+    "repeat_index"
+  ],
+  "confirmation": {
+    "A": "draft_prepared_not_yet_approved",
+    "B": "pending",
+    "C": "pending"
+  }
+}

@@ -1,0 +1,1 @@
+{"mode":"serial","n":2048,"threads":1,"iterations":1000,"tolerance":0,"status":"fixed_iterations","max_update":0.00071393420561749465,"max_error":1.9248271994058748,"residual_inf":11984.433500403773,"boundary_error":0,"compute_seconds":13.475341}

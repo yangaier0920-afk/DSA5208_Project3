@@ -1,0 +1,49 @@
+#!/bin/bash
+#PBS -N jserial
+#PBS -q serial
+#PBS -l select=1:ncpus=1:mem=2gb
+#PBS -l walltime=00:05:00
+#PBS -j oe
+#PBS -S /bin/bash
+
+# Submit with qsub; compilation and numerical runs happen on the compute node.
+set -eo pipefail
+: "${PBS_JOBID:?Submit this script with qsub, not bash on a login node}"
+: "${PBS_O_WORKDIR:?Missing PBS working directory}"
+cd "$PBS_O_WORKDIR"
+
+run_dir="$PBS_O_WORKDIR/results/atlas_serial_${PBS_JOBID}"
+mkdir -p "$run_dir/bin"
+exec > >(tee "$run_dir/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+
+printf 'RUN_DIR=%s\nPBS_JOBID=%s\nPBS_QUEUE=%s\n' "$run_dir" "$PBS_JOBID" "${PBS_QUEUE:-unknown}"
+date -Is
+hostname
+whoami
+pwd
+if [ -n "${PBS_NODEFILE:-}" ] && [ -r "$PBS_NODEFILE" ]; then
+    printf 'PBS_NODEFILE:\n'
+    cat "$PBS_NODEFILE"
+    cp "$PBS_NODEFILE" "$run_dir/pbs_nodefile.txt"
+fi
+cp "$0" "$run_dir/submitted_script.pbs"
+sha256sum jacobi.cpp "$run_dir/submitted_script.pbs" > "$run_dir/source_sha256.txt"
+
+source /app1/ebenv
+module load GCC/12.2.0
+module list
+command -v g++
+g++ --version
+export OMP_NUM_THREADS=1
+export OMP_DYNAMIC=FALSE
+
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi.cpp -o "$run_dir/bin/jacobi_serial"
+
+"$run_dir/bin/jacobi_serial" 1 1 0 | tee "$run_dir/n1_one_step.json"
+"$run_dir/bin/jacobi_serial" 2 1 0 | tee "$run_dir/n2_one_step.json"
+"$run_dir/bin/jacobi_serial" 16 100000 1e-12 | tee "$run_dir/n16.json"
+"$run_dir/bin/jacobi_serial" 32 100000 1e-12 | tee "$run_dir/n32.json"
+
+# This marks command completion. Numerical acceptance is checked separately.
+printf 'RUN_STATUS=COMPLETED\n'

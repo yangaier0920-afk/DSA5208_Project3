@@ -1,0 +1,10 @@
+* text=auto
+*.cpp text eol=lf
+*.py text eol=lf
+*.json -text
+*.txt -text
+*.md text eol=lf
+*.pbs text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+docs/PROJECT_REQUIREMENTS.md -text

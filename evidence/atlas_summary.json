@@ -1,0 +1,30 @@
+{
+  "archived_date": "2026-10-23",
+  "scope": "serial Jacobi correctness and MPI/OpenMP infrastructure only; not hybrid Jacobi or scaling",
+  "compiler": "GCC 12.2.0",
+  "mpi": "Open MPI 4.1.5",
+  "source_sha256": {
+    "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+    "mpi_hello.cpp": "b750f2e5a440d80b2c1c5f800e4ea4ca6b3550bc5eec25a697d256840cb9fe70",
+    "omp_hello.cpp": "cb6c15fec84132d8bbe45f7b0016d4ad408acfcfe0de7eefc4c3b9fbb078d810"
+  },
+  "jobs": [
+    {
+      "job_id": "1026533.venus01",
+      "queue": "serial",
+      "state": "F",
+      "exit_status": 0,
+      "allocated_cpus": 1,
+      "memory": "2gb"
+    },
+    {
+      "job_id": "1026538.venus01",
+      "queue": "parallel",
+      "state": "F",
+      "exit_status": 0,
+      "allocated_cpus": 12,
+      "memory": "2gb"
+    }
+  ],
+  "evidence_note": "Selected original numerical outputs copied unchanged. Full PBS records, source archives and logs remain in the original local workspace; summary is derived from those archived records. No new Atlas job was run during packaging."
+}

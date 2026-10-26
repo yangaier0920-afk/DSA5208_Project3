@@ -1,0 +1,12 @@
+rank=9/12 sum=78
+rank=10/12 sum=78
+rank=11/12 sum=78
+rank=0/12 sum=78
+rank=1/12 sum=78
+rank=2/12 sum=78
+rank=3/12 sum=78
+rank=4/12 sum=78
+rank=5/12 sum=78
+rank=7/12 sum=78
+rank=8/12 sum=78
+rank=6/12 sum=78
