@@ -1,0 +1,146 @@
+{
+  "scope": "local large-halo fixed-work check; not convergence or scaling",
+  "serial": {
+    "mode": "serial",
+    "n": 1024,
+    "threads": 1,
+    "iterations": 3,
+    "tolerance": 0,
+    "status": "fixed_iterations",
+    "max_update": 0.2497560975609756,
+    "max_error": 1.9921951219512195,
+    "residual_inf": 721407.8125,
+    "boundary_error": 0,
+    "compute_seconds": 0.002438042
+  },
+  "runs": [
+    {
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "4",
+        "DSA5208_Project3/build/jacobi_mpi",
+        "1024",
+        "3",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 3,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.2497560975609756,
+        "max_error": 1.9921951219512195,
+        "residual_inf": 721407.8125,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.001688000000000002
+      },
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "4",
+        "DSA5208_Project3/build/jacobi_mpi",
+        "1024",
+        "3",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 3,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.2497560975609756,
+        "max_error": 1.9921951219512195,
+        "residual_inf": 721407.8125,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.005003000000000002
+      },
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "4",
+        "DSA5208_Project3/build/jacobi_hybrid",
+        "1024",
+        "3",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "result": {
+        "mode": "hybrid",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 3,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.2497560975609756,
+        "max_error": 1.9921951219512195,
+        "residual_inf": 721407.8125,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.010964000000000002
+      },
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "4",
+        "DSA5208_Project3/build/jacobi_hybrid",
+        "1024",
+        "3",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "result": {
+        "mode": "hybrid",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 3,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.2497560975609756,
+        "max_error": 1.9921951219512195,
+        "residual_inf": 721407.8125,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.005578999999999999
+      },
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+mkdir -p build
+c++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi.cpp -o build/jacobi_serial
+c++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -L/opt/homebrew/opt/libomp/lib -lomp jacobi.cpp -o build/jacobi_omp
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_mpi.cpp -o build/jacobi_mpi
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -L/opt/homebrew/opt/libomp/lib -lomp jacobi_mpi.cpp -o build/jacobi_hybrid

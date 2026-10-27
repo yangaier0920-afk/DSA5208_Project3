@@ -1,0 +1,15 @@
+{
+  "scope": "Local Mac only; not Atlas/Vanda results",
+  "compiler": "Apple clang version 15.0.0 (clang-1500.3.9.4)\nTarget: arm64-apple-darwin23.1.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "mpi": "mpirun (Open MPI) 5.0.11\n\nReport bugs to https://www.open-mpi.org/community/help/\n\n",
+  "source_sha256": {
+    "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+    "jacobi_mpi.cpp": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+    "verify_parallel.py": "424bc3528e8e07080731a0eb598a3ea3f4ff340adfff92324a4585d0dbda32d9",
+    "benchmark_parallel.py": "aa39aeed3a99f17e2d287b2d4e6b023b7fb9cfd95d6b36d7218aeafe0d29a702"
+  },
+  "validation_runs": 278,
+  "large_halo_runs": 4,
+  "benchmark_workflow_smoke_runs": 24,
+  "note": "Validation summary is the original run record; full per-run stdout/stderr remain in results/b_local_validation. Python metadata/CSV changes after the full validation do not change the C++ numerical solver. Final CSV output path was additionally checked on five local executions."
+}

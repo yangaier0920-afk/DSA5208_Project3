@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -N jacobi_mpi
+#PBS -q auto_free
+#PBS -l select=1:ncpus=12:mpiprocs=12:ompthreads=1:mem=4gb
+#PBS -l walltime=00:30:00
+#PBS -j oe
+#PBS -k oed
+#PBS -S /bin/bash
+# The user-provided Vanda hpc cpu sample permits auto_free without -P.
+# For an allocated project, replace the queue line with #PBS -P YOUR_PROJECT.
+# Verify the current queue accepts 12 CPUs / 4GB / 30 minutes before submitting.
+# ompthreads=1 is the PBS default; run_cluster.sh sets OMP_NUM_THREADS per run.
+# Module names come from the user-provided module listing.
+# Successful loading and actual execution-queue limits still need verification.
+set -euo pipefail
+: "${PBS_JOBID:?Submit with qsub}"
+cd "$PBS_O_WORKDIR"
+# An optional per-user file overrides the supplied matched module stack.
+if [ -f vanda_modules.sh ]; then
+    source ./vanda_modules.sh
+else
+    source ./vanda_modules.example.sh
+fi
+bash run_cluster.sh Vanda

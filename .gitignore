@@ -32,3 +32,6 @@ id_rsa*
 id_ed25519*
 .aws/
 .ssh/
+
+# Per-user cluster module configuration
+vanda_modules.sh

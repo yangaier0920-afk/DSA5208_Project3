@@ -8,6 +8,8 @@
 
 配套文件：[机器可读约定](../team_contract_v0.1.json)、[参考输出生成脚本](../prepare_team_references.py)、[已运行的参考结果](../reference/reference_results.json)、[本机性能试跑](../reference/local_pilot.json)。
 
+实现更新（2026-10-27）：`jacobi_mpi.cpp` 已按本稿接口实现 MPI/混合版本并通过本地验证；见 [成员 B 指南](MEMBER_B.md)。下文“未来/待实现”为 10 月 26 日提案时的状态，组员确认与正式集群运行仍未完成。
+
 ## 1. 先建议统一这些值
 
 | 项目 | A 的推荐起点 | 可选值或适用范围 | 选值理由与状态 |

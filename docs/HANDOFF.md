@@ -2,6 +2,10 @@
 
 当前角色来自小组建议分工：A 负责串行基准、公共接口和正确性；B 负责 MPI/HPC；C 负责 OpenMP/实验工具；B/C 共同整合混合版本。
 
+## 2026-10-27 成员 B 实现更新
+
+MPI 与混合 Jacobi 已实现，支持不整除按行分区、sendrecv/overlap、全局停止及指标汇总。本地 278 次执行通过；基准工具完成本地流程检查。详见 [成员 B 指南](MEMBER_B.md)。Vanda 作业 1498804.stdct-mgmt-02 已成功，278 次验证、26 组重复计时已审计；见 evidence/vanda_1498804。B/C 本人确认及 C 的审阅未代为完成。下列初始接收与接口确认要求仍有效。
+
 ## 已具备
 
 - 串行 Jacobi、OpenMP 基础实现和小案例验证。
@@ -44,6 +48,6 @@ Windows 示例程序为 `build/jacobi_serial.exe`；Linux/Mac 为 `build/jacobi_
 | GitHub 仓库地址和首个 commit | 上传后填写 |
 | B 接受邀请、复现及确认 | 待完成 |
 | C 接受邀请、复现及确认 | 待完成 |
-| MPI/混合 Jacobi 实现和验证 | 待完成 |
-| 正式 Atlas 串行/并行基准 | 待完成 |
+| MPI/混合 Jacobi 实现和验证 | 本地与 Vanda 单节点验证完成 |
+| 指定集群基准 | Vanda 单节点 n=1024/K=1000 已完成；更多规模与基准差异调查待补 |
 | 报告算法和验证章节 | 待完成 |

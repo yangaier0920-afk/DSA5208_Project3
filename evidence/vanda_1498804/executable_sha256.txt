@@ -1,0 +1,4 @@
+cac47b3ab4adbbd302c2a4ef243141e0a61c78506153e0568bc912a6a038984a  /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_hybrid
+b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a  /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_mpi
+6a1961cc38bf71c74318aaa4cfdb9041fb8c66cd2d90a759d4f122bd85f2c06e  /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_omp
+28d9f207cc0fb1a592988796197488da9cfa6ef47567d40ce791d0f9ed0dbda9  /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_serial

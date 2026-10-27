@@ -8,3 +8,8 @@
 .gitignore text eol=lf
 .gitattributes text eol=lf
 docs/PROJECT_REQUIREMENTS.md -text
+
+# Preserve exported CSV bytes and original cluster log formatting.
+*.csv -text
+evidence/**/*.txt whitespace=-blank-at-eol,-blank-at-eof
+evidence/**/*.log whitespace=-blank-at-eol,-blank-at-eof

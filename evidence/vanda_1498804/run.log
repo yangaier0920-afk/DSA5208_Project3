@@ -1,0 +1,109 @@
+2026-10-27T15:09:22+08:00
+IN-008
+e1561365
+CLUSTER=Vanda
+JOB_ID=1498804.stdct-mgmt-02
+QUEUE=cpu_parallel
+N=1024
+K=1000
+REPEATS=5
+/app1/ebapps/arches/flat-avx2/software/GCCcore/12.2.0/bin/g++
+/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/bin/mpicxx
+/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/bin/mpirun
+/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3
+g++ (GCC) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+g++ -I/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/include -L/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,--enable-new-dtags -lmpi
+mpirun (Open MPI) 4.1.5
+
+Report bugs to http://www.open-mpi.org/community/help/
+Python 3.10.8
+Currently Loaded Modulefiles:
+ 1) shared                            14) libevent/2.1.12-GCCcore-12.2.0   
+ 2) apptainer/1.4.1                   15) UCX/1.13.1-GCCcore-12.2.0        
+ 3) GCCcore/12.2.0                    16) libfabric/1.16.1-GCCcore-12.2.0  
+ 4) zlib/1.2.12-GCCcore-12.2.0        17) PMIx/4.2.2-GCCcore-12.2.0        
+ 5) binutils/2.39-GCCcore-12.2.0      18) UCC/1.1.0-GCCcore-12.2.0         
+ 6) GCC/12.2.0                        19) OpenMPI/4.1.5-GCC-12.2.0         
+ 7) ncurses/6.3-GCCcore-12.2.0        20) bzip2/1.0.8-GCCcore-12.2.0       
+ 8) numactl/2.0.16-GCCcore-12.2.0     21) libreadline/8.2-GCCcore-12.2.0   
+ 9) XZ/5.2.7-GCCcore-12.2.0           22) Tcl/8.6.12-GCCcore-12.2.0        
+10) libxml2/2.10.3-GCCcore-12.2.0     23) SQLite/3.39.4-GCCcore-12.2.0     
+11) libpciaccess/0.17-GCCcore-12.2.0  24) GMP/6.2.1-GCCcore-12.2.0         
+12) hwloc/2.8.0-GCCcore-12.2.0        25) libffi/3.4.4-GCCcore-12.2.0      
+13) OpenSSL/1.1                       26) Python/3.10.8-GCCcore-12.2.0     
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+in-008.stdct.loc
+make: Entering directory '/nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/sources'
+mkdir -p /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi.cpp -o /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_serial
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -fopenmp jacobi.cpp -o /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_omp
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_mpi.cpp -o /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_mpi
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic -fopenmp jacobi_mpi.cpp -o /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_hybrid
+make: Leaving directory '/nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/sources'
+{"mode": "serial", "n": 8, "threads": 1, "iterations": 408, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.405809464624326e-13, "max_error": 1.4650614055256028e-11, "residual_inf": 2.862949877169285e-10, "boundary_error": 0, "compute_seconds": 0.000128133, "grid": [[0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777777, 0.8888888888888888, 1], [0.1111111111111111, 0.22222222222045515, 0.3333333333300123, 0.44444444443997, 0.5555555555504674, 0.6666666666615786, 0.7777777777733035, 0.8888888888855679, 0.9999999999982329, 1.1111111111111112], [0.2222222222222222, 0.3333333333300123, 0.44444444443820297, 0.5555555555471464, 0.6666666666571042, 0.7777777777682153, 0.8888888888804798, 0.9999999999937585, 1.1111111111077903, 1.222222222222222], [0.3333333333333333, 0.44444444443997005, 0.5555555555471464, 0.666666666655337, 0.7777777777648942, 0.8888888888760054, 0.9999999999886704, 1.1111111111027019, 1.2222222222177477, 1.3333333333333333], [0.4444444444444444, 0.5555555555504674, 0.6666666666571042, 0.7777777777648943, 0.8888888888742383, 0.9999999999853494, 1.1111111110982277, 1.2222222222126597, 1.3333333333282453, 1.4444444444444444], [0.5555555555555556, 0.6666666666615786, 0.7777777777682153, 0.8888888888760054, 0.9999999999853494, 1.1111111110964607, 1.2222222222093386, 1.333333333323771, 1.4444444444393563, 1.5555555555555554], [0.6666666666666666, 0.7777777777733034, 0.8888888888804798, 0.9999999999886704, 1.1111111110982277, 1.2222222222093386, 1.3333333333220039, 1.4444444444360351, 1.5555555555510812, 1.6666666666666665], [0.7777777777777777, 0.8888888888855679, 0.9999999999937585, 1.1111111111027019, 1.2222222222126597, 1.333333333323771, 1.4444444444360354, 1.5555555555493141, 1.6666666666633456, 1.7777777777777777], [0.8888888888888888, 0.999999999998233, 1.11111111110779, 1.2222222222177477, 1.333333333328245, 1.4444444444393563, 1.5555555555510812, 1.6666666666633456, 1.7777777777760106, 1.8888888888888888], [1, 1.1111111111111112, 1.222222222222222, 1.3333333333333333, 1.4444444444444444, 1.5555555555555554, 1.6666666666666665, 1.7777777777777777, 1.8888888888888888, 2]]}
+{"mode": "serial", "n": 16, "threads": 1, "iterations": 1401, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.843237336326638e-13, "max_error": 5.681455306216776e-11, "residual_inf": 1.1185627979415358e-09, "boundary_error": 0, "compute_seconds": 0.001538143}
+{"mode": "serial", "n": 32, "threads": 1, "iterations": 5006, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.985345883478658e-13, "max_error": 2.1949764228423874e-10, "residual_inf": 4.3300303342874705e-09, "boundary_error": 0, "compute_seconds": 0.023157973}
+PASS: hand values, boundaries, exact solution, residual, iteration limit: /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_serial
+{"mode": "openmp", "n": 8, "threads": 1, "iterations": 408, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.405809464624326e-13, "max_error": 1.4650614055256028e-11, "residual_inf": 2.862949877169285e-10, "boundary_error": 0, "compute_seconds": 0.000259332, "grid": [[0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777777, 0.8888888888888888, 1], [0.1111111111111111, 0.22222222222045515, 0.3333333333300123, 0.44444444443997, 0.5555555555504674, 0.6666666666615786, 0.7777777777733035, 0.8888888888855679, 0.9999999999982329, 1.1111111111111112], [0.2222222222222222, 0.3333333333300123, 0.44444444443820297, 0.5555555555471464, 0.6666666666571042, 0.7777777777682153, 0.8888888888804798, 0.9999999999937585, 1.1111111111077903, 1.222222222222222], [0.3333333333333333, 0.44444444443997005, 0.5555555555471464, 0.666666666655337, 0.7777777777648942, 0.8888888888760054, 0.9999999999886704, 1.1111111111027019, 1.2222222222177477, 1.3333333333333333], [0.4444444444444444, 0.5555555555504674, 0.6666666666571042, 0.7777777777648943, 0.8888888888742383, 0.9999999999853494, 1.1111111110982277, 1.2222222222126597, 1.3333333333282453, 1.4444444444444444], [0.5555555555555556, 0.6666666666615786, 0.7777777777682153, 0.8888888888760054, 0.9999999999853494, 1.1111111110964607, 1.2222222222093386, 1.333333333323771, 1.4444444444393563, 1.5555555555555554], [0.6666666666666666, 0.7777777777733034, 0.8888888888804798, 0.9999999999886704, 1.1111111110982277, 1.2222222222093386, 1.3333333333220039, 1.4444444444360351, 1.5555555555510812, 1.6666666666666665], [0.7777777777777777, 0.8888888888855679, 0.9999999999937585, 1.1111111111027019, 1.2222222222126597, 1.333333333323771, 1.4444444444360354, 1.5555555555493141, 1.6666666666633456, 1.7777777777777777], [0.8888888888888888, 0.999999999998233, 1.11111111110779, 1.2222222222177477, 1.333333333328245, 1.4444444444393563, 1.5555555555510812, 1.6666666666633456, 1.7777777777760106, 1.8888888888888888], [1, 1.1111111111111112, 1.222222222222222, 1.3333333333333333, 1.4444444444444444, 1.5555555555555554, 1.6666666666666665, 1.7777777777777777, 1.8888888888888888, 2]]}
+{"mode": "openmp", "n": 16, "threads": 1, "iterations": 1401, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.843237336326638e-13, "max_error": 5.681455306216776e-11, "residual_inf": 1.1185627979415358e-09, "boundary_error": 0, "compute_seconds": 0.001449913}
+{"mode": "openmp", "n": 32, "threads": 1, "iterations": 5006, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.985345883478658e-13, "max_error": 2.1949764228423874e-10, "residual_inf": 4.3300303342874705e-09, "boundary_error": 0, "compute_seconds": 0.013018466}
+PASS: hand values, boundaries, exact solution, residual, iteration limit: /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/bin/jacobi_omp
+PASS: serial/OpenMP full grid after 30 iterations, threads=1
+PASS: serial/OpenMP full grid after 30 iterations, threads=2
+PASS: serial/OpenMP full grid after 30 iterations, threads=4
+PASS hand_n1
+PASS hand_n2
+PASS odd_n7_k1
+PASS odd_n7_k2
+PASS odd_n7_k31
+PASS fixed_n8_k30
+PASS converged_n16
+PASS converged_n31
+PASS converged_n32
+PASS iteration_limit
+PASS one_row_per_rank
+PASS three_rows_per_rank
+PASS: 278 executions; results: /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/validation
+serial 1x1 none: median=2.653333s speedup=1.000
+mpi 1x1 sendrecv: median=1.293866s speedup=2.051
+mpi 1x1 overlap: median=1.273339s speedup=2.084
+mpi 2x1 sendrecv: median=1.106782s speedup=2.397
+mpi 2x1 overlap: median=0.660491s speedup=4.017
+mpi 3x1 sendrecv: median=0.796026s speedup=3.333
+mpi 3x1 overlap: median=0.799649s speedup=3.318
+mpi 4x1 sendrecv: median=0.607945s speedup=4.364
+mpi 4x1 overlap: median=0.603213s speedup=4.399
+mpi 6x1 sendrecv: median=0.421349s speedup=6.297
+mpi 6x1 overlap: median=0.411059s speedup=6.455
+mpi 12x1 sendrecv: median=0.215857s speedup=12.292
+mpi 12x1 overlap: median=0.220319s speedup=12.043
+openmp 1x12 none: median=0.202181s speedup=13.124
+hybrid 1x12 sendrecv: median=0.196799s speedup=13.482
+hybrid 1x12 overlap: median=0.201575s speedup=13.163
+hybrid 2x6 sendrecv: median=0.205024s speedup=12.942
+hybrid 2x6 overlap: median=0.207793s speedup=12.769
+hybrid 3x4 sendrecv: median=0.210324s speedup=12.615
+hybrid 3x4 overlap: median=0.212965s speedup=12.459
+hybrid 4x3 sendrecv: median=0.211763s speedup=12.530
+hybrid 4x3 overlap: median=0.215857s speedup=12.292
+hybrid 6x2 sendrecv: median=0.213256s speedup=12.442
+hybrid 6x2 overlap: median=0.215444s speedup=12.316
+hybrid 12x1 sendrecv: median=0.210878s speedup=12.582
+hybrid 12x1 overlap: median=0.213816s speedup=12.409
+PASS: results saved in /nfs/home/svu/e1561365/dsa5208_b/member_b/results/Vanda_parallel_1498804.stdct-mgmt-02/benchmark
+RUN_STATUS=PASSED
+JOB_EXIT_STATUS=0

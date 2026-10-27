@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "cluster": "Vanda",
+  "job_id": "1498804.stdct-mgmt-02",
+  "validation_executions": 278,
+  "benchmark_executions": 156,
+  "configurations": 26,
+  "warmups_per_configuration": 1,
+  "measurements_per_configuration": 5,
+  "original_source_and_binary_hashes_checked": true,
+  "raw_results_and_statistics_checked": true,
+  "warnings": [
+    "libpbs.so.0 unavailable; MPI PBS TM components were ignored"
+  ]
+}

@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N jacobi_mpi
+#PBS -q parallel
+#PBS -l select=1:ncpus=12:mpiprocs=12:mem=2gb
+#PBS -l walltime=00:30:00
+#PBS -j oe
+#PBS -S /bin/bash
+set -euo pipefail
+: "${PBS_JOBID:?Submit with qsub}"
+cd "$PBS_O_WORKDIR"
+source /app1/ebenv
+# Historical Atlas stack; verify module availability before submission.
+module load GCC/12.2.0
+module load OpenMPI/4.1.5-GCC-12.2.0
+# Load a Python >=3.10 module here if python3 is not already available.
+bash run_cluster.sh Atlas

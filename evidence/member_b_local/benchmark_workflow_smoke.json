@@ -1,0 +1,1050 @@
+{
+  "status": "PASS",
+  "generated_at_utc": "2026-10-27T06:54:26.915751+00:00",
+  "cluster": "local",
+  "host": "KendalldeMacBook-Pro.local",
+  "platform": "macOS-14.1-arm64-arm-64bit",
+  "job_id": null,
+  "allocated_cpus": 4,
+  "n": 64,
+  "iterations": 50,
+  "tolerance": 0,
+  "warmups": 1,
+  "repeats": 2,
+  "runs": [
+    {
+      "id": "serial_p1_t1_none_r-1",
+      "command": [
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_serial",
+        "64",
+        "50",
+        "0"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "serial",
+        "n": 64,
+        "threads": 1,
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 0,
+        "compute_seconds": 0.000133667
+      }
+    },
+    {
+      "id": "serial_p1_t1_none_r0",
+      "command": [
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_serial",
+        "64",
+        "50",
+        "0"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "serial",
+        "n": 64,
+        "threads": 1,
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 0,
+        "compute_seconds": 0.000138875
+      }
+    },
+    {
+      "id": "serial_p1_t1_none_r1",
+      "command": [
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_serial",
+        "64",
+        "50",
+        "0"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "serial",
+        "n": 64,
+        "threads": 1,
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 0,
+        "compute_seconds": 0.000133708
+      }
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "1",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00011200000000000012
+      }
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "1",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00011099999999999999
+      }
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "1",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00012199999999999971
+      }
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r-1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "1",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00010800000000000046
+      }
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r0",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "1",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00010799999999999959
+      }
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "1",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00011999999999999945
+      }
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.004339000000000001
+      }
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.004642
+      }
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.005272000000000001
+      }
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r-1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.00011800000000000005
+      }
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r0",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.002997999999999999
+      }
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_mpi",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.0031260000000000003
+      }
+    },
+    {
+      "id": "hybrid_p2_t2_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_hybrid",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "2",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "hybrid",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.0047539999999999995
+      }
+    },
+    {
+      "id": "hybrid_p2_t2_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_hybrid",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "2",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "hybrid",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.0031400000000000004
+      }
+    },
+    {
+      "id": "hybrid_p2_t2_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_hybrid",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "2",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "hybrid",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.005474
+      }
+    },
+    {
+      "id": "hybrid_p2_t2_overlap_r-1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_hybrid",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "2",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "hybrid",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.0036550000000000003
+      }
+    },
+    {
+      "id": "hybrid_p2_t2_overlap_r0",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_hybrid",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "2",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "hybrid",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.003509
+      }
+    },
+    {
+      "id": "hybrid_p2_t2_overlap_r1",
+      "command": [
+        "mpirun",
+        "--bind-to",
+        "none",
+        "-np",
+        "2",
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_hybrid",
+        "64",
+        "50",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "2",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "hybrid",
+        "n": 64,
+        "mpi_processes": 2,
+        "threads": 2,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 1.1102230246251565e-16,
+        "compute_seconds": 0.001030999999999999
+      }
+    },
+    {
+      "id": "openmp_p1_t4_none_r-1",
+      "command": [
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_omp",
+        "64",
+        "50",
+        "0"
+      ],
+      "exit_code": 0,
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "4",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "openmp",
+        "n": 64,
+        "threads": 4,
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 0,
+        "compute_seconds": 0.000390208
+      }
+    },
+    {
+      "id": "openmp_p1_t4_none_r0",
+      "command": [
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_omp",
+        "64",
+        "50",
+        "0"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "4",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "openmp",
+        "n": 64,
+        "threads": 4,
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 0,
+        "compute_seconds": 0.000382666
+      }
+    },
+    {
+      "id": "openmp_p1_t4_none_r1",
+      "command": [
+        "/Users/kendallshao/Documents/Codex/2026-10-27/https-github-com-yangaier0920-afk-dsa5208/DSA5208_Project3/build/jacobi_omp",
+        "64",
+        "50",
+        "0"
+      ],
+      "exit_code": 0,
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "4",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "result": {
+        "mode": "openmp",
+        "n": 64,
+        "threads": 4,
+        "iterations": 50,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.013499990558528241,
+        "max_error": 1.5712744142607185,
+        "residual_inf": 224.73300700020548,
+        "boundary_error": 0,
+        "compute_seconds": 0.00041475
+      }
+    }
+  ],
+  "groups": [
+    {
+      "mode": "serial",
+      "processes": 1,
+      "threads": 1,
+      "total_cores": 1,
+      "exchange": "none",
+      "median_seconds": 0.00013629149999999998,
+      "min_seconds": 0.000133708,
+      "max_seconds": 0.000138875,
+      "speedup": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "mode": "mpi",
+      "processes": 1,
+      "threads": 1,
+      "total_cores": 1,
+      "exchange": "sendrecv",
+      "median_seconds": 0.00011649999999999985,
+      "min_seconds": 0.00011099999999999999,
+      "max_seconds": 0.00012199999999999971,
+      "speedup": 1.1698841201716752,
+      "efficiency": 1.1698841201716752
+    },
+    {
+      "mode": "mpi",
+      "processes": 1,
+      "threads": 1,
+      "total_cores": 1,
+      "exchange": "overlap",
+      "median_seconds": 0.00011399999999999952,
+      "min_seconds": 0.00010799999999999959,
+      "max_seconds": 0.00011999999999999945,
+      "speedup": 1.1955394736842153,
+      "efficiency": 1.1955394736842153
+    },
+    {
+      "mode": "mpi",
+      "processes": 2,
+      "threads": 1,
+      "total_cores": 2,
+      "exchange": "sendrecv",
+      "median_seconds": 0.0049570000000000005,
+      "min_seconds": 0.004642,
+      "max_seconds": 0.005272000000000001,
+      "speedup": 0.027494754892071812,
+      "efficiency": 0.013747377446035906
+    },
+    {
+      "mode": "mpi",
+      "processes": 2,
+      "threads": 1,
+      "total_cores": 2,
+      "exchange": "overlap",
+      "median_seconds": 0.0030619999999999996,
+      "min_seconds": 0.002997999999999999,
+      "max_seconds": 0.0031260000000000003,
+      "speedup": 0.04451061397779229,
+      "efficiency": 0.022255306988896145
+    },
+    {
+      "mode": "hybrid",
+      "processes": 2,
+      "threads": 2,
+      "total_cores": 4,
+      "exchange": "sendrecv",
+      "median_seconds": 0.004307,
+      "min_seconds": 0.0031400000000000004,
+      "max_seconds": 0.005474,
+      "speedup": 0.03164418388669607,
+      "efficiency": 0.007911045971674018
+    },
+    {
+      "mode": "hybrid",
+      "processes": 2,
+      "threads": 2,
+      "total_cores": 4,
+      "exchange": "overlap",
+      "median_seconds": 0.0022699999999999994,
+      "min_seconds": 0.001030999999999999,
+      "max_seconds": 0.003509,
+      "speedup": 0.06004030837004406,
+      "efficiency": 0.015010077092511015
+    },
+    {
+      "mode": "openmp",
+      "processes": 1,
+      "threads": 4,
+      "total_cores": 4,
+      "exchange": "none",
+      "median_seconds": 0.000398708,
+      "min_seconds": 0.000382666,
+      "max_seconds": 0.00041475,
+      "speedup": 0.34183287017065117,
+      "efficiency": 0.08545821754266279
+    }
+  ],
+  "note": "Fixed iterations; no convergence claim. Efficiency denominator is P*T.",
+  "executable_sha256": {
+    "serial": "4b1b8c902d9444a64557f02d84d5004aeec6371f8a6e08ca469c8e07dd5b33b2",
+    "mpi": "b2cea9e748630ec3a150a5be3df1a68e46b1b73fbc42477052bb964da4f78d5d",
+    "hybrid": "beb26ffd821bbfb1a160bac2f4a787c9190ae2f2e4c16ba93c439b8f87b19f8e",
+    "openmp": "11b6d501ca5534cf36ae5b1f21fe4757ce75397e71e04b7bc21f348ce11b6c1e"
+  },
+  "source_sha256": {
+    "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+    "jacobi_mpi.cpp": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+    "benchmark_parallel.py": "75b65e83496506f0f5154dfb61999f378f6cd9d7d5e60497df967c4c7424477d"
+  }
+}
