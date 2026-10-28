@@ -1,0 +1,19 @@
+{
+  "origin_job": "1501884.stdct-mgmt-02",
+  "origin_summary_sha256": "f6ddae70662a623e083c22528f7d552739a594956b6b0d03fff6154ef9a2d518",
+  "production_source_sha256": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+  "n_values": {
+    "1024": {
+      "max_update": 0.0007077056141939764,
+      "max_error": 1.8590659809641223,
+      "residual_inf": 2972.8766375355312,
+      "boundary_error": 0
+    },
+    "2048": {
+      "max_update": 0.0007139342056174947,
+      "max_error": 1.9248271994058748,
+      "residual_inf": 11984.433500403773,
+      "boundary_error": 0
+    }
+  }
+}

@@ -1,10 +1,12 @@
 * text=auto
 *.cpp text eol=lf
 *.py text eol=lf
-*.json -text
+*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.txt -text
 *.md text eol=lf
 *.pbs text eol=lf
+*.sh text eol=lf
+Makefile text eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf
 docs/PROJECT_REQUIREMENTS.md -text
@@ -13,3 +15,8 @@ docs/PROJECT_REQUIREMENTS.md -text
 *.csv -text
 evidence/**/*.txt whitespace=-blank-at-eol,-blank-at-eof
 evidence/**/*.log whitespace=-blank-at-eol,-blank-at-eof
+
+# Historical evidence and snapshots must retain their audited bytes.
+evidence/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+results/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+*.tar.gz -text

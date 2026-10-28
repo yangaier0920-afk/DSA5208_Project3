@@ -1,0 +1,30 @@
+{
+  "status": "READY_FOR_REMOTE_BASH_CHECK_AND_PBS",
+  "date": "2026-10-28",
+  "real_local_serial_cases": 7,
+  "asymmetric_mpi_cases_pending": 24,
+  "cluster_performance_runs_pending": 180,
+  "python_ast_and_embedded_python_checked": true,
+  "pbs_lf_no_bom_checked": true,
+  "pbs_login_guard_rejected": true,
+  "bash_syntax_checked": false,
+  "mpi_compiled_or_run": false,
+  "bash_unavailable_reasons": [
+    "WindowsApps bash could not start",
+    "w64devkit bash alias failed"
+  ],
+  "synthetic_tooling_checks": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\supplement_tooling_ble20tba\\checks.json",
+  "performance_cpp_unchanged_vs_1500271": {
+    "jacobi.cpp": true,
+    "jacobi_serial_row_update.cpp": true,
+    "jacobi_mpi.cpp": true
+  },
+  "upload_archive": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\ab_supplement_upload_20261028_v1.tar.gz",
+  "upload_sha256": "f2c0a5833eb0e54838fc2433ce203eb0d4d2e25f043a34da172a00cf7b1ee142",
+  "upload_files": 19,
+  "upload_members_checked": true,
+  "new_cluster_jobs_submitted": 0,
+  "experiment2": "deferred pending priority experiments and remaining budget",
+  "git_committed_or_pushed": false,
+  "email_sent": false
+}

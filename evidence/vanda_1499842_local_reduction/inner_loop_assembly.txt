@@ -1,0 +1,71 @@
+serial_gpp
+  402608:	mulsd  %xmm2,%xmm0
+
+  40260c:	movsd  %xmm0,0x8(%r8,%rax,1)
+
+  402613:	subsd  0x8(%rdx,%rax,1),%xmm0
+
+  402619:	add    $0x8,%rax
+
+  40261d:	andpd  %xmm1,%xmm0
+
+  402621:	maxsd  0x8(%rsp),%xmm0
+
+  402627:	movsd  %xmm0,0x8(%rsp)
+
+  40262d:	cmp    %r9,%rax
+
+
+serial_local_update
+  402607:	mulsd  %xmm2,%xmm0
+
+  40260b:	movsd  %xmm0,0x8(%r8,%rax,1)
+
+  402612:	subsd  0x8(%rdx,%rax,1),%xmm0
+
+  402618:	add    $0x8,%rax
+
+  40261c:	andpd  %xmm1,%xmm0
+
+  402620:	maxsd  0x8(%rsp),%xmm0
+
+  402626:	movsd  %xmm0,0x8(%rsp)
+
+  40262c:	cmp    %r9,%rax
+
+
+serial_row_update
+  402607:	mulsd  %xmm3,%xmm0
+
+  40260b:	movsd  %xmm0,0x8(%r8,%rcx,1)
+
+  402612:	subsd  0x8(%rdx,%rcx,1),%xmm0
+
+  402618:	add    $0x8,%rcx
+
+  40261c:	andpd  %xmm2,%xmm0
+
+  402620:	maxsd  %xmm1,%xmm0
+
+  402624:	movapd %xmm0,%xmm1
+
+  402628:	cmp    %rcx,%r9
+
+
+mpi
+  402eb7:	mulsd  %xmm2,%xmm0
+
+  402ebb:	movsd  %xmm0,0x8(%r11,%rax,1)
+
+  402ec2:	subsd  0x8(%rbx,%rax,1),%xmm0
+
+  402ec8:	andpd  0x2460(%rip),%xmm0        # 405330 <_IO_stdin_used+0x330>
+
+  402ed0:	add    $0x8,%rax
+
+  402ed4:	maxsd  %xmm1,%xmm0
+
+  402ed8:	movapd %xmm0,%xmm1
+
+  402edc:	cmp    %rax,%rdx
+

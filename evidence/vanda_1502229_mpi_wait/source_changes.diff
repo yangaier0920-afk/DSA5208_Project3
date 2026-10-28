@@ -1,0 +1,60 @@
+--- production/jacobi_mpi.cpp
++++ diagnostic/jacobi_mpi_wait_diagnostic.cpp
+@@ -1,3 +1,4 @@
++// Independent pure-MPI wait-placement diagnostic; production source preserved.
+ // Distributed 2-D Jacobi; build with OpenMP for a hybrid MPI + OpenMP solver.
+ // MPI calls are made only by the thread that initializes MPI (FUNNELED).
+ #include <mpi.h>
+@@ -34,10 +35,10 @@
+         if (used != std::string(argv[3]).size()) throw std::invalid_argument("Invalid tolerance");
+     }
+     if (argc == 6 && std::string(argv[4]) == "--exchange") p.exchange = argv[5];
+-    else if (argc > 4) throw std::invalid_argument("Expected --exchange sendrecv|overlap");
++    else if (argc > 4) throw std::invalid_argument("Expected --exchange sendrecv|immediate|overlap");
+     if (p.n < 1 || p.n > 2048 || p.max_iters < 1 || p.max_iters > 10000000 ||
+         !std::isfinite(p.tolerance) || p.tolerance < 0 ||
+-        (p.exchange != "sendrecv" && p.exchange != "overlap"))
++        (p.exchange != "sendrecv" && p.exchange != "immediate" && p.exchange != "overlap"))
+         throw std::invalid_argument("Argument outside supported range");
+     return p;
+ }
+@@ -67,7 +68,7 @@
+         if (any_invalid) {
+             if (rank == 0) std::cerr << (error.empty() ? "Invalid input on another rank" : error)
+                 << "\nUsage: jacobi_mpi [n=16] [max_iters=100000] [tolerance=1e-12]"
+-                << " [--exchange sendrecv|overlap]\n";
++                << " [--exchange sendrecv|immediate|overlap]\n";
+             MPI_Finalize();
+             return 1;
+         }
+@@ -133,6 +134,7 @@
+             }
+             return delta;
+         };
++        const bool wait_immediately = p.exchange == "immediate";
+         int iterations = 0;
+         double max_update = 0.0;
+         bool converged = false;
+@@ -151,9 +153,11 @@
+                 MPI_Isend(old_grid.data() + width, width, MPI_DOUBLE, up, 0, MPI_COMM_WORLD, &requests[2]);
+                 MPI_Isend(old_grid.data() + rows * width, width, MPI_DOUBLE, down, 1,
+                     MPI_COMM_WORLD, &requests[3]);
+-                // Interior rows do not read receive buffers. Send buffers remain read-only.
++                // Both nonblocking modes have identical interior/edge work and order.
++                // Only the position of the single wait changes. No phase instrumentation.
++                if (wait_immediately) MPI_Waitall(4, requests, MPI_STATUSES_IGNORE);
+                 if (rows > 2) local_update = update(2, rows - 1);
+-                MPI_Waitall(4, requests, MPI_STATUSES_IGNORE);
++                if (!wait_immediately) MPI_Waitall(4, requests, MPI_STATUSES_IGNORE);
+                 local_update = std::max(local_update, update(1, rows, true));
+             }
+             old_grid.swap(new_grid);
+@@ -209,7 +213,7 @@
+ #else
+             const char* mode = "mpi";
+ #endif
+-            std::cout << std::setprecision(17) << "{\"mode\":\"" << mode
++            std::cout << std::setprecision(17) << "{\"diagnostic\":\"wait-placement-v1\",\"mode\":\"" << mode
+                 << "\",\"n\":" << n << ",\"mpi_processes\":" << size
+                 << ",\"threads\":" << threads << ",\"nodes\":" << nodes
+                 << ",\"exchange\":\"" << p.exchange << "\",\"iterations\":" << iterations

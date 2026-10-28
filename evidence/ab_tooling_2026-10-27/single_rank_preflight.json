@@ -1,0 +1,19 @@
+{
+  "scope": "Local Python scheduling, command and numerical-check tests only; no new MPI/HPC execution",
+  "python_syntax": "PASS",
+  "source_lf": "PASS",
+  "balanced_eight_round_schedule": "PASS",
+  "historical_fixed_and_converged_outputs": "PASS",
+  "wrong_rank_threads_workload_nan_boundary_rejected": "PASS",
+  "bad_full_grid_rejected": "PASS",
+  "same_cpu_command_structure": "PASS",
+  "linux_affinity_and_pbs_runtime": "PENDING ON VANDA",
+  "upload_file_sha256": {
+    "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+    "jacobi_mpi.cpp": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+    "diagnose_single_rank.py": "3de00cff63879ff41f7f71eabc6a7e15bf6553e9ab073db8f75218ebce941d35",
+    "prepare_team_references.py": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6",
+    "vanda_single_rank.pbs": "e954d8fdd64d2e1de3e3405a92f105b2441ff791a42ee6932466c57deb78bb34",
+    "vanda_modules.example.sh": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc"
+  }
+}

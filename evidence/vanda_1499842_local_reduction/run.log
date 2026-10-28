@@ -1,0 +1,75 @@
+Loading GCC/12.2.0
+  Loading requirement: GCCcore/12.2.0 zlib/1.2.12-GCCcore-12.2.0
+    binutils/2.39-GCCcore-12.2.0
+Loading OpenMPI/4.1.5-GCC-12.2.0
+  Loading requirement: ncurses/6.3-GCCcore-12.2.0 numactl/2.0.16-GCCcore-12.2.0
+    XZ/5.2.7-GCCcore-12.2.0 libxml2/2.10.3-GCCcore-12.2.0
+    libpciaccess/0.17-GCCcore-12.2.0 hwloc/2.8.0-GCCcore-12.2.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.2.0 UCX/1.13.1-GCCcore-12.2.0
+    libfabric/1.16.1-GCCcore-12.2.0 PMIx/4.2.2-GCCcore-12.2.0
+    UCC/1.1.0-GCCcore-12.2.0
+Loading Python/3.10.8-GCCcore-12.2.0
+  Loading requirement: bzip2/1.0.8-GCCcore-12.2.0 libreadline/8.2-GCCcore-12.2.0
+    Tcl/8.6.12-GCCcore-12.2.0 SQLite/3.39.4-GCCcore-12.2.0
+    GMP/6.2.1-GCCcore-12.2.0 libffi/3.4.4-GCCcore-12.2.0
+Currently Loaded Modulefiles:
+ 1) shared                            14) libevent/2.1.12-GCCcore-12.2.0   
+ 2) apptainer/1.4.1                   15) UCX/1.13.1-GCCcore-12.2.0        
+ 3) GCCcore/12.2.0                    16) libfabric/1.16.1-GCCcore-12.2.0  
+ 4) zlib/1.2.12-GCCcore-12.2.0        17) PMIx/4.2.2-GCCcore-12.2.0        
+ 5) binutils/2.39-GCCcore-12.2.0      18) UCC/1.1.0-GCCcore-12.2.0         
+ 6) GCC/12.2.0                        19) OpenMPI/4.1.5-GCC-12.2.0         
+ 7) ncurses/6.3-GCCcore-12.2.0        20) bzip2/1.0.8-GCCcore-12.2.0       
+ 8) numactl/2.0.16-GCCcore-12.2.0     21) libreadline/8.2-GCCcore-12.2.0   
+ 9) XZ/5.2.7-GCCcore-12.2.0           22) Tcl/8.6.12-GCCcore-12.2.0        
+10) libxml2/2.10.3-GCCcore-12.2.0     23) SQLite/3.39.4-GCCcore-12.2.0     
+11) libpciaccess/0.17-GCCcore-12.2.0  24) GMP/6.2.1-GCCcore-12.2.0         
+12) hwloc/2.8.0-GCCcore-12.2.0        25) libffi/3.4.4-GCCcore-12.2.0      
+13) OpenSSL/1.1                       26) Python/3.10.8-GCCcore-12.2.0     
+correctness_0_serial_gpp_n7: 0.000005s
+correctness_0_serial_local_update_n7: 0.000005s
+correctness_0_serial_row_update_n7: 0.000003s
+correctness_0_mpi_sendrecv_n7: 0.000007s
+correctness_0_serial_gpp_n32: 0.023204s
+correctness_0_serial_local_update_n32: 0.023185s
+correctness_0_serial_row_update_n32: 0.008139s
+correctness_0_mpi_sendrecv_n32: 0.012052s
+warmup_-1_serial_gpp_n1024: 4.514268s
+warmup_-1_serial_local_update_n1024: 3.471145s
+warmup_-1_serial_row_update_n1024: 1.672126s
+warmup_-1_mpi_sendrecv_n1024: 1.725685s
+measured_0_serial_gpp_n1024: 3.626091s
+measured_0_serial_local_update_n1024: 3.641372s
+measured_0_serial_row_update_n1024: 1.808066s
+measured_0_mpi_sendrecv_n1024: 1.827227s
+measured_1_serial_local_update_n1024: 3.639915s
+measured_1_serial_row_update_n1024: 1.809275s
+measured_1_mpi_sendrecv_n1024: 1.814410s
+measured_1_serial_gpp_n1024: 3.649766s
+measured_2_serial_row_update_n1024: 1.815711s
+measured_2_mpi_sendrecv_n1024: 1.761756s
+measured_2_serial_gpp_n1024: 3.500055s
+measured_2_serial_local_update_n1024: 3.466774s
+measured_3_mpi_sendrecv_n1024: 1.722310s
+measured_3_serial_gpp_n1024: 3.459048s
+measured_3_serial_local_update_n1024: 3.463527s
+measured_3_serial_row_update_n1024: 1.692559s
+measured_4_mpi_sendrecv_n1024: 1.769799s
+measured_4_serial_row_update_n1024: 1.750099s
+measured_4_serial_local_update_n1024: 3.533183s
+measured_4_serial_gpp_n1024: 3.505019s
+measured_5_serial_gpp_n1024: 3.492746s
+measured_5_mpi_sendrecv_n1024: 1.726623s
+measured_5_serial_row_update_n1024: 1.686583s
+measured_5_serial_local_update_n1024: 3.468035s
+measured_6_serial_local_update_n1024: 3.461322s
+measured_6_serial_gpp_n1024: 3.456308s
+measured_6_mpi_sendrecv_n1024: 1.715396s
+measured_6_serial_row_update_n1024: 1.696170s
+measured_7_serial_row_update_n1024: 1.686099s
+measured_7_serial_local_update_n1024: 3.470005s
+measured_7_serial_gpp_n1024: 3.466487s
+measured_7_mpi_sendrecv_n1024: 1.732038s
+DIAGNOSTIC_STATUS=PASSED
+RUN_STATUS=PASSED
+JOB_EXIT_STATUS=0

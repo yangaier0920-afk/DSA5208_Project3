@@ -1,0 +1,23 @@
+{
+  "scope": "Local Windows benchmark serial CLI and planner/affinity-check tests; multi-rank Linux execution pending",
+  "balanced_nine_config_nine_round_plan": "PASS",
+  "unique_ninety_run_ids": "PASS",
+  "rank_command_structure": "PASS",
+  "wrong_affinity_host_missing_rank_rejected": "PASS",
+  "grouped_serial_cli": "PASS",
+  "interleaved_serial_cli": "PASS",
+  "actual_serial_source_hash": "PASS",
+  "analysis_format_compatibility": "PASS",
+  "syntax_and_lf": "PASS",
+  "bash_syntax": "PENDING TARGET VANDA",
+  "mpi_pin_runtime": "PENDING TARGET VANDA",
+  "pin_wrapper_rank_selection_mock": "PASS (simulated Linux affinity/exec, not real MPI)",
+  "historical_26_group_statistics": "PASS",
+  "report_baseline_order_identity": "PASS",
+  "source_sha256": {
+    "benchmark_parallel.py": "fc3033b0145669509742de80bd02c0e60f641b73ee29f4d0a8b4c982ae337b02",
+    "pin_cpu.py": "7ed290a856bd991e94b923626e1237fb845e20a3bf79acefa6a5b5a889d8a02a",
+    "vanda_mpi_recheck.pbs": "e7d201f175843ff24a36caf5d173654e9820ddcc88d53952ffde0c6f93028bef",
+    "jacobi_serial_row_update.cpp": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f"
+  }
+}

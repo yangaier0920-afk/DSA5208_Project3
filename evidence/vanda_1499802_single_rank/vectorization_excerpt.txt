@@ -1,0 +1,40 @@
+serial_gpp_vectorization.txt
+/app1/ebapps/arches/flat-avx2/software/GCCcore/12.2.0/include/c++/12.2.0/bits/stl_vector.h:564:7: note: vectorized 0 loops in function.
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:69:31: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:69:31: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:69:31: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:70:35: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:70:35: note: ***** Analysis failed with vector mode V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:70:35: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:16:5: note: vectorized 0 loops in function.
+
+serial_mpicxx_vectorization.txt
+/app1/ebapps/arches/flat-avx2/software/GCCcore/12.2.0/include/c++/12.2.0/bits/stl_vector.h:564:7: note: vectorized 0 loops in function.
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:69:31: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:69:31: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:69:31: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:70:35: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:70:35: note: ***** Analysis failed with vector mode V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:70:35: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi.cpp:16:5: note: vectorized 0 loops in function.
+
+mpi_vectorization.txt
+/app1/ebapps/arches/flat-avx2/software/GCCcore/12.2.0/include/c++/12.2.0/bits/stl_vector.h:564:7: note: vectorized 0 loops in function.
+/app1/ebapps/arches/flat-avx2/software/GCCcore/12.2.0/include/c++/12.2.0/bits/stl_vector.h:551:7: note: vectorized 0 loops in function.
+/app1/ebapps/arches/flat-avx2/software/GCCcore/12.2.0/include/c++/12.2.0/bits/vector.tcc:523:5: note: vectorized 0 loops in function.
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:125:39: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:125:39: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: note: ***** Analysis failed with vector mode V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:125:39: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:125:39: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: note: ***** Analysis failed with vector mode V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:125:39: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:125:39: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: missed: couldn't vectorize loop
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: note: ***** Analysis failed with vector mode V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:127:35: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DF
+/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499802.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp:45:5: note: vectorized 0 loops in function.

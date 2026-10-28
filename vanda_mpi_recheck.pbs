@@ -1,0 +1,69 @@
+#!/bin/bash
+#PBS -N jacobi_mpi_recheck
+#PBS -q auto_free
+#PBS -l select=1:ncpus=12:mpiprocs=12:ompthreads=1:mem=4gb
+#PBS -l walltime=00:20:00
+#PBS -j oe
+#PBS -k oed
+#PBS -S /bin/bash
+# Pure MPI A/B experiment; original OpenMP/hybrid code is not built here.
+set -euo pipefail
+: "${PBS_JOBID:?Submit with qsub}"
+cd "$PBS_O_WORKDIR"
+run_dir="$PBS_O_WORKDIR/results/Vanda_mpi_recheck_${PBS_JOBID}"
+mkdir -p "$run_dir"
+exec > >(tee "$run_dir/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+if [ -e "$run_dir/metadata.txt" ]; then
+    echo 'Existing result metadata; use a new job ID.' >&2
+    exit 1
+fi
+if [ -f vanda_modules.sh ]; then
+    source ./vanda_modules.sh
+else
+    source ./vanda_modules.example.sh
+fi
+{
+    date -Is
+    hostname
+    printf 'N=%s\nK=%s\nSERIAL_SOURCE=jacobi_serial_row_update.cpp\n' "${JACOBI_N:-1024}" "${JACOBI_K:-1000}"
+    g++ --version
+    mpicxx --showme
+    mpirun --version
+    python3 --version
+    module list
+} > "$run_dir/metadata.txt" 2>&1
+cat "$run_dir/metadata.txt"
+lscpu > "$run_dir/lscpu.txt"
+qstat -f "$PBS_JOBID" > "$run_dir/qstat_at_start.txt"
+cp /proc/self/status "$run_dir/process_status.txt"
+cp "$PBS_NODEFILE" "$run_dir/pbs_nodefile.txt"
+# PBS CPU mask must match the 12 requested logical CPUs before explicit pinning.
+pin_cpus=$(python3 -c 'import os; c=sorted(os.sched_getaffinity(0)); assert len(c)==12, "Expected 12 allocated CPUs; inspect process_status.txt"; print(",".join(map(str,c)))')
+printf 'PIN_CPUS=%s\n' "$pin_cpus"
+mkdir "$run_dir/sources" "$run_dir/bin"
+cp jacobi.cpp jacobi_serial_row_update.cpp jacobi_mpi.cpp benchmark_parallel.py pin_cpu.py \
+    verify_small.py verify_parallel.py prepare_team_references.py team_contract_v0.1.json \
+    vanda_mpi_recheck.pbs vanda_modules.example.sh "$run_dir/sources/"
+if [ -f vanda_modules.sh ]; then cp vanda_modules.sh "$run_dir/sources/"; fi
+sha256sum "$run_dir"/sources/* > "$run_dir/source_sha256.txt"
+# Preserve exact compiler invocations in the job log. Build from the snapshots.
+set -x
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic "$run_dir/sources/jacobi_serial_row_update.cpp" -o "$run_dir/bin/jacobi_serial"
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic "$run_dir/sources/jacobi_mpi.cpp" -o "$run_dir/bin/jacobi_mpi"
+set +x
+sha256sum "$run_dir"/bin/* > "$run_dir/executable_sha256.txt"
+export OMP_NUM_THREADS=1
+export OMP_DYNAMIC=FALSE
+python3 "$run_dir/sources/verify_small.py" "$run_dir/bin/jacobi_serial"
+python3 "$run_dir/sources/verify_parallel.py" --serial "$run_dir/bin/jacobi_serial" \
+    --mpi "$run_dir/bin/jacobi_mpi" --processes 1,2,4,12 --threads 1 \
+    --launcher 'mpirun --bind-to none' --out-dir "$run_dir/validation"
+python3 "$run_dir/sources/benchmark_parallel.py" --build-dir "$run_dir/bin" \
+    --out-dir "$run_dir/benchmark" --cluster Vanda --allocated-cpus 12 \
+    --serial-source jacobi_serial_row_update.cpp --pin-cpus "$pin_cpus" \
+    --n "${JACOBI_N:-1024}" --iterations "${JACOBI_K:-1000}" \
+    --configs 'mpi:1:1,mpi:2:1,mpi:4:1,mpi:12:1' --exchanges sendrecv,overlap \
+    --warmups 1 --repeats 9 --order interleaved \
+    --mpi-args='--bind-to none --map-by slot'
+printf 'RUN_STATUS=PASSED\n'

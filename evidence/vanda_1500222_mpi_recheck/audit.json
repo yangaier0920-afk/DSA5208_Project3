@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "cluster": "Vanda",
+  "job_id": "1500222.stdct-mgmt-02",
+  "validation_executions": 92,
+  "benchmark_executions": 90,
+  "configurations": 9,
+  "warmups_per_configuration": 1,
+  "measurements_per_configuration": 9,
+  "original_source_and_binary_hashes_checked": true,
+  "raw_results_and_statistics_checked": true,
+  "warnings": [
+    "libpbs.so.0 unavailable; MPI PBS TM components were ignored"
+  ],
+  "numerical_validation_executions_rechecked": 88,
+  "invalid_input_rejections_rechecked": 4,
+  "benchmark_workload_metrics_rechecked": 90,
+  "rank_affinity_records_rechecked": 390,
+  "balanced_interleaved_order_checked": true,
+  "inherited_cpu_mask_checked": true,
+  "host": "IN-003",
+  "pin_cpus": [
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    47,
+    49,
+    51,
+    53,
+    57,
+    59
+  ],
+  "serial_source": "jacobi_serial_row_update.cpp",
+  "source_files_identical_to_1499881": {
+    "benchmark_parallel.py": true,
+    "jacobi.cpp": true,
+    "jacobi_mpi.cpp": true,
+    "jacobi_serial_row_update.cpp": true,
+    "pin_cpu.py": true,
+    "prepare_team_references.py": true,
+    "team_contract_v0.1.json": true,
+    "vanda_modules.example.sh": true,
+    "vanda_mpi_recheck.pbs": true,
+    "verify_parallel.py": true,
+    "verify_small.py": true
+  },
+  "raw_archive": "results/raw_archives/Vanda_mpi_recheck_1500222.stdct-mgmt-02.tar.gz",
+  "raw_archive_sha256": "0dd1f898d49aa8e4f361e347653804c06c647841410f2458d8ed2f6c908f500a",
+  "raw_archive_contents_rechecked": true
+}

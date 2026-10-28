@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "cluster": "Vanda",
+  "job_id": "1499881.stdct-mgmt-02",
+  "validation_executions": 92,
+  "benchmark_executions": 90,
+  "configurations": 9,
+  "warmups_per_configuration": 1,
+  "measurements_per_configuration": 9,
+  "original_source_and_binary_hashes_checked": true,
+  "raw_results_and_statistics_checked": true,
+  "warnings": [
+    "libpbs.so.0 unavailable; MPI PBS TM components were ignored"
+  ],
+  "numerical_validation_executions_rechecked": 88,
+  "invalid_input_rejections_rechecked": 4,
+  "benchmark_workload_metrics_rechecked": 90,
+  "rank_affinity_records_rechecked": 390,
+  "balanced_interleaved_order_checked": true,
+  "host": "IN-006",
+  "pin_cpus": [
+    25,
+    27,
+    29,
+    31,
+    33,
+    41,
+    43,
+    47,
+    51,
+    57,
+    59,
+    61
+  ],
+  "serial_source": "jacobi_serial_row_update.cpp",
+  "raw_archive": "results/raw_archives/Vanda_mpi_recheck_1499881.stdct-mgmt-02.tar.gz",
+  "raw_archive_sha256": "1f958a71a5ba40cfb734ff7274e8d08945bd4ea7a684d9a1eca6760b4fc6d8c6"
+}

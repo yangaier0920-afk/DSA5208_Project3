@@ -1,0 +1,2 @@
+b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a  /nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1500271.stdct-mgmt-02/bin/jacobi_mpi
+44dc8fffa7fb657a2cd8d63a475cca94d95e7d712e32ca6721763aae3c2b93d2  /nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1500271.stdct-mgmt-02/bin/jacobi_serial

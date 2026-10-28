@@ -1,0 +1,355 @@
+{
+  "status": "PASS",
+  "job_id": "1501884.stdct-mgmt-02",
+  "host": "IN-005",
+  "pin_cpus": [
+    1,
+    3,
+    5,
+    7,
+    41,
+    43,
+    45,
+    47,
+    49,
+    51,
+    53,
+    55
+  ],
+  "numa_nodes": [
+    1
+  ],
+  "primary_audit": {
+    "status": "PASS",
+    "job_id": "1501884.stdct-mgmt-02",
+    "host": "IN-005",
+    "validation": {
+      "total": 92,
+      "numerical": 88,
+      "rejections": 4,
+      "full_grid": 43
+    },
+    "asymmetric_full_grid_executions": 31,
+    "performance_executions": 180,
+    "performance_warmups": 18,
+    "performance_formal": 162,
+    "rank_affinity_records": 780,
+    "global_order_checked": true,
+    "within_scale_nine_positions_checked": true,
+    "eighteen_positions_balanced": false,
+    "raw_archive": {
+      "path": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\raw_archives\\Vanda_ab_dual_1501884.stdct-mgmt-02.tar.gz",
+      "sha256": "ddda26f6f5822c5b29d7143549935a0544fc9dc3ac257bbb704d109f03f5f78b",
+      "files": 646,
+      "member_by_member_checked": true
+    },
+    "warnings": [
+      "libpbs.so.0 warning retained"
+    ]
+  },
+  "printed_sequence_and_timers_checked": 180,
+  "builds_checked": {
+    "jacobi_serial": {
+      "compiler": "g++",
+      "source": "jacobi_serial_row_update.cpp"
+    },
+    "jacobi_mpi": {
+      "compiler": "mpicxx",
+      "source": "jacobi_mpi.cpp"
+    },
+    "jacobi_serial_asymmetric": {
+      "compiler": "g++",
+      "source": "jacobi_serial_asymmetric.cpp"
+    },
+    "jacobi_mpi_asymmetric": {
+      "compiler": "mpicxx",
+      "source": "jacobi_mpi_asymmetric.cpp"
+    }
+  },
+  "uploaded_snapshot_files_identical": {
+    "analyze_results.py": true,
+    "audit_ab_supplement.py": true,
+    "benchmark_dual_scale.py": true,
+    "benchmark_parallel.py": true,
+    "jacobi.cpp": true,
+    "jacobi_mpi.cpp": true,
+    "jacobi_mpi_asymmetric.cpp": true,
+    "jacobi_serial_asymmetric.cpp": true,
+    "jacobi_serial_row_update.cpp": true,
+    "pin_cpu.py": true,
+    "prepare_team_references.py": true,
+    "team_contract_v0.1.json": true,
+    "vanda_ab_dual_scale.pbs": true,
+    "vanda_modules.example.sh": true,
+    "verify_asymmetric.py": true,
+    "verify_parallel.py": true,
+    "verify_small.py": true
+  },
+  "historical_identity_comparisons": [
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "benchmark_parallel.py",
+      "sha256": "fc3033b0145669509742de80bd02c0e60f641b73ee29f4d0a8b4c982ae337b02",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "jacobi.cpp",
+      "sha256": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "jacobi_mpi.cpp",
+      "sha256": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "jacobi_serial_row_update.cpp",
+      "sha256": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "pin_cpu.py",
+      "sha256": "7ed290a856bd991e94b923626e1237fb845e20a3bf79acefa6a5b5a889d8a02a",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "prepare_team_references.py",
+      "sha256": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "team_contract_v0.1.json",
+      "sha256": "26211971a26d05188b53baa817fa398b435bba27f54bd3c39c62d86e0cd7d00f",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "vanda_modules.example.sh",
+      "sha256": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "verify_parallel.py",
+      "sha256": "424bc3528e8e07080731a0eb598a3ea3f4ff340adfff92324a4585d0dbda32d9",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "source",
+      "name": "verify_small.py",
+      "sha256": "92ea27b39aab10516aec2390f299d3ea75b908430ac56b235d91a3657820d3d6",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "executable",
+      "name": "jacobi_serial",
+      "sha256": "44dc8fffa7fb657a2cd8d63a475cca94d95e7d712e32ca6721763aae3c2b93d2",
+      "identical": true
+    },
+    {
+      "historical_job": "1499881",
+      "kind": "executable",
+      "name": "jacobi_mpi",
+      "sha256": "b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "benchmark_parallel.py",
+      "sha256": "fc3033b0145669509742de80bd02c0e60f641b73ee29f4d0a8b4c982ae337b02",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "jacobi.cpp",
+      "sha256": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "jacobi_mpi.cpp",
+      "sha256": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "jacobi_serial_row_update.cpp",
+      "sha256": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "pin_cpu.py",
+      "sha256": "7ed290a856bd991e94b923626e1237fb845e20a3bf79acefa6a5b5a889d8a02a",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "prepare_team_references.py",
+      "sha256": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "team_contract_v0.1.json",
+      "sha256": "26211971a26d05188b53baa817fa398b435bba27f54bd3c39c62d86e0cd7d00f",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "vanda_modules.example.sh",
+      "sha256": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "verify_parallel.py",
+      "sha256": "424bc3528e8e07080731a0eb598a3ea3f4ff340adfff92324a4585d0dbda32d9",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "source",
+      "name": "verify_small.py",
+      "sha256": "92ea27b39aab10516aec2390f299d3ea75b908430ac56b235d91a3657820d3d6",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "executable",
+      "name": "jacobi_serial",
+      "sha256": "44dc8fffa7fb657a2cd8d63a475cca94d95e7d712e32ca6721763aae3c2b93d2",
+      "identical": true
+    },
+    {
+      "historical_job": "1500222",
+      "kind": "executable",
+      "name": "jacobi_mpi",
+      "sha256": "b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "benchmark_parallel.py",
+      "sha256": "fc3033b0145669509742de80bd02c0e60f641b73ee29f4d0a8b4c982ae337b02",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "jacobi.cpp",
+      "sha256": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "jacobi_mpi.cpp",
+      "sha256": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "jacobi_serial_row_update.cpp",
+      "sha256": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "pin_cpu.py",
+      "sha256": "7ed290a856bd991e94b923626e1237fb845e20a3bf79acefa6a5b5a889d8a02a",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "prepare_team_references.py",
+      "sha256": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "team_contract_v0.1.json",
+      "sha256": "26211971a26d05188b53baa817fa398b435bba27f54bd3c39c62d86e0cd7d00f",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "vanda_modules.example.sh",
+      "sha256": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "verify_parallel.py",
+      "sha256": "424bc3528e8e07080731a0eb598a3ea3f4ff340adfff92324a4585d0dbda32d9",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "source",
+      "name": "verify_small.py",
+      "sha256": "92ea27b39aab10516aec2390f299d3ea75b908430ac56b235d91a3657820d3d6",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "executable",
+      "name": "jacobi_serial",
+      "sha256": "44dc8fffa7fb657a2cd8d63a475cca94d95e7d712e32ca6721763aae3c2b93d2",
+      "identical": true
+    },
+    {
+      "historical_job": "1500271",
+      "kind": "executable",
+      "name": "jacobi_mpi",
+      "sha256": "b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a",
+      "identical": true
+    }
+  ],
+  "serial_precheck_executions_from_script": 6,
+  "serial_precheck_numeric_log_records_rechecked": 3,
+  "structured_solver_records": 303,
+  "total_solver_executions_including_serial_precheck": 309,
+  "asymmetric_max_full_grid_difference": 8.881784197001252e-16,
+  "validation_converged_runs": 27,
+  "asymmetric_converged_runs": 7,
+  "benchmark_interval_start_utc": "2026-10-28T03:12:59.632679+00:00",
+  "benchmark_interval_end_utc": "2026-10-28T03:27:50.036854+00:00",
+  "interpretation": "Large chronological performance changes observed; system mechanism unmeasured.",
+  "experiment2": "Deferred for this reporting round; summarize experiment1/3 first.",
+  "performance_samples_removed": 0,
+  "new_cluster_executions_during_review": 0
+}

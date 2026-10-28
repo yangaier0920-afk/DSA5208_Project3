@@ -1,0 +1,10 @@
+mode,processes,exchange,n2048_median_over_n1024_median
+serial,1,none,4.37376341048099
+mpi,1,sendrecv,4.383696056677895
+mpi,1,overlap,4.3229832930943966
+mpi,2,sendrecv,3.80259673681793
+mpi,2,overlap,3.2232933236255334
+mpi,4,sendrecv,3.936392962024627
+mpi,4,overlap,4.152065776237828
+mpi,12,sendrecv,1.3517726351236081
+mpi,12,overlap,2.8521100797252483

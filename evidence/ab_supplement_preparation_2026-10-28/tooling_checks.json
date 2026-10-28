@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "local tooling and synthetic fixtures; NOT MPI/HPC measurements",
+  "fixture": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\supplement_tooling_ble20tba\\SYNTHETIC_NOT_HPC",
+  "mock_solver_launches": 180,
+  "plan_rank_records": 780,
+  "asymmetric_fixture_records": 31,
+  "rejected_invalid_fixtures": [
+    {
+      "name": "global_order",
+      "error": "Global execution order"
+    },
+    {
+      "name": "missing_affinity",
+      "error": "Missing or duplicate rank affinity records"
+    },
+    {
+      "name": "changed_statistics",
+      "error": "Scale statistics projection"
+    },
+    {
+      "name": "missing_asymmetric_case",
+      "error": "Asymmetric matrix incomplete"
+    },
+    {
+      "name": "unfinished_pbs",
+      "error": "PBS resource/completion mismatch: \\bjob_state\\s*=\\s*F\\b"
+    },
+    {
+      "name": "changed_source",
+      "error": "Hash mismatch: jacobi_mpi.cpp"
+    },
+    {
+      "name": "swapped_xy_grid",
+      "error": "independent grid rejected transposed coordinates"
+    }
+  ],
+  "real_cluster_executions": 0,
+  "real_mpi_executions": 0,
+  "archive_round_trip_checked": true,
+  "plots_generated": true
+}

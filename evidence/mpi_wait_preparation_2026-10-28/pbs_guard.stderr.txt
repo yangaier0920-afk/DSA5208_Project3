@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\桌面文件\NUS_sem1\DSA5208\Project3\github_ready\DSA5208_Project3\mpi_wait_diagnostic.py", line 419, in <module>
+    main()
+  File "D:\桌面文件\NUS_sem1\DSA5208\Project3\github_ready\DSA5208_Project3\mpi_wait_diagnostic.py", line 415, in main
+    run_experiment(args) if args.action=='run' else audit(args)
+    ^^^^^^^^^^^^^^^^^^^^
+  File "D:\桌面文件\NUS_sem1\DSA5208\Project3\github_ready\DSA5208_Project3\mpi_wait_diagnostic.py", line 180, in run_experiment
+    require(os.environ.get('PBS_JOBID'),'Diagnostic performance runs require PBS allocation')
+  File "D:\桌面文件\NUS_sem1\DSA5208\Project3\github_ready\DSA5208_Project3\mpi_wait_diagnostic.py", line 45, in require
+    raise ValueError(message)
+ValueError: Diagnostic performance runs require PBS allocation

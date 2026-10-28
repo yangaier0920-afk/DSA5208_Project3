@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "job_id": "1499842.stdct-mgmt-02",
+  "host": "CN-161",
+  "selected_logical_cpu": 61,
+  "inherited_affinity": [
+    61,
+    63
+  ],
+  "pbs_exit_status": 0,
+  "pbs_walltime": "00:01:58",
+  "source_and_binary_hashes_checked": true,
+  "raw_stdout_and_affinity_checked": 44,
+  "numerical_executions_revalidated": 44,
+  "correctness_executions": 8,
+  "warmups": 4,
+  "measured_executions": 32,
+  "production_cpp_sources_modified": false,
+  "compiler_observation": "Original and iteration-local maxima spill inside the cell loop; row-local and MPI accumulators stay in registers",
+  "old_over_row": 2.0290929400069193,
+  "row_over_mpi": 0.9863974138260033,
+  "serial_baseline_for_next_ab_job": "jacobi_serial_row_update.cpp",
+  "causal_scope": "Controlled evidence for the tested GCC12.2/O2 problem/node; not a universal speedup claim",
+  "raw_archive": "results/raw_archives/Vanda_single_rank_1499842.stdct-mgmt-02.tar.gz",
+  "raw_archive_sha256": "b8fd7754337918275665aa0d182702fb48b396f4888bceaba6a76fb1b575e37c"
+}

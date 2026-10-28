@@ -1,13 +1,214 @@
-"""Audit a downloaded Jacobi PBS run and generate report tables/optional figures.
-Standard library for auditing/Markdown/CSV; --plots additionally needs matplotlib.
-"""
+'''Audit a complete downloaded PBS run; generate data-driven tables and plots.
+Standard library for auditing; --plots additionally needs matplotlib.
+'''
 import argparse
 import csv
+from datetime import datetime, timezone
 import hashlib
 import json
 import math
 from pathlib import Path
 import statistics
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def checked_rows(benchmark):
+    '''Recompute statistics from recorded executions, independently of saved tables.'''
+    groups = benchmark['groups']
+    serial_groups = [g for g in groups if g['mode'] == 'serial']
+    require(len(serial_groups) == 1, 'Expected exactly one serial baseline')
+    serial = serial_groups[0]['median_seconds']
+    mpi_base = {g['exchange']: g['median_seconds'] for g in groups
+                if g['mode'] == 'mpi' and g['processes'] == 1}
+    rows = []
+    keys = set()
+    for group in groups:
+        key = (group['mode'], group['processes'], group['threads'], group['exchange'])
+        require(key not in keys, f'Duplicate configuration: {key}')
+        keys.add(key)
+        records = [r for r in benchmark['runs']
+                   if (r['result']['mode'], r['result'].get('mpi_processes', 1),
+                       r['result']['threads'], r['result'].get('exchange', 'none')) == key]
+        require(sum(r['warmup'] for r in records) == benchmark['warmups'],
+                f'Wrong warmup count: {key}')
+        times = [r['result']['compute_seconds'] for r in records if not r['warmup']]
+        require(len(times) == benchmark['repeats'], f'Wrong measurement count: {key}')
+        require(all(math.isfinite(t) and t > 0 for t in times), f'Invalid time: {key}')
+        require(statistics.median(times) == group['median_seconds'] and
+                min(times) == group['min_seconds'] and max(times) == group['max_seconds'],
+                f'Saved statistics differ from executions: {key}')
+        require(group['total_cores'] == group['processes'] * group['threads'],
+                f'Wrong core count: {key}')
+        require(math.isclose(serial / group['median_seconds'], group['speedup']) and
+                math.isclose(group['speedup'] / group['total_cores'], group['efficiency']),
+                f'Wrong speedup/efficiency: {key}')
+        row = dict(group)
+        base = mpi_base.get(group['exchange']) if group['mode'] == 'mpi' else None
+        row['mpi_relative_speedup'] = base / group['median_seconds'] if base else ''
+        row['mpi_relative_efficiency'] = (row['mpi_relative_speedup'] / group['processes']
+                                          if base else '')
+        rows.append(row)
+    require(sum((benchmark['warmups'] + benchmark['repeats']) for _ in rows) ==
+            len(benchmark['runs']), 'Executions outside configured groups')
+    return rows
+
+
+def make_report(benchmark, validation, rows, warnings):
+    '''Describe this dataset only; causal explanations remain a manual review task.'''
+    b, v = benchmark, validation
+    numerical = [r['result'] for r in v['runs'] if 'result' in r]
+    invalid = len(v['runs']) - len(numerical)
+    sizes = ', '.join(map(str, sorted({d['n'] for d in numerical})))
+    nodes = sorted({r['result']['nodes'] for r in b['runs'] if 'nodes' in r['result']})
+    node_text = ', '.join(map(str, nodes)) if nodes else 'not recorded'
+    table = '\n'.join(
+        f"| {r['mode']} | {r['processes']}x{r['threads']} | {r['exchange']} | "
+        f"{r['median_seconds']:.6f} | {r['min_seconds']:.6f}-{r['max_seconds']:.6f} | "
+        f"{r['speedup']:.3f} | {100*r['efficiency']:.1f}% |" for r in rows)
+    normalized = '\n'.join(
+        f"| {r['processes']} | {r['exchange']} | {r['mpi_relative_speedup']:.3f} | "
+        f"{100*r['mpi_relative_efficiency']:.1f}% |"
+        for r in rows if r['mpi_relative_speedup'] != '')
+    observations = []
+    serial = next(r for r in rows if r['mode'] == 'serial')
+    for r in rows:
+        if r['mode'] == 'mpi' and r['processes'] == 1:
+            observations.append(
+                f"- MPI P=1 ({r['exchange']}) 为 {r['median_seconds']:.6f} 秒，"
+                f"相对本次串行基准为 {r['speedup']:.3f} 倍；该差异不能归因于多进程并行。")
+    for method in sorted({r['exchange'] for r in rows if r['mode'] == 'mpi'}):
+        data = [r for r in rows if r['mode'] == 'mpi' and r['exchange'] == method
+                and r['mpi_relative_speedup'] != '']
+        if data:
+            r = max(data, key=lambda item: item['processes'])
+            observations.append(
+                f"- {method} 在本次最大 P={r['processes']} 时，相对同策略 MPI P=1 "
+                f"加速 {r['mpi_relative_speedup']:.3f} 倍，效率 "
+                f"{100*r['mpi_relative_efficiency']:.1f}%。")
+    widest = max(r['total_cores'] for r in rows)
+    best = min((r for r in rows if r['total_cores'] == widest),
+               key=lambda item: item['median_seconds'])
+    observations.append(
+        f"- 本次使用 {widest} 核的已测配置中，观测中位数最低的是 "
+        f"{best['mode']} {best['processes']}x{best['threads']} {best['exchange']}，"
+        f"为 {best['median_seconds']:.6f} 秒；此处不作统计显著性结论。")
+    observations.append(f"- 本次串行基准中位数为 {serial['median_seconds']:.6f} 秒。"
+                        '相对串行加速比包含实现和编译效果差异；不据此单独判断超线性扩展。')
+    warning_text = '\n'.join('- ' + warning for warning in warnings) or '- 原始 stderr 未检出 libpbs.so.0 警告。'
+    return f'''# A/B 集群实验核对
+
+生成日期：{datetime.now(timezone.utc).date().isoformat()}（UTC）。此文件是当前作业的数据摘要，人工因果分析和阶段报告需另行审阅。
+
+## 当前证据
+
+集群：{b['cluster']}；作业：`{b['job_id']}`；记录主机：`{b['host']}`。
+分配 CPU 数：{b['allocated_cpus']}；并行输出记录的节点数：{node_text}。
+完整原始目录的 PBS 完成状态、退出码、源码/程序哈希及逐次 JSON 已核对。
+硬件型号、内存、walltime、模块与 flags 以原始 metadata.txt、qstat_full.txt 和构建日志为准，本摘要不推断未采集的信息。
+
+## 正确性记录
+
+共 {len(v['runs'])} 次验证执行，其中 {len(numerical)} 次含数值结果，{invalid} 次为预期非法输入拒绝测试；网格规模 n 包括 {sizes}。
+验证器状态为 PASS，逐次数值 JSON 已与汇总核对。执行次数不等于不同数学问题数；本审计不代替验证器中的数值验收。
+
+## 性能口径
+
+n={b['n']}，K={b['iterations']}，tolerance={b['tolerance']}；固定迭代工作量，不宣称收敛。
+{len(rows)} 组配置，各预热 {b['warmups']} 次、测量 {b['repeats']} 次，共 {len(b['runs'])} 次执行。
+串行基准源码：`{b.get('serial_source', 'jacobi.cpp')}`；运行顺序：`{b.get('order', 'grouped (historical)')}`。
+显式CPU映射：`{b.get('pin_cpus', [])}`；空列表表示未由本脚本记录显式映射，需查原始绑定日志。
+计时为迭代阶段，MPI 含必要通信/同步并取最慢 rank；初始化、最终检查与输出不计入。
+报告中位数和 min/max，min/max 不是置信区间。运行顺序和绑定方式应结合逐次命令审阅。
+
+| 版本 | PxT | 通信 | 中位秒数 | min-max 秒数 | 相对串行加速比 | 相对串行效率 |
+|---|---|---|---:|---:|---:|---:|
+{table}
+
+## 同策略 MPI 单进程基准
+
+S(P)=T_MPI(1)/T_MPI(P)，E(P)=S(P)/P。缺少对应 P=1 时不推算此指标。
+
+| 进程数 | 通信 | 相对 MPI P=1 加速比 | 效率 |
+|---:|---|---:|---:|
+{normalized}
+
+## 本次观测
+
+{chr(10).join(observations)}
+
+单个作业、单一规模不支持跨规模稳定性结论。非阻塞 API 的使用不证明通信已有效重叠；通信方案的优势与差异原因需结合重复实验分析。
+
+## 环境警告
+
+{warning_text}
+
+完整原始目录须单独保留以供复核。当前摘要不自动确认线程 affinity、PBS 多节点集成、个人代码理解或组员接口确认。
+
+AI 使用：Codex 协助编写核对工具和当前数据摘要；集群操作、源码修改、人工复核等实际贡献应在阶段报告中据实补充。
+'''
+
+
+def make_plots(b, rows, out):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    mpi = [r for r in rows if r['mode'] == 'mpi']
+    links = []
+    title = (f"{b['cluster']} {b['host']} | n={b['n']}, K={b['iterations']} | "
+             f"{b['warmups']} warmups + {b['repeats']} measurements")
+    if mpi:
+        fig, axes = plt.subplots(1, 2, figsize=(11, 4.5), layout='constrained')
+        for method in sorted({r['exchange'] for r in mpi}):
+            data = sorted((r for r in mpi if r['exchange'] == method), key=lambda r:r['processes'])
+            axes[0].errorbar([r['processes'] for r in data], [r['median_seconds'] for r in data],
+                            yerr=[[r['median_seconds']-r['min_seconds'] for r in data],
+                                  [r['max_seconds']-r['median_seconds'] for r in data]],
+                            marker='o', capsize=3, label=method)
+            scaled = [r for r in data if r['mpi_relative_speedup'] != '']
+            if scaled:
+                axes[1].plot([r['processes'] for r in scaled],
+                             [r['mpi_relative_speedup'] for r in scaled], marker='o', label=method)
+        maximum = max(r['processes'] for r in mpi)
+        axes[1].plot([1, maximum], [1, maximum], '--', color='#999999', label='Ideal linear')
+        for ax in axes:
+            ax.set_xlabel('MPI processes')
+            ax.set_xticks(sorted({r['processes'] for r in mpi}))
+            ax.grid(alpha=.2)
+            ax.legend()
+        axes[0].set_ylabel('Iteration time (seconds)')
+        axes[1].set_ylabel('Speedup vs same-strategy MPI P=1')
+        fig.suptitle(title)
+        fig.savefig(out/'mpi_scaling.png', dpi=180)
+        plt.close(fig)
+        links.append('![MPI 扩展](mpi_scaling.png)')
+    hybrid = [r for r in rows if r['mode'] == 'hybrid']
+    for cores in sorted({r['total_cores'] for r in hybrid}):
+        data = [r for r in hybrid if r['total_cores'] == cores]
+        fig, ax = plt.subplots(figsize=(10, 4.6), layout='constrained')
+        ax.bar(range(len(data)), [r['median_seconds'] for r in data],
+               yerr=[[r['median_seconds']-r['min_seconds'] for r in data],
+                     [r['max_seconds']-r['median_seconds'] for r in data]], capsize=3)
+        ax.set_xticks(range(len(data)),
+                      [f"{r['processes']}x{r['threads']}\n{r['exchange']}" for r in data], rotation=30)
+        for r in rows:
+            if r['mode'] == 'openmp' and r['total_cores'] == cores:
+                ax.axhline(r['median_seconds'], linestyle='--', color='#555555',
+                           label=f'OpenMP {cores} threads')
+                ax.legend()
+        ax.set_ylabel('Iteration time (seconds)')
+        ax.set_ylim(bottom=0)
+        ax.grid(axis='y', alpha=.2)
+        ax.set_axisbelow(True)
+        ax.set_title(title + f' | hybrid, {cores} cores')
+        name = f'hybrid_comparison_{cores}cores.png'
+        fig.savefig(out/name, dpi=180)
+        plt.close(fig)
+        links.append(f'![Hybrid {cores} 核]({name})')
+    return links
 
 
 def main():
@@ -16,167 +217,54 @@ def main():
     ap.add_argument('--out-dir', type=Path, required=True)
     ap.add_argument('--plots', action='store_true')
     args = ap.parse_args()
-    root = args.results.resolve()
-    out = args.out_dir.resolve()
-    out.mkdir(parents=True, exist_ok=True)
-    b = json.loads((root / 'benchmark/summary.json').read_text())
-    v = json.loads((root / 'validation/summary.json').read_text())
-    assert b['status'] == v['status'] == 'PASS', 'Incomplete or failed run'
-    log = (root / 'run.log').read_text()
-    qstat = (root / 'qstat_full.txt').read_text()
-    assert 'RUN_STATUS=PASSED' in log and 'JOB_EXIT_STATUS=0' in log
-    assert 'Exit_status = 0' in qstat and 'job_state = F' in qstat
+    root, out = args.results.resolve(), args.out_dir.resolve()
+    b = json.loads((root/'benchmark/summary.json').read_text(encoding='utf-8'))
+    v = json.loads((root/'validation/summary.json').read_text(encoding='utf-8'))
+    require(b['status'] == v['status'] == 'PASS', 'Incomplete or failed run')
+    log = (root/'run.log').read_text(encoding='utf-8')
+    qstat = (root/'qstat_full.txt').read_text(encoding='utf-8')
+    require('RUN_STATUS=PASSED' in log and 'JOB_EXIT_STATUS=0' in log, 'Failed run log')
+    require('Exit_status = 0' in qstat and 'job_state = F' in qstat, 'Failed PBS status')
     for manifest, directory in [('source_sha256.txt', 'sources'), ('executable_sha256.txt', 'bin')]:
-        for line in (root / manifest).read_text().splitlines():
+        for line in (root/manifest).read_text(encoding='utf-8').splitlines():
             digest, name = line.split(maxsplit=1)
-            path = root / directory / Path(name.strip()).name
-            # A shared evidence copy may omit binaries; never claim these were checked if absent.
-            if not path.exists():
+            path = root/directory/name.strip().rsplit('/', 1)[-1]
+            if not path.is_file():
                 raise FileNotFoundError(f'Audit requires original archived file: {path}')
-            assert hashlib.sha256(path.read_bytes()).hexdigest() == digest, path
+            require(hashlib.sha256(path.read_bytes()).hexdigest() == digest, f'Hash mismatch: {path}')
     for record in v['runs']:
-        assert record['validation'] == 'PASS'
+        require(record['validation'] == 'PASS', f"Failed validation: {record['id']}")
+        raw = (root/'validation'/(record['id']+'.stdout.json')).read_text(encoding='utf-8')
         if 'result' in record:
-            assert json.loads((root / 'validation' / (record['id'] + '.stdout.json')).read_text()) == record['result']
+            require(json.loads(raw) == record['result'], f"Changed validation JSON: {record['id']}")
+        else:
+            require(record['exit_code'] != 0 and not raw.strip(),
+                    f"Invalid-input test did not reject input: {record['id']}")
     for record in b['runs']:
-        assert record['exit_code'] == 0
-        raw = json.loads((root / 'benchmark' / (record['id'] + '.stdout.json')).read_text())
-        assert raw == record['result']
-    groups = b['groups']
-    serial = next(g['median_seconds'] for g in groups if g['mode'] == 'serial')
-    mpi_base = {g['exchange']: g['median_seconds'] for g in groups if g['mode'] == 'mpi' and g['processes'] == 1}
-    rows = []
-    for g in groups:
-        records = [r for r in b['runs'] if r['result']['mode'] == g['mode']
-                   and r['result'].get('mpi_processes', 1) == g['processes']
-                   and r['result']['threads'] == g['threads']
-                   and r['result'].get('exchange', 'none') == g['exchange']]
-        assert sum(r['warmup'] for r in records) == b['warmups']
-        times = [r['result']['compute_seconds'] for r in records if not r['warmup']]
-        assert len(times) == b['repeats']
-        assert statistics.median(times) == g['median_seconds']
-        assert min(times) == g['min_seconds'] and max(times) == g['max_seconds']
-        assert math.isclose(serial / g['median_seconds'], g['speedup'])
-        assert math.isclose(g['speedup'] / g['total_cores'], g['efficiency'])
-        row = dict(g)
-        row['mpi_relative_speedup'] = mpi_base[g['exchange']] / g['median_seconds'] if g['mode'] == 'mpi' else ''
-        row['mpi_relative_efficiency'] = row['mpi_relative_speedup'] / g['processes'] if g['mode'] == 'mpi' else ''
-        rows.append(row)
-    with (out / 'performance_audited.csv').open('w', newline='') as stream:
+        require(record['exit_code'] == 0, f"Failed benchmark: {record['id']}")
+        raw = json.loads((root/'benchmark'/(record['id']+'.stdout.json')).read_text(encoding='utf-8'))
+        require(raw == record['result'], f"Changed benchmark JSON: {record['id']}")
+    rows = checked_rows(b)
+    warnings = (['libpbs.so.0 unavailable; MPI PBS TM components were ignored']
+                if any('libpbs.so.0' in p.read_text(encoding='utf-8')
+                       for p in (root/'benchmark').glob('*.stderr.txt')) else [])
+    out.mkdir(parents=True, exist_ok=False)
+    with (out/'performance_audited.csv').open('w', newline='', encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
-    warnings = sorted(set('libpbs.so.0 unavailable; MPI PBS TM components were ignored'
-                         for p in (root / 'benchmark').glob('*.stderr.txt') if 'libpbs.so.0' in p.read_text()))
-    audit = {'status': 'PASS', 'cluster': b['cluster'], 'job_id': b['job_id'],
-             'validation_executions': len(v['runs']), 'benchmark_executions': len(b['runs']),
-             'configurations': len(rows), 'warmups_per_configuration': b['warmups'],
-             'measurements_per_configuration': b['repeats'],
-             'original_source_and_binary_hashes_checked': True,
-             'raw_results_and_statistics_checked': True, 'warnings': warnings}
-    (out / 'audit.json').write_text(json.dumps(audit, indent=2) + '\n')
-    table = '\n'.join(f"| {r['mode']} | {r['processes']}×{r['threads']} | {r['exchange']} | {r['median_seconds']:.6f} | {r['min_seconds']:.6f}–{r['max_seconds']:.6f} | {r['speedup']:.3f} | {100*r['efficiency']:.1f}% |" for r in rows)
-    normalized = '\n'.join(f"| {r['processes']} | {r['exchange']} | {r['mpi_relative_speedup']:.3f} | {100*r['mpi_relative_efficiency']:.1f}% |" for r in rows if r['mode'] == 'mpi')
-    report = f'''# 成员 B：Vanda 实验分析与交接
-
-日期：2026-10-27。此文为 B 的实验材料与报告章节草稿，不是含组员姓名学号的最终提交 PDF。
-
-## 完成与证据
-
-Vanda 作业 `{b['job_id']}` 在 IN-008 节点执行，PBS 最终 `job_state=F`、`Exit_status=0`，日志 `RUN_STATUS=PASSED`、`JOB_EXIT_STATUS=0`。278 次验证执行通过；26 组性能配置各预热 1 次、测量 5 次，共 156 次性能执行。已逐项核对原始 JSON、重算中位数/min/max，并核对归档源码及 Linux 可执行文件 SHA-256。原始压缩包保留不改，审计记录为 `audit.json`。
-
-资源为单节点 12 CPU、4GB、30 分钟上限，作业实际 walltime 6 分钟。模块为 GCC 12.2.0、Open MPI 4.1.5、Python 3.10.8，C++17、-O2、-Wall -Wextra -Wpedantic，OpenMP 构建另加 -fopenmp。当前记录未采集 lscpu，不能推断 CPU 型号、缓存容量或主频。
-
-## 算法与设计
-
-二维 Laplace 的 Jacobi 五点更新；单位正方形，double，边界/精确解 u=x+y，内部初值 0。MPI 按行分区，前 n%P 个进程多一行，每个进程保留本地行及两个 halo。P>n 明确拒绝。OpenMP 静态分配本地更新循环，以 max reduction 汇总局部更新量。主线程执行 MPI，混合版使用 MPI_THREAD_FUNNELED。
-
-sendrecv 使用两次 MPI_Sendrecv；overlap 先发起非阻塞收发，更新不依赖 halo 的内部行，等待通信完成后更新首末行。old/new 双数组避免读取本轮新值。正容差模式每轮汇总全局最大更新量统一停止；固定轮数模式只在最后一轮归约该指标，两种通信策略口径相同。最终重新交换 halo 再计算残差，误差/残差/边界指标取全局最大值，小网格由 rank 0 收集完整网格输出。
-
-## 正确性验证
-
-验证包含手算 n=1/2、n=7 奇数网格的 1/2/31 轮、n=8 固定轮数、n=16/31/32 收敛、耗尽迭代上限、每进程一行/两行/三行及非法输入。不同可行进程数 1/2/3/4、混合版线程数 1/2、两种通信方式均与串行指标及独立 Python 小网格参考比较。n<=8 检查完整网格形状和最大绝对差<=1e-12；小规模收敛真误差<=1e-8、残差<=1e-7，边界误差<=1e-14。278 次执行包括预期非法输入失败；不是 278 个不同数学问题。
-
-## 实验口径
-
-本次性能问题固定为 n={b['n']}、K={b['iterations']}、tolerance=0，即 1024×1024 内部点、严格迭代 1000 轮，不宣称解已收敛。初始化和最终验证不计入迭代时间；MPI 计时包含 halo 通信、需要的归约与线程同步，取最慢 rank 耗时，排队/编译时间不计入。每组记录 5 次及 min/max，min/max 不是置信区间。
-
-相对串行总加速比为 S_serial=T_serial/T_config，效率为 S_serial/(P×T)。该指标包含实现、编译效果与并行等全部差异。另计算相同通信策略的 MPI 强扩展 S_MPI(P)=T_MPI(1)/T_MPI(P)，效率 S_MPI(P)/P，以区分 MPI 版本自身的单进程差异。
-
-## 全部运行数据
-
-| 版本 | P×T | 通信 | 中位秒数 | min–max 秒数 | 相对串行加速比 | 相对串行效率 |
-|---|---|---|---:|---:|---:|---:|
-{table}
-
-## MPI 自身的强扩展
-
-| 进程数 | 通信 | 相对同策略 MPI 单进程加速比 | 效率 |
-|---:|---|---:|---:|
-{normalized}
-
-## 可以支持的结论
-
-1. 串行中位数 2.653333 秒，MPI 单进程 sendrecv 为 1.293866 秒、overlap 为 1.273339 秒。一个 MPI 进程就有约 2 倍差异，不能归因为多个进程并行。两份实现虽求解同一问题且匹配数值，但当前记录不足以确定差异来自代码生成、绑定、缓存、频率还是系统负载。
-2. MPI 从 1 到 12 进程，sendrecv 加速 5.994 倍、效率 49.95%；overlap 加速 5.780 倍、效率 48.16%。这是同一实现基准下的单节点强扩展结果。
-3. 在本次固定 12 核配置中，hybrid 1×12 sendrecv 的观测中位数最低，为 0.196799 秒；与串行相比 13.482 倍。该配置只有一个 MPI 进程，不能用它证明跨进程或跨节点通信性能。2×6、4×3 等配置使用多个进程，但本次均未更快。
-4. 相对串行效率超过 100% 是原始数值计算结果，应如实保留，不应截成 100%。由于单进程 MPI 基准已明显不同，不能将其直接解读为并行效率超过理想线性扩展，也不能认定缓存导致超线性加速。
-5. overlap 没有普遍优于 sendrecv。MPI 2 进程这一组 sendrecv 的 5 次时间为 1.179913、1.187305、1.106782、0.668077、0.664464 秒，波动很大；overlap 的优势可能混合了运行环境/时间顺序影响，需要重测后才能解释。固定 12 核混合配置的 sendrecv 中位数均略低于 overlap，但不少范围重叠，不作显著性结论。
-
-## 核心绑定与环境限制
-
-MPI 命令使用 `--map-by slot:PE=T --bind-to core --report-bindings`，OpenMP 使用 OMP_NUM_THREADS=T、OMP_PLACES=cores、OMP_PROC_BIND=close。4×3 的 MPI 日志显示四个 rank 分别绑定到可见的 0–2、3–5、6–8、9–11 核，12×1 显示逐核分配。1×12 日志称 rank 未绑定或绑定到所有可用处理器：这不足以单独证明越界，也不能据此宣称线程级 affinity 已验证。原始记录没有逐线程掩码或完整 cpuset/topology，后续应补采。
-
-MPI stderr 还提示 `libpbs.so.0` 找不到，PBS TM 的 plm/ras 组件被忽略。作业及数值检查确实通过，但当前日志不能证明调度器集成完整，也不能证明多节点启动可用。需在计算节点核对 PBS 库路径/站点 MPI 使用建议，避免仅隐藏警告。单节点成功不能替代多节点验收。
-
-配置按固定顺序执行而非随机交错；只有一个问题规模、一个节点、一次 PBS 分配，未完成弱扩展、多节点扩展或独立重复作业。报告只应据此描述本次单节点结果。
-
-## 交接与下一步
-
-B 的 MPI/混合实现、数值验证、Vanda 首次成功作业、原始性能证据和设计说明已具备。A 可使用本材料完善验证与算法章节；C 可审阅线程管理、优化持久并行区域，并补充其他规模的实验。本人接口确认、代码理解和最终小组报告审阅不能由 AI 代替。
-
-为了形成更可靠的性能结论，下一轮优先：采集 lscpu/cpuset/实际线程 affinity；核对 PBS 库警告；加上 hybrid 1×1 与 OpenMP 1 线程对照，分析单进程差异；交错/重复测试波动组；再增加 n=512/2048。多节点/弱扩展按时间和课程预期另行设计，不将当前结果写成已经完成。
-
-## AI 使用说明
-
-OpenAI Codex 协助编写 MPI/混合代码、验证和计时脚本、PBS 模板、操作教程及本分析；执行本机验证并审计下载的原始结果。用户本人完成 VPN、学校账号认证、现场环境查询、上传、提交 Vanda 作业和结果下载。AI 没有直接登录集群，也未代替成员本人确认或理解代码。归档源码与证据用于复核，最终报告应由成员检查并补充实际修改记录。
-'''
+    audit = dict(status='PASS', cluster=b['cluster'], job_id=b['job_id'],
+                 validation_executions=len(v['runs']), benchmark_executions=len(b['runs']),
+                 configurations=len(rows), warmups_per_configuration=b['warmups'],
+                 measurements_per_configuration=b['repeats'],
+                 original_source_and_binary_hashes_checked=True,
+                 raw_results_and_statistics_checked=True, warnings=warnings)
+    (out/'audit.json').write_text(json.dumps(audit, indent=2)+'\n', encoding='utf-8')
+    report = make_report(b, v, rows, warnings)
     if args.plots:
-        import matplotlib
-        matplotlib.use('Agg')
-        import matplotlib.pyplot as plt
-        plt.rcParams.update({'font.size': 10, 'axes.spines.top': False, 'axes.spines.right': False})
-        colors = {'sendrecv': '#2468a0', 'overlap': '#d27b24'}
-        fig, axes = plt.subplots(1, 2, figsize=(11, 4.5), layout='constrained')
-        for method in ('sendrecv', 'overlap'):
-            data = sorted((r for r in rows if r['mode'] == 'mpi' and r['exchange'] == method), key=lambda r:r['processes'])
-            x = [r['processes'] for r in data]
-            y = [r['median_seconds'] for r in data]
-            axes[0].errorbar(x, y, yerr=[[r['median_seconds']-r['min_seconds'] for r in data],
-                [r['max_seconds']-r['median_seconds'] for r in data]], marker='o', capsize=3, label=method, color=colors[method])
-            axes[1].plot(x, [r['mpi_relative_speedup'] for r in data], marker='o', label=method, color=colors[method])
-        axes[1].plot([1,12],[1,12], '--', color='#999999', label='Ideal linear')
-        for ax in axes:
-            ax.set_xlabel('MPI processes'); ax.set_xticks([1,2,3,4,6,12]);ax.grid(alpha=.2);ax.legend()
-        axes[0].set_ylabel('Iteration time (seconds)');axes[0].set_title('MPI runtime: median and min/max')
-        axes[1].set_ylabel('Speedup vs same-strategy MPI P=1');axes[1].set_title('MPI strong scaling (single node)')
-        fig.suptitle('Vanda IN-008 | n=1024, K=1000 | 1 warmup + 5 measured runs')
-        fig.savefig(out/'mpi_scaling.png',dpi=180);plt.close(fig)
-        fig, ax = plt.subplots(figsize=(10,4.6),layout='constrained')
-        pairs=[(1,12),(2,6),(3,4),(4,3),(6,2),(12,1)]
-        for method,offset in [('sendrecv',-.16),('overlap',.16)]:
-            data=[next(r for r in rows if r['mode']=='hybrid' and r['processes']==p and r['threads']==t and r['exchange']==method) for p,t in pairs]
-            ax.bar([i+offset for i in range(len(pairs))],[r['median_seconds'] for r in data],width=.3,label=method,color=colors[method],
-                yerr=[[r['median_seconds']-r['min_seconds'] for r in data],[r['max_seconds']-r['median_seconds'] for r in data]],capsize=3)
-        omp=next(r for r in rows if r['mode']=='openmp')
-        ax.axhline(omp['median_seconds'],color='#555555',linestyle='--',label='OpenMP 12 threads')
-        ax.set_xticks(range(len(pairs)),[f'{p} x {t}' for p,t in pairs]);ax.set_xlabel('MPI processes x OpenMP threads per process (12 cores total)')
-        ax.set_ylabel('Iteration time (seconds)');ax.set_ylim(0,.26);ax.grid(axis='y',alpha=.2);ax.set_axisbelow(True)
-        ax.set_title('Vanda hybrid configurations | median and min/max of 5 measurements');ax.legend(loc='upper left',ncols=3)
-        fig.savefig(out/'hybrid_comparison.png',dpi=180);plt.close(fig)
-        report+='\n## 图表\n\n![MPI 单节点扩展](mpi_scaling.png)\n\n![固定 12 核混合配置比较](hybrid_comparison.png)\n'
-    (out / 'B_Vanda实验分析.md').write_text(report, encoding='utf-8')
-    print(f'Audit PASS: {len(v["runs"])} validation executions, {len(b["runs"])} benchmark executions, {len(rows)} configurations; {out}')
+        report += '\n## 图表\n\n' + '\n\n'.join(make_plots(b, rows, out)) + '\n'
+    (out/'B_Vanda实验分析.md').write_text(report, encoding='utf-8')
+    print(f"Audit PASS: {len(v['runs'])} validation executions, {len(b['runs'])} benchmark executions, {len(rows)} configurations; {out}")
 
 
 if __name__ == '__main__':

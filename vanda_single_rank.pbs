@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -N jacobi_single_rank
+#PBS -q auto_free
+#PBS -l select=1:ncpus=2:mpiprocs=1:ompthreads=1:mem=4gb
+#PBS -l walltime=00:15:00
+#PBS -j oe
+#PBS -k oed
+#PBS -S /bin/bash
+# Verified user listing: cpu_parallel accepts >=2 CPUs and routes from auto_free.
+# This job compares one solver process at a time; no OpenMP or scaling experiment.
+set -euo pipefail
+: "${PBS_JOBID:?Submit with qsub}"
+cd "$PBS_O_WORKDIR"
+log_dir="$PBS_O_WORKDIR/results/Vanda_single_rank_${PBS_JOBID}"
+mkdir -p "$log_dir"
+# The Python output is a new child directory, keeping previous diagnostics intact.
+exec > >(tee "$log_dir/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+if [ -f vanda_modules.sh ]; then
+    source ./vanda_modules.sh
+else
+    source ./vanda_modules.example.sh
+fi
+module list
+python3 diagnose_single_rank.py --out-dir "$log_dir/diagnostic" \
+    --allocated-cpus 2 --n "${JACOBI_N:-1024}" --iterations "${JACOBI_K:-1000}" \
+    --warmups 1 --repeats "${JACOBI_REPEATS:-8}" \
+    --experiment "${JACOBI_EXPERIMENT:-baseline}"
+printf 'RUN_STATUS=PASSED\n'

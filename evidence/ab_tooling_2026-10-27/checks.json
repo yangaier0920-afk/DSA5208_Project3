@@ -1,0 +1,23 @@
+{
+  "scope": "Local tool checks only; no new HPC run or complete original-archive audit",
+  "historical_26_group_statistics": "PASS",
+  "historical_270_plus_8_counts": "PASS",
+  "changed_dataset_report": "PASS",
+  "changed_dataset_plots": "PASS",
+  "corrupt_statistics_rejected": "PASS",
+  "synthetic_cli": "PASS",
+  "missing_original_rejected": "PASS",
+  "cli_output_and_missing_file_rechecked": "PASS",
+  "shell_makefile_lf": "PASS",
+  "python_syntax": "PASS",
+  "bash_syntax": "NOT RUN: local Git Bash denied by Windows sandbox; no shell script logic changed",
+  "base_commit": "6ba0fd57c14f54d4ca2d9f0d93ccd9f9d1668340",
+  "source_sha256": {
+    "analyze_results.py": "2f00149db22272093b92a3c65173107e9373150c3354c86e35fb36fbb29410ec",
+    ".gitattributes": "8f9be5be48121ec6c444a69b5ca71351be02ed296166bab78d2d9f264fcc3a39",
+    "run_cluster.sh": "2fdd3c1a91fb84c91efd33cd76370bc98fb429cde42d6947a5ee5d612fd94252",
+    "vanda_modules.example.sh": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc",
+    "Makefile": "0e62d020d26f97f4f227c1b17ff17482e606ed15c68350e19c2d7ec83da629d5"
+  },
+  "historical_evidence_modified": false
+}

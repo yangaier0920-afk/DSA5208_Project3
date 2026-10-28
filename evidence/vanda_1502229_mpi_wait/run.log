@@ -1,0 +1,150 @@
+Loading GCC/12.2.0
+  Loading requirement: GCCcore/12.2.0 zlib/1.2.12-GCCcore-12.2.0
+    binutils/2.39-GCCcore-12.2.0
+Loading OpenMPI/4.1.5-GCC-12.2.0
+  Loading requirement: ncurses/6.3-GCCcore-12.2.0 numactl/2.0.16-GCCcore-12.2.0
+    XZ/5.2.7-GCCcore-12.2.0 libxml2/2.10.3-GCCcore-12.2.0
+    libpciaccess/0.17-GCCcore-12.2.0 hwloc/2.8.0-GCCcore-12.2.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.2.0 UCX/1.13.1-GCCcore-12.2.0
+    libfabric/1.16.1-GCCcore-12.2.0 PMIx/4.2.2-GCCcore-12.2.0
+    UCC/1.1.0-GCCcore-12.2.0
+Loading Python/3.10.8-GCCcore-12.2.0
+  Loading requirement: bzip2/1.0.8-GCCcore-12.2.0 libreadline/8.2-GCCcore-12.2.0
+    Tcl/8.6.12-GCCcore-12.2.0 SQLite/3.39.4-GCCcore-12.2.0
+    GMP/6.2.1-GCCcore-12.2.0 libffi/3.4.4-GCCcore-12.2.0
+2026-10-28T12:37:25+08:00
+IN-006
+EXPERIMENT=wait-placement-v1
+K=1000
+TOL=0
+INSTRUMENTATION=none
+g++ (GCC) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+g++ -I/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/include -L/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,--enable-new-dtags -lmpi
+mpirun (Open MPI) 4.1.5
+
+Report bugs to http://www.open-mpi.org/community/help/
+Python 3.10.8
+Currently Loaded Modulefiles:
+ 1) shared                            14) libevent/2.1.12-GCCcore-12.2.0   
+ 2) apptainer/1.4.1                   15) UCX/1.13.1-GCCcore-12.2.0        
+ 3) GCCcore/12.2.0                    16) libfabric/1.16.1-GCCcore-12.2.0  
+ 4) zlib/1.2.12-GCCcore-12.2.0        17) PMIx/4.2.2-GCCcore-12.2.0        
+ 5) binutils/2.39-GCCcore-12.2.0      18) UCC/1.1.0-GCCcore-12.2.0         
+ 6) GCC/12.2.0                        19) OpenMPI/4.1.5-GCC-12.2.0         
+ 7) ncurses/6.3-GCCcore-12.2.0        20) bzip2/1.0.8-GCCcore-12.2.0       
+ 8) numactl/2.0.16-GCCcore-12.2.0     21) libreadline/8.2-GCCcore-12.2.0   
+ 9) XZ/5.2.7-GCCcore-12.2.0           22) Tcl/8.6.12-GCCcore-12.2.0        
+10) libxml2/2.10.3-GCCcore-12.2.0     23) SQLite/3.39.4-GCCcore-12.2.0     
+11) libpciaccess/0.17-GCCcore-12.2.0  24) GMP/6.2.1-GCCcore-12.2.0         
+12) hwloc/2.8.0-GCCcore-12.2.0        25) libffi/3.4.4-GCCcore-12.2.0      
+13) OpenSSL/1.1                       26) Python/3.10.8-GCCcore-12.2.0     
+PIN_CPUS=25,27,29,31,33,41,43,47,51,57,59,61
++ mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic /nfs/home/svu/yangaier/dsa5208_project3/ab_wait_20261028_v1/results/Vanda_mpi_wait_1502229.stdct-mgmt-02/sources/jacobi_mpi.cpp -o /nfs/home/svu/yangaier/dsa5208_project3/ab_wait_20261028_v1/results/Vanda_mpi_wait_1502229.stdct-mgmt-02/bin/jacobi_mpi
++ mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic /nfs/home/svu/yangaier/dsa5208_project3/ab_wait_20261028_v1/results/Vanda_mpi_wait_1502229.stdct-mgmt-02/sources/jacobi_mpi_wait_diagnostic.cpp -o /nfs/home/svu/yangaier/dsa5208_project3/ab_wait_20261028_v1/results/Vanda_mpi_wait_1502229.stdct-mgmt-02/bin/jacobi_mpi_wait_diagnostic
++ set +x
+PASS correctness one_cell_original_sendrecv
+PASS correctness one_cell_original_overlap
+PASS correctness one_cell_diagnostic_sendrecv
+PASS correctness one_cell_diagnostic_immediate
+PASS correctness one_cell_diagnostic_overlap
+PASS correctness one_per_rank_original_sendrecv
+PASS correctness one_per_rank_original_overlap
+PASS correctness one_per_rank_diagnostic_sendrecv
+PASS correctness one_per_rank_diagnostic_immediate
+PASS correctness one_per_rank_diagnostic_overlap
+PASS correctness two_per_rank_original_sendrecv
+PASS correctness two_per_rank_original_overlap
+PASS correctness two_per_rank_diagnostic_sendrecv
+PASS correctness two_per_rank_diagnostic_immediate
+PASS correctness two_per_rank_diagnostic_overlap
+PASS correctness uneven_interiors_original_sendrecv
+PASS correctness uneven_interiors_original_overlap
+PASS correctness uneven_interiors_diagnostic_sendrecv
+PASS correctness uneven_interiors_diagnostic_immediate
+PASS correctness uneven_interiors_diagnostic_overlap
+PASS correctness uneven_single_original_sendrecv
+PASS correctness uneven_single_original_overlap
+PASS correctness uneven_single_diagnostic_sendrecv
+PASS correctness uneven_single_diagnostic_immediate
+PASS correctness uneven_single_diagnostic_overlap
+PASS correctness four_double_original_sendrecv
+PASS correctness four_double_original_overlap
+PASS correctness four_double_diagnostic_sendrecv
+PASS correctness four_double_diagnostic_immediate
+PASS correctness four_double_diagnostic_overlap
+PASS correctness converged_original_sendrecv
+PASS correctness converged_original_overlap
+PASS correctness converged_diagnostic_sendrecv
+PASS correctness converged_diagnostic_immediate
+PASS correctness converged_diagnostic_overlap
+PASS correctness twelve_single_original_sendrecv
+PASS correctness twelve_single_original_overlap
+PASS correctness twelve_single_diagnostic_sendrecv
+PASS correctness twelve_single_diagnostic_immediate
+PASS correctness twelve_single_diagnostic_overlap
+PASS correctness twelve_double_original_sendrecv
+PASS correctness twelve_double_original_overlap
+PASS correctness twelve_double_diagnostic_sendrecv
+PASS correctness twelve_double_diagnostic_immediate
+PASS correctness twelve_double_diagnostic_overlap
+seq=0 n2048_p2_sendrecv_r-1: 5.327647s
+seq=1 n2048_p2_immediate_r-1: 4.384678s
+seq=2 n2048_p2_overlap_r-1: 4.386977s
+seq=3 n2048_p12_sendrecv_r-1: 1.278653s
+seq=4 n2048_p12_immediate_r-1: 1.257385s
+seq=5 n2048_p12_overlap_r-1: 1.248623s
+seq=6 n1024_p12_sendrecv_r-1: 0.231242s
+seq=7 n1024_p12_immediate_r-1: 0.213248s
+seq=8 n1024_p12_overlap_r-1: 0.218918s
+seq=9 n2048_p2_sendrecv_r0: 4.423609s
+seq=10 n2048_p2_immediate_r0: 4.392556s
+seq=11 n2048_p2_overlap_r0: 4.418978s
+seq=12 n2048_p12_sendrecv_r0: 1.304917s
+seq=13 n2048_p12_overlap_r0: 1.271535s
+seq=14 n2048_p12_immediate_r0: 1.250436s
+seq=15 n1024_p12_immediate_r0: 0.211764s
+seq=16 n1024_p12_sendrecv_r0: 0.223073s
+seq=17 n1024_p12_overlap_r0: 0.216709s
+seq=18 n2048_p12_immediate_r1: 1.237398s
+seq=19 n2048_p12_sendrecv_r1: 1.297545s
+seq=20 n2048_p12_overlap_r1: 1.237182s
+seq=21 n1024_p12_immediate_r1: 0.215579s
+seq=22 n1024_p12_overlap_r1: 0.214189s
+seq=23 n1024_p12_sendrecv_r1: 0.225360s
+seq=24 n2048_p2_sendrecv_r1: 5.331092s
+seq=25 n2048_p2_overlap_r1: 4.419169s
+seq=26 n2048_p2_immediate_r1: 4.409246s
+seq=27 n1024_p12_overlap_r2: 0.213247s
+seq=28 n1024_p12_sendrecv_r2: 0.221087s
+seq=29 n1024_p12_immediate_r2: 0.220141s
+seq=30 n2048_p2_immediate_r2: 4.398515s
+seq=31 n2048_p2_sendrecv_r2: 4.434342s
+seq=32 n2048_p2_overlap_r2: 4.372580s
+seq=33 n2048_p12_immediate_r2: 1.263220s
+seq=34 n2048_p12_overlap_r2: 1.259330s
+seq=35 n2048_p12_sendrecv_r2: 1.285498s
+seq=36 n2048_p2_immediate_r3: 4.399289s
+seq=37 n2048_p2_overlap_r3: 4.391255s
+seq=38 n2048_p2_sendrecv_r3: 4.420006s
+seq=39 n2048_p12_overlap_r3: 1.249932s
+seq=40 n2048_p12_sendrecv_r3: 1.282592s
+seq=41 n2048_p12_immediate_r3: 1.276956s
+seq=42 n1024_p12_overlap_r3: 0.216518s
+seq=43 n1024_p12_immediate_r3: 0.219135s
+seq=44 n1024_p12_sendrecv_r3: 0.216904s
+seq=45 n2048_p12_overlap_r4: 1.250628s
+seq=46 n2048_p12_immediate_r4: 1.269513s
+seq=47 n2048_p12_sendrecv_r4: 1.272107s
+seq=48 n1024_p12_sendrecv_r4: 0.218227s
+seq=49 n1024_p12_immediate_r4: 0.222883s
+seq=50 n1024_p12_overlap_r4: 0.218837s
+seq=51 n2048_p2_overlap_r4: 4.406850s
+seq=52 n2048_p2_sendrecv_r4: 4.457682s
+seq=53 n2048_p2_immediate_r4: 4.399834s
+PASS: 45 correctness + 54 performance (9 warmups + 45 formal); no phase instrumentation
+RUN_STATUS=PASSED
+JOB_EXIT_STATUS=0

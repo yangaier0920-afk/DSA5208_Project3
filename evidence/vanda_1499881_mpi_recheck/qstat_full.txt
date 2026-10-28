@@ -1,0 +1,69 @@
+Job Id: 1499881.stdct-mgmt-02
+    Job_Name = jacobi_mpi_recheck
+    Job_Owner = yangaier@vanda.nus.edu.sg
+    resources_used.cpupercent = 109
+    resources_used.cput = 00:08:09
+    resources_used.mem = 104180kb
+    resources_used.ncpus = 12
+    resources_used.ngpus = 0
+    resources_used.vmem = 3976956kb
+    resources_used.walltime = 00:05:49
+    job_state = F
+    queue = cpu_parallel
+    server = stdct-mgmt-02
+    Checkpoint = u
+    ctime = Tue Oct 27 20:48:32 2026
+    Error_Path = vanda.nus.edu.sg:/nfs/home/svu/yangaier/dsa5208_project3/ab_di
+	agnostic/jacobi_mpi_recheck.e1499881
+    exec_host = IN-006/2*12
+    exec_vnode = (IN-006[1]:ncpus=12:mem=4gb)
+    Hold_Types = n
+    Join_Path = oe
+    Keep_Files = oed
+    Mail_Points = a
+    mtime = Tue Oct 27 20:54:29 2026
+    Output_Path = vanda.nus.edu.sg:/nfs/home/svu/yangaier/dsa5208_project3/ab_d
+	iagnostic/jacobi_mpi_recheck.o1499881
+    Priority = 0
+    qtime = Tue Oct 27 20:48:32 2026
+    Rerunable = True
+    Resource_List.am_job_cache = {"job.walltime": 1200, "job.ncpus": 12.0,
+	 "job.queue_charge_rate": 0, "job.ngpus": 0,
+	 "am_cloud_enabled": false}
+    Resource_List.mem = 4gb
+    Resource_List.mpiprocs = 12
+    Resource_List.ncpus = 12
+    Resource_List.ngpus = 0
+    Resource_List.nodect = 1
+    Resource_List.place = free
+    Resource_List.queue_charge_rate = 0
+    Resource_List.select = 1:ncpus=12:mpiprocs=12:ompthreads=1:mem=4gb
+    Resource_List.walltime = 00:20:00
+    stime = Tue Oct 27 20:48:38 2026
+    obittime = Tue Oct 27 20:54:29 2026
+    session_id = 3597985
+    Shell_Path_List = /bin/bash
+    jobdir = /home/svu/yangaier
+    substate = 92
+    Variable_List = PBS_O_HOME=/home/svu/yangaier,PBS_O_LANG=en_US.UTF-8,
+	PBS_O_LOGNAME=yangaier,
+	PBS_O_PATH=/home/svu/yangaier/.local/bin:/home/svu/yangaier/bin:/cm/sh
+	ared/apps/apptainer/1.4.1/bin:/cm/local/apps/environment-modules/4.5.3/
+	/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/am/python/b
+	in:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/pb
+	s/bin,PBS_O_MAIL=/var/spool/mail/yangaier,PBS_O_SHELL=/bin/bash,
+	PBS_O_INTERACTIVE_AUTH_METHOD=resvport,
+	PBS_O_HOST=stdct-login-01.stdct.loc,
+	PBS_O_WORKDIR=/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic,
+	PBS_O_SYSTEM=Linux,PBS_O_QUEUE=auto_free
+    comment = Job run at Tue Oct 27 at 20:48 on (IN-006[1]:ncpus=12:mem=4gb) an
+	d finished
+    etime = Tue Oct 27 20:48:32 2026
+    run_count = 1
+    Stageout_status = 1
+    Exit_status = 0
+    Submit_arguments = vanda_mpi_recheck.pbs
+    history_timestamp = 1793105669
+    project = personal-yangaier
+    Submit_Host = vanda.nus.edu.sg
+

@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "job_id": "1501884.stdct-mgmt-02",
+  "host": "IN-005",
+  "validation": {
+    "total": 92,
+    "numerical": 88,
+    "rejections": 4,
+    "full_grid": 43
+  },
+  "asymmetric_full_grid_executions": 31,
+  "performance_executions": 180,
+  "performance_warmups": 18,
+  "performance_formal": 162,
+  "rank_affinity_records": 780,
+  "global_order_checked": true,
+  "within_scale_nine_positions_checked": true,
+  "eighteen_positions_balanced": false,
+  "raw_archive": {
+    "path": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\raw_archives\\Vanda_ab_dual_1501884.stdct-mgmt-02.tar.gz",
+    "sha256": "ddda26f6f5822c5b29d7143549935a0544fc9dc3ac257bbb704d109f03f5f78b",
+    "files": 646,
+    "member_by_member_checked": true
+  },
+  "warnings": [
+    "libpbs.so.0 warning retained"
+  ]
+}

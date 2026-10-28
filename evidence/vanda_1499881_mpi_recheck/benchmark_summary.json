@@ -1,0 +1,7264 @@
+{
+  "status": "PASS",
+  "generated_at_utc": "2026-10-27T12:50:45.984320+00:00",
+  "cluster": "Vanda",
+  "host": "IN-006",
+  "platform": "Linux-5.14.0-427.125.1.el9_4.x86_64-x86_64-with-glibc2.34",
+  "job_id": "1499881.stdct-mgmt-02",
+  "allocated_cpus": 12,
+  "n": 1024,
+  "iterations": 1000,
+  "tolerance": 0,
+  "warmups": 1,
+  "repeats": 9,
+  "order": "interleaved",
+  "serial_source": "jacobi_serial_row_update.cpp",
+  "pin_cpus": [
+    25,
+    27,
+    29,
+    31,
+    33,
+    41,
+    43,
+    47,
+    51,
+    57,
+    59,
+    61
+  ],
+  "runs": [
+    {
+      "id": "serial_p1_t1_none_r-1",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.399704021
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.089819943
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.084852334
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.286976286
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.268420858
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.618081731
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.629633978
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.226471403
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r-1",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": true,
+      "repeat_index": -1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.224902403
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r0",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.070570126
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.090212834
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.091919123
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.2901274489999999
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.248767452
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.623838651
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.6202468649999999
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.225811439
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r0",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 0,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.215726636
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.060190877
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.030100181
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.301125814
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.16290633
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.6305063
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.608202473
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.223129476
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r1",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.223696768
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r1",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 1,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.048637026
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.086155747
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.278700067
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.237276086
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.624610118
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.617651213
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.219141226
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.216749352
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r2",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.060349146
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r2",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 2,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.087818338
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.277856565
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.256066659
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.6344994740000001
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.619288696
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.221925491
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.224574846
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r3",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.062685582
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.097628936
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r3",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 3,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.096484019
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.240947568
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.6257486489999999
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.630592092
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.218638049
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.212210915
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r4",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.072421464
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.073014488
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.005373281
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r4",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 4,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.2378875
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.627275758
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.613707754
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.224261979
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.221119903
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r5",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.947887232
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.975087721
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.987627771
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.273161276
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r5",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 5,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.24149717
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.631594294
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.226218325
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.214874127
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r6",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.070845086
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.071285812
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.09325085
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.281410976
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.244288653
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r6",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 6,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.643780692
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.225375967
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.215883553
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r7",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.081918608
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.10283935
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.058958225
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.2741653560000001
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.261545318
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.617798903
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r7",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 7,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.609787823
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_overlap_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.233082017
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serial_p1_t1_none_r8",
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_serial",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.066069931
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_sendrecv_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.078345048
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p1_t1_overlap_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 2.081533179
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_sendrecv_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.3119583320000001
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p2_t1_overlap_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "2",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 2,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.282899487
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_sendrecv_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.614976966
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p4_t1_overlap_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "4",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "overlap"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 4,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "overlap",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.625876597
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mpi_p12_t1_sendrecv_r8",
+      "command": [
+        "mpirun",
+        "-np",
+        "12",
+        "--bind-to",
+        "none",
+        "--map-by",
+        "slot",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/sources/pin_cpu.py",
+        "--cpus",
+        "25,27,29,31,33,41,43,47,51,57,59,61",
+        "--",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_mpi_recheck_1499881.stdct-mgmt-02/bin/jacobi_mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "warmup": false,
+      "repeat_index": 8,
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_PLACES": "cores",
+        "OMP_PROC_BIND": "close"
+      },
+      "exit_code": 0,
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 12,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 0.231804987
+      },
+      "affinity_before_exec": [
+        {
+          "rank": 0,
+          "host": "IN-006",
+          "cpus": [
+            25
+          ]
+        },
+        {
+          "rank": 1,
+          "host": "IN-006",
+          "cpus": [
+            27
+          ]
+        },
+        {
+          "rank": 2,
+          "host": "IN-006",
+          "cpus": [
+            29
+          ]
+        },
+        {
+          "rank": 3,
+          "host": "IN-006",
+          "cpus": [
+            31
+          ]
+        },
+        {
+          "rank": 4,
+          "host": "IN-006",
+          "cpus": [
+            33
+          ]
+        },
+        {
+          "rank": 5,
+          "host": "IN-006",
+          "cpus": [
+            41
+          ]
+        },
+        {
+          "rank": 6,
+          "host": "IN-006",
+          "cpus": [
+            43
+          ]
+        },
+        {
+          "rank": 7,
+          "host": "IN-006",
+          "cpus": [
+            47
+          ]
+        },
+        {
+          "rank": 8,
+          "host": "IN-006",
+          "cpus": [
+            51
+          ]
+        },
+        {
+          "rank": 9,
+          "host": "IN-006",
+          "cpus": [
+            57
+          ]
+        },
+        {
+          "rank": 10,
+          "host": "IN-006",
+          "cpus": [
+            59
+          ]
+        },
+        {
+          "rank": 11,
+          "host": "IN-006",
+          "cpus": [
+            61
+          ]
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "mode": "serial",
+      "processes": 1,
+      "threads": 1,
+      "total_cores": 1,
+      "exchange": "none",
+      "median_seconds": 2.066069931,
+      "min_seconds": 1.947887232,
+      "max_seconds": 2.081918608,
+      "speedup": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "mode": "mpi",
+      "processes": 1,
+      "threads": 1,
+      "total_cores": 1,
+      "exchange": "sendrecv",
+      "median_seconds": 2.078345048,
+      "min_seconds": 1.975087721,
+      "max_seconds": 2.10283935,
+      "speedup": 0.994093802176009,
+      "efficiency": 0.994093802176009
+    },
+    {
+      "mode": "mpi",
+      "processes": 1,
+      "threads": 1,
+      "total_cores": 1,
+      "exchange": "overlap",
+      "median_seconds": 2.081533179,
+      "min_seconds": 1.987627771,
+      "max_seconds": 2.096484019,
+      "speedup": 0.9925712219454369,
+      "efficiency": 0.9925712219454369
+    },
+    {
+      "mode": "mpi",
+      "processes": 2,
+      "threads": 1,
+      "total_cores": 2,
+      "exchange": "sendrecv",
+      "median_seconds": 1.278700067,
+      "min_seconds": 1.2378875,
+      "max_seconds": 1.3119583320000001,
+      "speedup": 1.6157580532917888,
+      "efficiency": 0.8078790266458944
+    },
+    {
+      "mode": "mpi",
+      "processes": 2,
+      "threads": 1,
+      "total_cores": 2,
+      "exchange": "overlap",
+      "median_seconds": 1.244288653,
+      "min_seconds": 1.16290633,
+      "max_seconds": 1.282899487,
+      "speedup": 1.6604426360544815,
+      "efficiency": 0.8302213180272408
+    },
+    {
+      "mode": "mpi",
+      "processes": 4,
+      "threads": 1,
+      "total_cores": 4,
+      "exchange": "sendrecv",
+      "median_seconds": 0.6257486489999999,
+      "min_seconds": 0.614976966,
+      "max_seconds": 0.643780692,
+      "speedup": 3.301756918375704,
+      "efficiency": 0.825439229593926
+    },
+    {
+      "mode": "mpi",
+      "processes": 4,
+      "threads": 1,
+      "total_cores": 4,
+      "exchange": "overlap",
+      "median_seconds": 0.619288696,
+      "min_seconds": 0.608202473,
+      "max_seconds": 0.631594294,
+      "speedup": 3.3361983584470267,
+      "efficiency": 0.8340495896117567
+    },
+    {
+      "mode": "mpi",
+      "processes": 12,
+      "threads": 1,
+      "total_cores": 12,
+      "exchange": "sendrecv",
+      "median_seconds": 0.224261979,
+      "min_seconds": 0.218638049,
+      "max_seconds": 0.231804987,
+      "speedup": 9.21275171213931,
+      "efficiency": 0.7677293093449425
+    },
+    {
+      "mode": "mpi",
+      "processes": 12,
+      "threads": 1,
+      "total_cores": 12,
+      "exchange": "overlap",
+      "median_seconds": 0.216749352,
+      "min_seconds": 0.212210915,
+      "max_seconds": 0.233082017,
+      "speedup": 9.532069701412532,
+      "efficiency": 0.7943391417843776
+    }
+  ],
+  "note": "Fixed iterations; no convergence claim. Efficiency denominator is P*T.",
+  "executable_sha256": {
+    "serial": "44dc8fffa7fb657a2cd8d63a475cca94d95e7d712e32ca6721763aae3c2b93d2",
+    "mpi": "b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a"
+  },
+  "source_sha256": {
+    "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+    "jacobi_mpi.cpp": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+    "benchmark_parallel.py": "fc3033b0145669509742de80bd02c0e60f641b73ee29f4d0a8b4c982ae337b02",
+    "jacobi_serial_row_update.cpp": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f",
+    "pin_cpu.py": "7ed290a856bd991e94b923626e1237fb845e20a3bf79acefa6a5b5a889d8a02a"
+  }
+}

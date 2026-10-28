@@ -1,0 +1,65 @@
+#!/bin/bash
+#PBS -N jacobi_ab_dual
+#PBS -q auto_free
+#PBS -l select=1:ncpus=12:mpiprocs=12:ompthreads=1:mem=4gb
+#PBS -l walltime=00:30:00
+#PBS -j oe
+#PBS -k oed
+#PBS -S /bin/bash
+set -euo pipefail
+: "${PBS_JOBID:?Submit with qsub}"
+cd "$PBS_O_WORKDIR"
+run_dir="$PBS_O_WORKDIR/results/Vanda_ab_dual_${PBS_JOBID}"
+mkdir -p "$PBS_O_WORKDIR/results"
+mkdir "$run_dir"
+exec > >(tee "$run_dir/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+if [ -f vanda_modules.sh ]; then source ./vanda_modules.sh; else source ./vanda_modules.example.sh; fi
+{
+    date -Is
+    hostname
+    printf 'SIZES=1024,2048\nK=1000\nTOL=0\nSERIAL_SOURCE=jacobi_serial_row_update.cpp\n'
+    g++ --version
+    mpicxx --showme
+    mpirun --version
+    python3 --version
+    module list
+} > "$run_dir/metadata.txt" 2>&1
+cat "$run_dir/metadata.txt"
+python3 -c 'import os; print("\n".join(k+"="+v for k,v in sorted(os.environ.items()) if k in ("PATH","LD_LIBRARY_PATH","LOADEDMODULES","MODULEPATH") or k.startswith(("PBS_","OMP_","OMPI_"))))' > "$run_dir/environment.txt"
+lscpu > "$run_dir/lscpu.txt"
+qstat -f "$PBS_JOBID" > "$run_dir/qstat_at_start.txt"
+cp /proc/self/status "$run_dir/process_status.txt"
+cp "$PBS_NODEFILE" "$run_dir/pbs_nodefile.txt"
+pin_cpus=$(python3 -c 'import os; c=sorted(os.sched_getaffinity(0)); assert len(c)==12, "Expected 12 allocated CPUs"; print(",".join(map(str,c)))')
+printf 'PIN_CPUS=%s\n' "$pin_cpus" | tee "$run_dir/pin_cpus.txt"
+mkdir "$run_dir/sources" "$run_dir/bin"
+cp jacobi.cpp jacobi_serial_row_update.cpp jacobi_mpi.cpp benchmark_parallel.py benchmark_dual_scale.py \
+    pin_cpu.py verify_small.py verify_parallel.py prepare_team_references.py team_contract_v0.1.json \
+    vanda_ab_dual_scale.pbs vanda_modules.example.sh analyze_results.py audit_ab_supplement.py \
+    verify_asymmetric.py jacobi_serial_asymmetric.cpp jacobi_mpi_asymmetric.cpp "$run_dir/sources/"
+if [ -f vanda_modules.sh ]; then cp vanda_modules.sh "$run_dir/sources/"; fi
+sha256sum "$run_dir"/sources/* > "$run_dir/source_sha256.txt"
+set -x
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic "$run_dir/sources/jacobi_serial_row_update.cpp" -o "$run_dir/bin/jacobi_serial"
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic "$run_dir/sources/jacobi_mpi.cpp" -o "$run_dir/bin/jacobi_mpi"
+set +x
+export OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE
+# One original validation suite for both scales. This is not a benchmark warmup.
+python3 "$run_dir/sources/verify_small.py" "$run_dir/bin/jacobi_serial"
+python3 "$run_dir/sources/verify_parallel.py" --serial "$run_dir/bin/jacobi_serial" \
+    --mpi "$run_dir/bin/jacobi_mpi" --processes 1,2,4,12 --threads 1 \
+    --launcher 'mpirun --bind-to none' --out-dir "$run_dir/validation"
+sha256sum "$run_dir"/bin/* > "$run_dir/executable_sha256.txt"
+python3 "$run_dir/sources/benchmark_dual_scale.py" --build-dir "$run_dir/bin" \
+    --out-dir "$run_dir/benchmark" --pin-cpus "$pin_cpus"
+# Independent correctness-only experiment follows the priority performance work.
+set -x
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic "$run_dir/sources/jacobi_serial_asymmetric.cpp" -o "$run_dir/bin/jacobi_serial_asymmetric"
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic "$run_dir/sources/jacobi_mpi_asymmetric.cpp" -o "$run_dir/bin/jacobi_mpi_asymmetric"
+set +x
+sha256sum "$run_dir"/bin/* > "$run_dir/executable_sha256.txt"
+python3 "$run_dir/sources/verify_asymmetric.py" --serial "$run_dir/bin/jacobi_serial_asymmetric" \
+    --mpi "$run_dir/bin/jacobi_mpi_asymmetric" --launcher 'mpirun --bind-to none' \
+    --out-dir "$run_dir/asymmetric_validation"
+printf 'RUN_STATUS=PASSED\n'

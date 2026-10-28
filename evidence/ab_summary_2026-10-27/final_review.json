@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "date": "2026-10-27",
+  "new_job": "1500271.stdct-mgmt-02",
+  "new_job_audit": "evidence/vanda_1500271_mpi_recheck/audit.json",
+  "summary_configurations": 27,
+  "communication_comparisons": 12,
+  "formal_samples_per_configuration": 9,
+  "all_five_archives_compared_member_by_member": true,
+  "new_markdown_links_resolve": true,
+  "utf8_text_checked": true,
+  "original_serial_and_mpi_sources_match_snapshots": true,
+  "git_diff_check_passed": true,
+  "plots_visually_reviewed": [
+    "evidence/vanda_1500271_mpi_recheck/mpi_scaling.png",
+    "evidence/ab_summary_2026-10-27/strong_scaling_comparison.png",
+    "evidence/ab_summary_2026-10-27/runtime_and_communication.png",
+    "evidence/ab_summary_2026-10-27/measurement_samples.png"
+  ],
+  "new_cluster_executions": 0,
+  "git_committed_or_pushed": false,
+  "email_sent": false
+}

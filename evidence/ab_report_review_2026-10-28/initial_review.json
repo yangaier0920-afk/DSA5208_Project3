@@ -1,0 +1,16 @@
+{
+  "git_head_before": "6ba0fd57c14f54d4ca2d9f0d93ccd9f9d1668340",
+  "preexisting_files": 4296,
+  "backup_sha256": "397477d33fe7a40507635ef17c34c11e2f89cfde90d135783313b600dae347cb",
+  "previous_final_review_hashes_match": {
+    "docs/AB_PROGRESS_CHECKLIST.md": true,
+    "docs/AB_RESULTS_SUMMARY.md": true,
+    "docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md": true,
+    "docs/VANDA_MPI_WAIT_DIAGNOSTIC.md": true,
+    "docs/AI_USAGE.md": true,
+    "evidence/vanda_1502229_mpi_wait/analysis_reviewed.md": true,
+    "evidence/ab_final_2026-10-28/README.md": true,
+    "mpi_wait_diagnostic.py": true,
+    "finalize_ab_evidence.py": true
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "date": "2026-10-28",
+  "scope": "GitHub sharing preparation; no solver or cluster runs",
+  "python_sources_syntax_checked": 21,
+  "credential_pattern_findings": [],
+  "independent_clean_export_restore": {
+    "archives": 7,
+    "member_files": 2271,
+    "passed": true
+  },
+  "offline_scaling_rebuild": {
+    "groups": 45,
+    "performance_executions": 450,
+    "passed": true
+  },
+  "offline_final_rebuild": {
+    "diagnostic_groups": 9,
+    "performance_executions": 54,
+    "passed": true
+  },
+  "rebuilt_csv_json_byte_identical": {
+    "evidence\\ab_summary_2026-10-28\\asymmetric_validation.csv": true,
+    "evidence\\ab_summary_2026-10-28\\communication_comparison.csv": true,
+    "evidence\\ab_summary_2026-10-28\\execution_sequence_1501884.csv": true,
+    "evidence\\ab_summary_2026-10-28\\measurement_samples.csv": true,
+    "evidence\\ab_summary_2026-10-28\\new_job_review.json": true,
+    "evidence\\ab_summary_2026-10-28\\performance_comparison.csv": true,
+    "evidence\\ab_summary_2026-10-28\\same_allocation_scale_ratios.csv": true,
+    "evidence\\ab_summary_2026-10-28\\source_binary_identity.csv": true,
+    "evidence\\ab_summary_2026-10-28\\summary.json": true,
+    "evidence\\ab_final_2026-10-28\\diagnostic_comparisons.csv": true,
+    "evidence\\ab_final_2026-10-28\\diagnostic_execution_sequence.csv": true,
+    "evidence\\ab_final_2026-10-28\\diagnostic_paired_rounds.csv": true,
+    "evidence\\ab_final_2026-10-28\\diagnostic_performance.csv": true,
+    "evidence\\ab_final_2026-10-28\\diagnostic_validation.csv": true,
+    "evidence\\ab_final_2026-10-28\\raw_archives_manifest.json": true,
+    "evidence\\ab_final_2026-10-28\\summary.json": true,
+    "evidence\\ab_final_2026-10-28\\wait_diagnostic_review.json": true
+  },
+  "prior_checkpoint_files": 4296,
+  "unchanged_prior_checkpoint_files": 4288,
+  "changed_since_prior_checkpoint": [
+    ".gitattributes",
+    "finalize_ab_evidence.py",
+    "README.md",
+    "docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md",
+    "docs/AI_USAGE.md",
+    "docs/FILES.md",
+    "docs/HANDOFF.md",
+    "docs/MEMBER_B.md"
+  ],
+  "historical_evidence_and_tracked_archives_match_git_blob_bytes": true,
+  "entry_document_local_links_checked": 37,
+  "staged_deletions": 0,
+  "portable_tool_fix": "Only replace original-host archive lookup with current checkout lookup; keep original path as historical metadata and retain all exact comparisons.",
+  "historical_finalizer_source_preserved": true,
+  "git_push_authorized_by_user": true,
+  "members_read_or_understanding_confirmed": false,
+  "email_sent": false
+}

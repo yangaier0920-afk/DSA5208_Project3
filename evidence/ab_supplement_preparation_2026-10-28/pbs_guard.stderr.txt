@@ -1,0 +1,3 @@
+usage: benchmark_dual_scale.py [-h] --build-dir BUILD_DIR --out-dir OUT_DIR
+                               --pin-cpus PIN_CPUS [--launcher LAUNCHER]
+benchmark_dual_scale.py: error: Performance measurements require a PBS allocation

@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "date": "2026-10-28",
+  "completed_experiments": [
+    1,
+    3,
+    2
+  ],
+  "archived_files_rechecked": 2271,
+  "raw_archives": [
+    {
+      "path": "results/raw_archives/Vanda_mpi_recheck_1499881.stdct-mgmt-02.tar.gz",
+      "files": 390,
+      "sha256": "1f958a71a5ba40cfb734ff7274e8d08945bd4ea7a684d9a1eca6760b4fc6d8c6",
+      "member_by_member_checked": true
+    },
+    {
+      "path": "results/raw_archives/Vanda_mpi_recheck_1500222.stdct-mgmt-02.tar.gz",
+      "files": 390,
+      "sha256": "0dd1f898d49aa8e4f361e347653804c06c647841410f2458d8ed2f6c908f500a",
+      "member_by_member_checked": true
+    },
+    {
+      "path": "results/raw_archives/Vanda_mpi_recheck_1500271.stdct-mgmt-02.tar.gz",
+      "files": 390,
+      "sha256": "d207aea6e76f973acac73bf743d3ad62588dfbe0ef034bf554b04a0fa1c18014",
+      "member_by_member_checked": true
+    },
+    {
+      "path": "results/raw_archives/Vanda_single_rank_1499802.stdct-mgmt-02.tar.gz",
+      "files": 114,
+      "sha256": "7494cc22d5b4c5f4bce0b85ab646aa4383de041122fc6a6e53d55ea609335f89",
+      "member_by_member_checked": true
+    },
+    {
+      "path": "results/raw_archives/Vanda_single_rank_1499842.stdct-mgmt-02.tar.gz",
+      "files": 119,
+      "sha256": "b8fd7754337918275665aa0d182702fb48b396f4888bceaba6a76fb1b575e37c",
+      "member_by_member_checked": true
+    },
+    {
+      "path": "results/raw_archives/Vanda_ab_dual_1501884.stdct-mgmt-02.tar.gz",
+      "files": 646,
+      "sha256": "ddda26f6f5822c5b29d7143549935a0544fc9dc3ac257bbb704d109f03f5f78b",
+      "member_by_member_checked": true
+    },
+    {
+      "path": "results/raw_archives/Vanda_mpi_wait_1502229.stdct-mgmt-02.tar.gz",
+      "files": 222,
+      "sha256": "dfa84e17e040c138a21493aa24d45d8e097f8bba3ead62bf3025aed866ac687a",
+      "member_by_member_checked": true
+    }
+  ],
+  "final_summary_rebuild_byte_equal": {
+    "wait_diagnostic_review.json": true,
+    "raw_archives_manifest.json": true,
+    "diagnostic_performance.csv": true,
+    "diagnostic_comparisons.csv": true,
+    "diagnostic_paired_rounds.csv": true,
+    "diagnostic_validation.csv": true,
+    "diagnostic_execution_sequence.csv": true,
+    "summary.json": true,
+    "stage_report_before_experiment2.md": true
+  },
+  "diagnostic_audit_repeated_exact": true,
+  "markdown_local_links_checked": 65,
+  "utf8_and_unexpanded_templates_checked": true,
+  "diagnostic_plot_visually_reviewed": "evidence/vanda_1502229_mpi_wait/round_times.png",
+  "original_raw_data_modified": false,
+  "performance_samples_removed": 0,
+  "new_cluster_solver_runs_during_audit": 0,
+  "cv_only_cross_python_fix": "evidence/mpi_wait_audit_tool_fix_2026-10-28/rounding_differences.json",
+  "reviewed_file_sha256": {
+    "docs/AB_PROGRESS_CHECKLIST.md": "5a9403b765bf19b157b65309e593b47f8b1eeae719b645b3a951c0723ecc1a3c",
+    "docs/AB_RESULTS_SUMMARY.md": "e133711c799dadc5c90e8ea41bf3c465f051b64f941f103fc1bbcefb896d319b",
+    "docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md": "397477d33fe7a40507635ef17c34c11e2f89cfde90d135783313b600dae347cb",
+    "docs/VANDA_MPI_WAIT_DIAGNOSTIC.md": "4d59347603dfb2f35b6741cb9bb495a00c936112c73d3aafd181054c66c12b24",
+    "docs/AI_USAGE.md": "7129af4addb10824018eb644002d1ba3303d5d772ae93099033b0f5853e1a02c",
+    "evidence/vanda_1502229_mpi_wait/analysis_reviewed.md": "5ad78f407915b8f5f11ef2442ffde70fc9335439513bfb7a1d813dfd4bd12d4d",
+    "evidence/ab_final_2026-10-28/README.md": "0ecff588273e69c1bea11e905f63247100df526a6f3ccb6ce70505b776ce06cc"
+  },
+  "code_sha256": {
+    "mpi_wait_diagnostic.py": "2c8e6e7c3a6db250a22d33c6915903350e02ad06417827bc31eeddc5c4801ec1",
+    "finalize_ab_evidence.py": "e42370eb514767b0ac9beb3f908142b36f37df658547df78e8b62a569d55db2f"
+  },
+  "future_cluster_experiments_for_this_round": "none",
+  "git_committed_or_pushed": false,
+  "email_sent": false
+}

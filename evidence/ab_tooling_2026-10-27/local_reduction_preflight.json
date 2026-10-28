@@ -1,0 +1,21 @@
+{
+  "scope": "Local Windows numerical and planner checks; candidate Vanda experiment pending",
+  "variants_compiled": [
+    "original",
+    "local_update",
+    "row_update"
+  ],
+  "reference_cases": 10,
+  "all_non_timing_output_fields_identical": true,
+  "reference_validation": "PASS",
+  "both_four_configuration_eight_round_schedules": "PASS",
+  "syntax_and_lf": "PASS",
+  "production_cpp_sources_modified": false,
+  "windows_codegen_note": "Windows original already uses a register accumulator; do not use Windows timings as Linux causal evidence",
+  "source_sha256": {
+    "diagnose_single_rank.py": "87f150e40d51bfc914603796965b632c3491b7cbb70c19aaa2d79bd985c805a0",
+    "vanda_single_rank.pbs": "5d2289bda9b1bf384502f1e9acbc3688b3addea1001d02393e639714361f5745",
+    "jacobi_serial_local_update.cpp": "a0180ee943d8de17bf86bfaea80f1bfbbe253dfe5fe2be91b7fc5b969396e185",
+    "jacobi_serial_row_update.cpp": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f"
+  }
+}

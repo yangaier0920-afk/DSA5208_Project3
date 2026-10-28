@@ -1,0 +1,46 @@
+id,case_id,n,p,kind,exchange,iterations,tolerance,status,max_error,residual_inf,full_grid_max_difference,comparison_scope
+one_cell_original_sendrecv,one_cell,1,1,original,sendrecv,1,0,fixed_iterations,0,0,0.0,full grid and independent metrics
+one_cell_original_overlap,one_cell,1,1,original,overlap,1,0,fixed_iterations,0,0,0.0,full grid and independent metrics
+one_cell_diagnostic_sendrecv,one_cell,1,1,diagnostic,sendrecv,1,0,fixed_iterations,0,0,0.0,full grid and independent metrics
+one_cell_diagnostic_immediate,one_cell,1,1,diagnostic,immediate,1,0,fixed_iterations,0,0,0.0,full grid and independent metrics
+one_cell_diagnostic_overlap,one_cell,1,1,diagnostic,overlap,1,0,fixed_iterations,0,0,0.0,full grid and independent metrics
+one_per_rank_original_sendrecv,one_per_rank,2,2,original,sendrecv,2,0,fixed_iterations,0.25,4.5,2.220446049250313e-16,full grid and independent metrics
+one_per_rank_original_overlap,one_per_rank,2,2,original,overlap,2,0,fixed_iterations,0.25,4.5,2.220446049250313e-16,full grid and independent metrics
+one_per_rank_diagnostic_sendrecv,one_per_rank,2,2,diagnostic,sendrecv,2,0,fixed_iterations,0.25,4.5,2.220446049250313e-16,full grid and independent metrics
+one_per_rank_diagnostic_immediate,one_per_rank,2,2,diagnostic,immediate,2,0,fixed_iterations,0.25,4.5,2.220446049250313e-16,full grid and independent metrics
+one_per_rank_diagnostic_overlap,one_per_rank,2,2,diagnostic,overlap,2,0,fixed_iterations,0.25,4.5,2.220446049250313e-16,full grid and independent metrics
+two_per_rank_original_sendrecv,two_per_rank,4,2,original,sendrecv,3,0,fixed_iterations,0.7812500000000002,15.625000000000002,2.220446049250313e-16,full grid and independent metrics
+two_per_rank_original_overlap,two_per_rank,4,2,original,overlap,3,0,fixed_iterations,0.7812500000000002,15.625000000000002,2.220446049250313e-16,full grid and independent metrics
+two_per_rank_diagnostic_sendrecv,two_per_rank,4,2,diagnostic,sendrecv,3,0,fixed_iterations,0.7812500000000002,15.625000000000002,2.220446049250313e-16,full grid and independent metrics
+two_per_rank_diagnostic_immediate,two_per_rank,4,2,diagnostic,immediate,3,0,fixed_iterations,0.7812500000000002,15.625000000000002,2.220446049250313e-16,full grid and independent metrics
+two_per_rank_diagnostic_overlap,two_per_rank,4,2,diagnostic,overlap,3,0,fixed_iterations,0.7812500000000002,15.625000000000002,2.220446049250313e-16,full grid and independent metrics
+uneven_interiors_original_sendrecv,uneven_interiors,7,2,original,sendrecv,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_interiors_original_overlap,uneven_interiors,7,2,original,overlap,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_interiors_diagnostic_sendrecv,uneven_interiors,7,2,diagnostic,sendrecv,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_interiors_diagnostic_immediate,uneven_interiors,7,2,diagnostic,immediate,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_interiors_diagnostic_overlap,uneven_interiors,7,2,diagnostic,overlap,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_single_original_sendrecv,uneven_single,7,4,original,sendrecv,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_single_original_overlap,uneven_single,7,4,original,overlap,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_single_diagnostic_sendrecv,uneven_single,7,4,diagnostic,sendrecv,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_single_diagnostic_immediate,uneven_single,7,4,diagnostic,immediate,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+uneven_single_diagnostic_overlap,uneven_single,7,4,diagnostic,overlap,31,0,fixed_iterations,0.1355021752533503,2.5641888249636366,0.0,full grid and independent metrics
+four_double_original_sendrecv,four_double,8,4,original,sendrecv,30,0,fixed_iterations,0.24050391271418214,4.763193429925562,2.220446049250313e-16,full grid and independent metrics
+four_double_original_overlap,four_double,8,4,original,overlap,30,0,fixed_iterations,0.24050391271418214,4.763193429925562,2.220446049250313e-16,full grid and independent metrics
+four_double_diagnostic_sendrecv,four_double,8,4,diagnostic,sendrecv,30,0,fixed_iterations,0.24050391271418214,4.763193429925562,2.220446049250313e-16,full grid and independent metrics
+four_double_diagnostic_immediate,four_double,8,4,diagnostic,immediate,30,0,fixed_iterations,0.24050391271418214,4.763193429925562,2.220446049250313e-16,full grid and independent metrics
+four_double_diagnostic_overlap,four_double,8,4,diagnostic,overlap,30,0,fixed_iterations,0.24050391271418214,4.763193429925562,2.220446049250313e-16,full grid and independent metrics
+converged_original_sendrecv,converged,7,2,original,sendrecv,324,1e-12,update_tolerance_reached,1.1444623027045964e-11,2.3145219074649503e-10,0.0,full grid and independent metrics
+converged_original_overlap,converged,7,2,original,overlap,324,1e-12,update_tolerance_reached,1.1444623027045964e-11,2.3145219074649503e-10,0.0,full grid and independent metrics
+converged_diagnostic_sendrecv,converged,7,2,diagnostic,sendrecv,324,1e-12,update_tolerance_reached,1.1444623027045964e-11,2.3145219074649503e-10,0.0,full grid and independent metrics
+converged_diagnostic_immediate,converged,7,2,diagnostic,immediate,324,1e-12,update_tolerance_reached,1.1444623027045964e-11,2.3145219074649503e-10,0.0,full grid and independent metrics
+converged_diagnostic_overlap,converged,7,2,diagnostic,overlap,324,1e-12,update_tolerance_reached,1.1444623027045964e-11,2.3145219074649503e-10,0.0,full grid and independent metrics
+twelve_single_original_sendrecv,twelve_single,12,12,original,sendrecv,3,0,fixed_iterations,1.483173076923077,104.81250000000003,,independent metrics only
+twelve_single_original_overlap,twelve_single,12,12,original,overlap,3,0,fixed_iterations,1.483173076923077,104.81250000000003,,independent metrics only
+twelve_single_diagnostic_sendrecv,twelve_single,12,12,diagnostic,sendrecv,3,0,fixed_iterations,1.483173076923077,104.81250000000003,,independent metrics only
+twelve_single_diagnostic_immediate,twelve_single,12,12,diagnostic,immediate,3,0,fixed_iterations,1.483173076923077,104.81250000000003,,independent metrics only
+twelve_single_diagnostic_overlap,twelve_single,12,12,diagnostic,overlap,3,0,fixed_iterations,1.483173076923077,104.81250000000003,,independent metrics only
+twelve_double_original_sendrecv,twelve_double,24,12,original,sendrecv,4,0,fixed_iterations,1.665625,371.8750000000002,,independent metrics only
+twelve_double_original_overlap,twelve_double,24,12,original,overlap,4,0,fixed_iterations,1.665625,371.8750000000002,,independent metrics only
+twelve_double_diagnostic_sendrecv,twelve_double,24,12,diagnostic,sendrecv,4,0,fixed_iterations,1.665625,371.8750000000002,,independent metrics only
+twelve_double_diagnostic_immediate,twelve_double,24,12,diagnostic,immediate,4,0,fixed_iterations,1.665625,371.8750000000002,,independent metrics only
+twelve_double_diagnostic_overlap,twelve_double,24,12,diagnostic,overlap,4,0,fixed_iterations,1.665625,371.8750000000002,,independent metrics only

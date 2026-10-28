@@ -1,0 +1,283 @@
+Loading GCC/12.2.0
+  Loading requirement: GCCcore/12.2.0 zlib/1.2.12-GCCcore-12.2.0
+    binutils/2.39-GCCcore-12.2.0
+Loading OpenMPI/4.1.5-GCC-12.2.0
+  Loading requirement: ncurses/6.3-GCCcore-12.2.0 numactl/2.0.16-GCCcore-12.2.0
+    XZ/5.2.7-GCCcore-12.2.0 libxml2/2.10.3-GCCcore-12.2.0
+    libpciaccess/0.17-GCCcore-12.2.0 hwloc/2.8.0-GCCcore-12.2.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.2.0 UCX/1.13.1-GCCcore-12.2.0
+    libfabric/1.16.1-GCCcore-12.2.0 PMIx/4.2.2-GCCcore-12.2.0
+    UCC/1.1.0-GCCcore-12.2.0
+Loading Python/3.10.8-GCCcore-12.2.0
+  Loading requirement: bzip2/1.0.8-GCCcore-12.2.0 libreadline/8.2-GCCcore-12.2.0
+    Tcl/8.6.12-GCCcore-12.2.0 SQLite/3.39.4-GCCcore-12.2.0
+    GMP/6.2.1-GCCcore-12.2.0 libffi/3.4.4-GCCcore-12.2.0
+2026-10-28T11:03:50+08:00
+IN-005
+SIZES=1024,2048
+K=1000
+TOL=0
+SERIAL_SOURCE=jacobi_serial_row_update.cpp
+g++ (GCC) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+g++ -I/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/include -L/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,--enable-new-dtags -lmpi
+mpirun (Open MPI) 4.1.5
+
+Report bugs to http://www.open-mpi.org/community/help/
+Python 3.10.8
+Currently Loaded Modulefiles:
+ 1) shared                            14) libevent/2.1.12-GCCcore-12.2.0   
+ 2) apptainer/1.4.1                   15) UCX/1.13.1-GCCcore-12.2.0        
+ 3) GCCcore/12.2.0                    16) libfabric/1.16.1-GCCcore-12.2.0  
+ 4) zlib/1.2.12-GCCcore-12.2.0        17) PMIx/4.2.2-GCCcore-12.2.0        
+ 5) binutils/2.39-GCCcore-12.2.0      18) UCC/1.1.0-GCCcore-12.2.0         
+ 6) GCC/12.2.0                        19) OpenMPI/4.1.5-GCC-12.2.0         
+ 7) ncurses/6.3-GCCcore-12.2.0        20) bzip2/1.0.8-GCCcore-12.2.0       
+ 8) numactl/2.0.16-GCCcore-12.2.0     21) libreadline/8.2-GCCcore-12.2.0   
+ 9) XZ/5.2.7-GCCcore-12.2.0           22) Tcl/8.6.12-GCCcore-12.2.0        
+10) libxml2/2.10.3-GCCcore-12.2.0     23) SQLite/3.39.4-GCCcore-12.2.0     
+11) libpciaccess/0.17-GCCcore-12.2.0  24) GMP/6.2.1-GCCcore-12.2.0         
+12) hwloc/2.8.0-GCCcore-12.2.0        25) libffi/3.4.4-GCCcore-12.2.0      
+13) OpenSSL/1.1                       26) Python/3.10.8-GCCcore-12.2.0     
+PIN_CPUS=1,3,5,7,41,43,45,47,49,51,53,55
++ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/sources/jacobi_serial_row_update.cpp -o /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/bin/jacobi_serial
++ mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/sources/jacobi_mpi.cpp -o /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/bin/jacobi_mpi
++ set +x
+{"mode": "serial", "n": 8, "threads": 1, "iterations": 408, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.405809464624326e-13, "max_error": 1.4650614055256028e-11, "residual_inf": 2.862949877169285e-10, "boundary_error": 0, "compute_seconds": 4.9783e-05, "grid": [[0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777777, 0.8888888888888888, 1], [0.1111111111111111, 0.22222222222045515, 0.3333333333300123, 0.44444444443997, 0.5555555555504674, 0.6666666666615786, 0.7777777777733035, 0.8888888888855679, 0.9999999999982329, 1.1111111111111112], [0.2222222222222222, 0.3333333333300123, 0.44444444443820297, 0.5555555555471464, 0.6666666666571042, 0.7777777777682153, 0.8888888888804798, 0.9999999999937585, 1.1111111111077903, 1.222222222222222], [0.3333333333333333, 0.44444444443997005, 0.5555555555471464, 0.666666666655337, 0.7777777777648942, 0.8888888888760054, 0.9999999999886704, 1.1111111111027019, 1.2222222222177477, 1.3333333333333333], [0.4444444444444444, 0.5555555555504674, 0.6666666666571042, 0.7777777777648943, 0.8888888888742383, 0.9999999999853494, 1.1111111110982277, 1.2222222222126597, 1.3333333333282453, 1.4444444444444444], [0.5555555555555556, 0.6666666666615786, 0.7777777777682153, 0.8888888888760054, 0.9999999999853494, 1.1111111110964607, 1.2222222222093386, 1.333333333323771, 1.4444444444393563, 1.5555555555555554], [0.6666666666666666, 0.7777777777733034, 0.8888888888804798, 0.9999999999886704, 1.1111111110982277, 1.2222222222093386, 1.3333333333220039, 1.4444444444360351, 1.5555555555510812, 1.6666666666666665], [0.7777777777777777, 0.8888888888855679, 0.9999999999937585, 1.1111111111027019, 1.2222222222126597, 1.333333333323771, 1.4444444444360354, 1.5555555555493141, 1.6666666666633456, 1.7777777777777777], [0.8888888888888888, 0.999999999998233, 1.11111111110779, 1.2222222222177477, 1.333333333328245, 1.4444444444393563, 1.5555555555510812, 1.6666666666633456, 1.7777777777760106, 1.8888888888888888], [1, 1.1111111111111112, 1.222222222222222, 1.3333333333333333, 1.4444444444444444, 1.5555555555555554, 1.6666666666666665, 1.7777777777777777, 1.8888888888888888, 2]]}
+{"mode": "serial", "n": 16, "threads": 1, "iterations": 1401, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.843237336326638e-13, "max_error": 5.681455306216776e-11, "residual_inf": 1.1185627979415358e-09, "boundary_error": 0, "compute_seconds": 0.000601788}
+{"mode": "serial", "n": 32, "threads": 1, "iterations": 5006, "tolerance": 1e-12, "status": "update_tolerance_reached", "max_update": 9.985345883478658e-13, "max_error": 2.1949764228423874e-10, "residual_inf": 4.3300303342874705e-09, "boundary_error": 0, "compute_seconds": 0.008140387}
+PASS: hand values, boundaries, exact solution, residual, iteration limit: /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/bin/jacobi_serial
+PASS hand_n1
+PASS hand_n2
+PASS odd_n7_k1
+PASS odd_n7_k2
+PASS odd_n7_k31
+PASS fixed_n8_k30
+PASS converged_n16
+PASS converged_n31
+PASS converged_n32
+PASS iteration_limit
+PASS one_row_per_rank
+PASS three_rows_per_rank
+PASS: 92 executions; results: /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/validation
+seq=0 n=1024 serial_p1_t1_none_r-1: 2.125651s
+seq=1 n=1024 mpi_p1_t1_sendrecv_r-1: 1.668874s
+seq=2 n=1024 mpi_p1_t1_overlap_r-1: 1.665513s
+seq=3 n=1024 mpi_p2_t1_sendrecv_r-1: 1.217464s
+seq=4 n=1024 mpi_p2_t1_overlap_r-1: 1.220853s
+seq=5 n=1024 mpi_p4_t1_sendrecv_r-1: 1.055062s
+seq=6 n=1024 mpi_p4_t1_overlap_r-1: 1.042345s
+seq=7 n=1024 mpi_p12_t1_sendrecv_r-1: 1.654982s
+seq=8 n=1024 mpi_p12_t1_overlap_r-1: 0.845149s
+seq=9 n=2048 serial_p1_t1_none_r-1: 7.470222s
+seq=10 n=2048 mpi_p1_t1_sendrecv_r-1: 7.545094s
+seq=11 n=2048 mpi_p1_t1_overlap_r-1: 7.587772s
+seq=12 n=2048 mpi_p2_t1_sendrecv_r-1: 3.807985s
+seq=13 n=2048 mpi_p2_t1_overlap_r-1: 3.804183s
+seq=14 n=2048 mpi_p4_t1_sendrecv_r-1: 4.021978s
+seq=15 n=2048 mpi_p4_t1_overlap_r-1: 3.026874s
+seq=16 n=2048 mpi_p12_t1_sendrecv_r-1: 3.666858s
+seq=17 n=2048 mpi_p12_t1_overlap_r-1: 4.493273s
+seq=18 n=1024 serial_p1_t1_none_r0: 1.514429s
+seq=19 n=1024 mpi_p1_t1_sendrecv_r0: 1.567155s
+seq=20 n=1024 mpi_p1_t1_overlap_r0: 1.561515s
+seq=21 n=1024 mpi_p2_t1_sendrecv_r0: 0.806823s
+seq=22 n=1024 mpi_p2_t1_overlap_r0: 0.818318s
+seq=23 n=1024 mpi_p4_t1_sendrecv_r0: 1.061530s
+seq=24 n=1024 mpi_p4_t1_overlap_r0: 1.006995s
+seq=25 n=1024 mpi_p12_t1_sendrecv_r0: 3.504229s
+seq=26 n=1024 mpi_p12_t1_overlap_r0: 1.270242s
+seq=27 n=2048 serial_p1_t1_none_r0: 7.354308s
+seq=28 n=2048 mpi_p1_t1_sendrecv_r0: 7.383057s
+seq=29 n=2048 mpi_p1_t1_overlap_r0: 7.364049s
+seq=30 n=2048 mpi_p2_t1_sendrecv_r0: 4.604071s
+seq=31 n=2048 mpi_p2_t1_overlap_r0: 3.831992s
+seq=32 n=2048 mpi_p4_t1_sendrecv_r0: 3.457291s
+seq=33 n=2048 mpi_p4_t1_overlap_r0: 3.074776s
+seq=34 n=2048 mpi_p12_t1_sendrecv_r0: 5.200214s
+seq=35 n=2048 mpi_p12_t1_overlap_r0: 2.903452s
+seq=36 n=2048 mpi_p1_t1_sendrecv_r1: 7.296916s
+seq=37 n=2048 mpi_p1_t1_overlap_r1: 7.344094s
+seq=38 n=2048 mpi_p2_t1_sendrecv_r1: 4.643876s
+seq=39 n=2048 mpi_p2_t1_overlap_r1: 3.974242s
+seq=40 n=2048 mpi_p4_t1_sendrecv_r1: 3.619891s
+seq=41 n=2048 mpi_p4_t1_overlap_r1: 3.850227s
+seq=42 n=2048 mpi_p12_t1_sendrecv_r1: 4.235633s
+seq=43 n=2048 mpi_p12_t1_overlap_r1: 4.285313s
+seq=44 n=2048 serial_p1_t1_none_r1: 7.629229s
+seq=45 n=1024 mpi_p1_t1_sendrecv_r1: 1.749099s
+seq=46 n=1024 mpi_p1_t1_overlap_r1: 1.786112s
+seq=47 n=1024 mpi_p2_t1_sendrecv_r1: 1.221238s
+seq=48 n=1024 mpi_p2_t1_overlap_r1: 1.238940s
+seq=49 n=1024 mpi_p4_t1_sendrecv_r1: 1.062946s
+seq=50 n=1024 mpi_p4_t1_overlap_r1: 1.112420s
+seq=51 n=1024 mpi_p12_t1_sendrecv_r1: 3.335784s
+seq=52 n=1024 mpi_p12_t1_overlap_r1: 0.991551s
+seq=53 n=1024 serial_p1_t1_none_r1: 1.749200s
+seq=54 n=1024 mpi_p1_t1_overlap_r2: 1.762791s
+seq=55 n=1024 mpi_p2_t1_sendrecv_r2: 0.914102s
+seq=56 n=1024 mpi_p2_t1_overlap_r2: 0.913039s
+seq=57 n=1024 mpi_p4_t1_sendrecv_r2: 1.027916s
+seq=58 n=1024 mpi_p4_t1_overlap_r2: 0.878061s
+seq=59 n=1024 mpi_p12_t1_sendrecv_r2: 3.101710s
+seq=60 n=1024 mpi_p12_t1_overlap_r2: 2.394721s
+seq=61 n=1024 serial_p1_t1_none_r2: 1.724062s
+seq=62 n=1024 mpi_p1_t1_sendrecv_r2: 1.713158s
+seq=63 n=2048 mpi_p1_t1_overlap_r2: 7.721334s
+seq=64 n=2048 mpi_p2_t1_sendrecv_r2: 4.271843s
+seq=65 n=2048 mpi_p2_t1_overlap_r2: 3.984230s
+seq=66 n=2048 mpi_p4_t1_sendrecv_r2: 4.074000s
+seq=67 n=2048 mpi_p4_t1_overlap_r2: 3.183267s
+seq=68 n=2048 mpi_p12_t1_sendrecv_r2: 4.192806s
+seq=69 n=2048 mpi_p12_t1_overlap_r2: 2.828012s
+seq=70 n=2048 serial_p1_t1_none_r2: 7.650589s
+seq=71 n=2048 mpi_p1_t1_sendrecv_r2: 7.667517s
+seq=72 n=2048 mpi_p2_t1_sendrecv_r3: 3.947916s
+seq=73 n=2048 mpi_p2_t1_overlap_r3: 3.993469s
+seq=74 n=2048 mpi_p4_t1_sendrecv_r3: 4.128833s
+seq=75 n=2048 mpi_p4_t1_overlap_r3: 3.318100s
+seq=76 n=2048 mpi_p12_t1_sendrecv_r3: 4.857998s
+seq=77 n=2048 mpi_p12_t1_overlap_r3: 3.442897s
+seq=78 n=2048 serial_p1_t1_none_r3: 7.371001s
+seq=79 n=2048 mpi_p1_t1_sendrecv_r3: 7.414535s
+seq=80 n=2048 mpi_p1_t1_overlap_r3: 7.389777s
+seq=81 n=1024 mpi_p2_t1_sendrecv_r3: 0.826160s
+seq=82 n=1024 mpi_p2_t1_overlap_r3: 0.833600s
+seq=83 n=1024 mpi_p4_t1_sendrecv_r3: 1.025746s
+seq=84 n=1024 mpi_p4_t1_overlap_r3: 0.845220s
+seq=85 n=1024 mpi_p12_t1_sendrecv_r3: 3.186967s
+seq=86 n=1024 mpi_p12_t1_overlap_r3: 1.353880s
+seq=87 n=1024 serial_p1_t1_none_r3: 1.578355s
+seq=88 n=1024 mpi_p1_t1_sendrecv_r3: 1.547593s
+seq=89 n=1024 mpi_p1_t1_overlap_r3: 1.562055s
+seq=90 n=1024 mpi_p2_t1_overlap_r4: 0.810854s
+seq=91 n=1024 mpi_p4_t1_sendrecv_r4: 1.003814s
+seq=92 n=1024 mpi_p4_t1_overlap_r4: 0.976354s
+seq=93 n=1024 mpi_p12_t1_sendrecv_r4: 3.234800s
+seq=94 n=1024 mpi_p12_t1_overlap_r4: 1.924926s
+seq=95 n=1024 serial_p1_t1_none_r4: 1.532395s
+seq=96 n=1024 mpi_p1_t1_sendrecv_r4: 1.549753s
+seq=97 n=1024 mpi_p1_t1_overlap_r4: 1.564581s
+seq=98 n=1024 mpi_p2_t1_sendrecv_r4: 0.786753s
+seq=99 n=2048 mpi_p2_t1_overlap_r4: 3.788555s
+seq=100 n=2048 mpi_p4_t1_sendrecv_r4: 3.985994s
+seq=101 n=2048 mpi_p4_t1_overlap_r4: 3.592302s
+seq=102 n=2048 mpi_p12_t1_sendrecv_r4: 5.377992s
+seq=103 n=2048 mpi_p12_t1_overlap_r4: 5.529450s
+seq=104 n=2048 serial_p1_t1_none_r4: 7.345913s
+seq=105 n=2048 mpi_p1_t1_sendrecv_r4: 7.391237s
+seq=106 n=2048 mpi_p1_t1_overlap_r4: 7.475383s
+seq=107 n=2048 mpi_p2_t1_sendrecv_r4: 3.792208s
+seq=108 n=2048 mpi_p4_t1_sendrecv_r5: 4.084606s
+seq=109 n=2048 mpi_p4_t1_overlap_r5: 3.082752s
+seq=110 n=2048 mpi_p12_t1_sendrecv_r5: 3.636157s
+seq=111 n=2048 mpi_p12_t1_overlap_r5: 1.105263s
+seq=112 n=2048 serial_p1_t1_none_r5: 8.914473s
+seq=113 n=2048 mpi_p1_t1_sendrecv_r5: 8.581216s
+seq=114 n=2048 mpi_p1_t1_overlap_r5: 7.794467s
+seq=115 n=2048 mpi_p2_t1_sendrecv_r5: 5.275308s
+seq=116 n=2048 mpi_p2_t1_overlap_r5: 4.658712s
+seq=117 n=1024 mpi_p4_t1_sendrecv_r5: 0.631505s
+seq=118 n=1024 mpi_p4_t1_overlap_r5: 0.656638s
+seq=119 n=1024 mpi_p12_t1_sendrecv_r5: 0.223345s
+seq=120 n=1024 mpi_p12_t1_overlap_r5: 0.214146s
+seq=121 n=1024 serial_p1_t1_none_r5: 2.053530s
+seq=122 n=1024 mpi_p1_t1_sendrecv_r5: 2.264117s
+seq=123 n=1024 mpi_p1_t1_overlap_r5: 2.468088s
+seq=124 n=1024 mpi_p2_t1_sendrecv_r5: 1.420126s
+seq=125 n=1024 mpi_p2_t1_overlap_r5: 1.443995s
+seq=126 n=1024 mpi_p4_t1_overlap_r6: 0.649874s
+seq=127 n=1024 mpi_p12_t1_sendrecv_r6: 0.213243s
+seq=128 n=1024 mpi_p12_t1_overlap_r6: 0.225152s
+seq=129 n=1024 serial_p1_t1_none_r6: 2.438930s
+seq=130 n=1024 mpi_p1_t1_sendrecv_r6: 2.462074s
+seq=131 n=1024 mpi_p1_t1_overlap_r6: 2.464296s
+seq=132 n=1024 mpi_p2_t1_sendrecv_r6: 1.429238s
+seq=133 n=1024 mpi_p2_t1_overlap_r6: 1.449243s
+seq=134 n=1024 mpi_p4_t1_sendrecv_r6: 0.653993s
+seq=135 n=2048 mpi_p4_t1_overlap_r6: 3.509409s
+seq=136 n=2048 mpi_p12_t1_sendrecv_r6: 1.353720s
+seq=137 n=2048 mpi_p12_t1_overlap_r6: 1.358113s
+seq=138 n=2048 serial_p1_t1_none_r6: 11.826219s
+seq=139 n=2048 mpi_p1_t1_sendrecv_r6: 11.842396s
+seq=140 n=2048 mpi_p1_t1_overlap_r6: 12.966931s
+seq=141 n=2048 mpi_p2_t1_sendrecv_r6: 6.525822s
+seq=142 n=2048 mpi_p2_t1_overlap_r6: 6.430106s
+seq=143 n=2048 mpi_p4_t1_sendrecv_r6: 3.832399s
+seq=144 n=2048 mpi_p12_t1_sendrecv_r7: 1.605104s
+seq=145 n=2048 mpi_p12_t1_overlap_r7: 1.527249s
+seq=146 n=2048 serial_p1_t1_none_r7: 11.734665s
+seq=147 n=2048 mpi_p1_t1_sendrecv_r7: 11.814556s
+seq=148 n=2048 mpi_p1_t1_overlap_r7: 11.998062s
+seq=149 n=2048 mpi_p2_t1_sendrecv_r7: 6.637900s
+seq=150 n=2048 mpi_p2_t1_overlap_r7: 6.357320s
+seq=151 n=2048 mpi_p4_t1_sendrecv_r7: 3.755070s
+seq=152 n=2048 mpi_p4_t1_overlap_r7: 3.550400s
+seq=153 n=1024 mpi_p12_t1_sendrecv_r7: 0.224243s
+seq=154 n=1024 mpi_p12_t1_overlap_r7: 0.228046s
+seq=155 n=1024 serial_p1_t1_none_r7: 2.908640s
+seq=156 n=1024 mpi_p1_t1_sendrecv_r7: 2.888173s
+seq=157 n=1024 mpi_p1_t1_overlap_r7: 2.933871s
+seq=158 n=1024 mpi_p2_t1_sendrecv_r7: 1.609502s
+seq=159 n=1024 mpi_p2_t1_overlap_r7: 1.590803s
+seq=160 n=1024 mpi_p4_t1_sendrecv_r7: 0.696806s
+seq=161 n=1024 mpi_p4_t1_overlap_r7: 0.693151s
+seq=162 n=1024 mpi_p12_t1_overlap_r8: 0.227835s
+seq=163 n=1024 serial_p1_t1_none_r8: 2.952787s
+seq=164 n=1024 mpi_p1_t1_sendrecv_r8: 3.063077s
+seq=165 n=1024 mpi_p1_t1_overlap_r8: 3.019444s
+seq=166 n=1024 mpi_p2_t1_sendrecv_r8: 1.642238s
+seq=167 n=1024 mpi_p2_t1_overlap_r8: 1.659521s
+seq=168 n=1024 mpi_p4_t1_sendrecv_r8: 0.671599s
+seq=169 n=1024 mpi_p4_t1_overlap_r8: 0.690936s
+seq=170 n=1024 mpi_p12_t1_sendrecv_r8: 0.219301s
+seq=171 n=2048 mpi_p12_t1_overlap_r8: 1.612992s
+seq=172 n=2048 serial_p1_t1_none_r8: 13.040662s
+seq=173 n=2048 mpi_p1_t1_sendrecv_r8: 12.851072s
+seq=174 n=2048 mpi_p1_t1_overlap_r8: 12.320326s
+seq=175 n=2048 mpi_p2_t1_sendrecv_r8: 5.737495s
+seq=176 n=2048 mpi_p2_t1_overlap_r8: 6.307519s
+seq=177 n=2048 mpi_p4_t1_sendrecv_r8: 3.951408s
+seq=178 n=2048 mpi_p4_t1_overlap_r8: 3.678688s
+seq=179 n=2048 mpi_p12_t1_sendrecv_r8: 1.655240s
+PASS: 180 executions; 18 warmups, 162 formal; scales analyzed separately
++ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/sources/jacobi_serial_asymmetric.cpp -o /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/bin/jacobi_serial_asymmetric
++ mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/sources/jacobi_mpi_asymmetric.cpp -o /nfs/home/svu/yangaier/dsa5208_project3/ab_supplement_20261028_v1/results/Vanda_ab_dual_1501884.stdct-mgmt-02/bin/jacobi_mpi_asymmetric
++ set +x
+PASS single_cell_serial_p1_none
+PASS single_cell_mpi_p1_sendrecv
+PASS single_cell_mpi_p1_overlap
+PASS two_rows_serial_p1_none
+PASS two_rows_mpi_p1_sendrecv
+PASS two_rows_mpi_p1_overlap
+PASS two_rows_mpi_p2_sendrecv
+PASS two_rows_mpi_p2_overlap
+PASS uneven_serial_p1_none
+PASS uneven_mpi_p1_sendrecv
+PASS uneven_mpi_p1_overlap
+PASS uneven_mpi_p2_sendrecv
+PASS uneven_mpi_p2_overlap
+PASS uneven_mpi_p4_sendrecv
+PASS uneven_mpi_p4_overlap
+PASS two_per_rank_serial_p1_none
+PASS two_per_rank_mpi_p4_sendrecv
+PASS two_per_rank_mpi_p4_overlap
+PASS twelve_single_serial_p1_none
+PASS twelve_single_mpi_p12_sendrecv
+PASS twelve_single_mpi_p12_overlap
+PASS twelve_double_serial_p1_none
+PASS twelve_double_mpi_p12_sendrecv
+PASS twelve_double_mpi_p12_overlap
+PASS converged_serial_p1_none
+PASS converged_mpi_p1_sendrecv
+PASS converged_mpi_p1_overlap
+PASS converged_mpi_p2_sendrecv
+PASS converged_mpi_p2_overlap
+PASS converged_mpi_p4_sendrecv
+PASS converged_mpi_p4_overlap
+PASS: 31 asymmetric full-grid executions
+RUN_STATUS=PASSED
+JOB_EXIT_STATUS=0

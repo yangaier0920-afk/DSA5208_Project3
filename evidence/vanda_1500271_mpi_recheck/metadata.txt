@@ -1,0 +1,29 @@
+2026-10-27T22:25:07+08:00
+IN-003
+N=1024
+K=1000
+SERIAL_SOURCE=jacobi_serial_row_update.cpp
+g++ (GCC) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+g++ -I/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/include -L/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -L/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/OpenMPI/4.1.5-GCC-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/hwloc/2.8.0-GCCcore-12.2.0/lib -Wl,-rpath -Wl,/app1/ebapps/arches/flat-avx2/software/libevent/2.1.12-GCCcore-12.2.0/lib -Wl,--enable-new-dtags -lmpi
+mpirun (Open MPI) 4.1.5
+
+Report bugs to http://www.open-mpi.org/community/help/
+Python 3.10.8
+Currently Loaded Modulefiles:
+ 1) shared                            14) libevent/2.1.12-GCCcore-12.2.0   
+ 2) apptainer/1.4.1                   15) UCX/1.13.1-GCCcore-12.2.0        
+ 3) GCCcore/12.2.0                    16) libfabric/1.16.1-GCCcore-12.2.0  
+ 4) zlib/1.2.12-GCCcore-12.2.0        17) PMIx/4.2.2-GCCcore-12.2.0        
+ 5) binutils/2.39-GCCcore-12.2.0      18) UCC/1.1.0-GCCcore-12.2.0         
+ 6) GCC/12.2.0                        19) OpenMPI/4.1.5-GCC-12.2.0         
+ 7) ncurses/6.3-GCCcore-12.2.0        20) bzip2/1.0.8-GCCcore-12.2.0       
+ 8) numactl/2.0.16-GCCcore-12.2.0     21) libreadline/8.2-GCCcore-12.2.0   
+ 9) XZ/5.2.7-GCCcore-12.2.0           22) Tcl/8.6.12-GCCcore-12.2.0        
+10) libxml2/2.10.3-GCCcore-12.2.0     23) SQLite/3.39.4-GCCcore-12.2.0     
+11) libpciaccess/0.17-GCCcore-12.2.0  24) GMP/6.2.1-GCCcore-12.2.0         
+12) hwloc/2.8.0-GCCcore-12.2.0        25) libffi/3.4.4-GCCcore-12.2.0      
+13) OpenSSL/1.1                       26) Python/3.10.8-GCCcore-12.2.0     

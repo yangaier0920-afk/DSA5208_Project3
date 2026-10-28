@@ -1,0 +1,123 @@
+{
+  "status": "PASS",
+  "scope": "real local serial oracle + synthetic tooling; NOT MPI/HPC measurements",
+  "source_change_roundtrip": true,
+  "real_local_serial_workloads": [
+    {
+      "n": 1,
+      "k": 1,
+      "tol": 0,
+      "iterations": 1,
+      "status": "fixed_iterations",
+      "max_error": 0
+    },
+    {
+      "n": 2,
+      "k": 2,
+      "tol": 0,
+      "iterations": 2,
+      "status": "fixed_iterations",
+      "max_error": 0.25
+    },
+    {
+      "n": 4,
+      "k": 3,
+      "tol": 0,
+      "iterations": 3,
+      "status": "fixed_iterations",
+      "max_error": 0.7812500000000002
+    },
+    {
+      "n": 7,
+      "k": 31,
+      "tol": 0,
+      "iterations": 31,
+      "status": "fixed_iterations",
+      "max_error": 0.1355021752533503
+    },
+    {
+      "n": 8,
+      "k": 30,
+      "tol": 0,
+      "iterations": 30,
+      "status": "fixed_iterations",
+      "max_error": 0.24050391271418214
+    },
+    {
+      "n": 7,
+      "k": 10000,
+      "tol": 1e-12,
+      "iterations": 324,
+      "status": "update_tolerance_reached",
+      "max_error": 1.1444623027045964e-11
+    },
+    {
+      "n": 12,
+      "k": 3,
+      "tol": 0,
+      "iterations": 3,
+      "status": "fixed_iterations",
+      "max_error": 1.483173076923077
+    },
+    {
+      "n": 24,
+      "k": 4,
+      "tol": 0,
+      "iterations": 4,
+      "status": "fixed_iterations",
+      "max_error": 1.665625
+    }
+  ],
+  "real_local_serial_workload_count": 8,
+  "mock_solver_launches": 99,
+  "validation_mock_launches": 45,
+  "performance_mock_launches": 54,
+  "expected_rank_affinity_records": 673,
+  "rejected_broken_fixtures": [
+    {
+      "name": "correctness_gate",
+      "error": "Correctness gate missing"
+    },
+    {
+      "name": "execution_order",
+      "error": "Actual order differs"
+    },
+    {
+      "name": "missing_affinity",
+      "error": "Missing or duplicate rank affinity records"
+    },
+    {
+      "name": "changed_raw_workload",
+      "error": "Changed raw JSON"
+    },
+    {
+      "name": "changed_statistics",
+      "error": "Saved statistics differ"
+    },
+    {
+      "name": "unfinished_pbs",
+      "error": "PBS completion/resources"
+    },
+    {
+      "name": "changed_source",
+      "error": "Hash mismatch"
+    }
+  ],
+  "timeout_evidence_and_gate_checked": true,
+  "archive_roundtrip_checked": true,
+  "real_mpi_compiled_or_run": false,
+  "real_cluster_executions": 0,
+  "serial_build_command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\jacobi_serial_row_update.cpp",
+    "-o",
+    "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\mpi_wait_local_20261028\\serial_reference.exe"
+  ],
+  "serial_source_sha256": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f",
+  "diagnostic_source_sha256": "e7256180b3060ecddd79272710099520385852cc0f04eea7f2cfd417ae0f8386"
+}

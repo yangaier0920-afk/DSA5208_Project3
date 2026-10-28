@@ -1,0 +1,37 @@
+[
+  {
+    "path": "results/raw_archives/Vanda_mpi_recheck_1499881.stdct-mgmt-02.tar.gz",
+    "size_bytes": 77076,
+    "sha256": "1f958a71a5ba40cfb734ff7274e8d08945bd4ea7a684d9a1eca6760b4fc6d8c6",
+    "files": 390,
+    "contents_rechecked_against_downloaded_directory": true
+  },
+  {
+    "path": "results/raw_archives/Vanda_mpi_recheck_1500222.stdct-mgmt-02.tar.gz",
+    "size_bytes": 78194,
+    "sha256": "0dd1f898d49aa8e4f361e347653804c06c647841410f2458d8ed2f6c908f500a",
+    "files": 390,
+    "contents_rechecked_against_downloaded_directory": true
+  },
+  {
+    "path": "results/raw_archives/Vanda_mpi_recheck_1500271.stdct-mgmt-02.tar.gz",
+    "size_bytes": 77998,
+    "sha256": "d207aea6e76f973acac73bf743d3ad62588dfbe0ef034bf554b04a0fa1c18014",
+    "files": 390,
+    "contents_rechecked_against_downloaded_directory": true
+  },
+  {
+    "path": "results/raw_archives/Vanda_single_rank_1499802.stdct-mgmt-02.tar.gz",
+    "size_bytes": 68075,
+    "sha256": "7494cc22d5b4c5f4bce0b85ab646aa4383de041122fc6a6e53d55ea609335f89",
+    "files": 114,
+    "contents_rechecked_against_downloaded_directory": true
+  },
+  {
+    "path": "results/raw_archives/Vanda_single_rank_1499842.stdct-mgmt-02.tar.gz",
+    "size_bytes": 76144,
+    "sha256": "b8fd7754337918275665aa0d182702fb48b396f4888bceaba6a76fb1b575e37c",
+    "files": 119,
+    "contents_rechecked_against_downloaded_directory": true
+  }
+]

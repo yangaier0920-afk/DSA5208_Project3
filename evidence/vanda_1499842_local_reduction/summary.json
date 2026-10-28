@@ -1,0 +1,2295 @@
+{
+  "status": "PASS",
+  "scope": "Serial vs MPI single-process diagnostic; no scaling claim",
+  "generated_at_utc": "2026-10-27T12:21:57.691105+00:00",
+  "job_id": "1499842.stdct-mgmt-02",
+  "host": "CN-161",
+  "n": 1024,
+  "iterations": 1000,
+  "tolerance": 0,
+  "warmups": 1,
+  "repeats": 8,
+  "allocated_cpus": 2,
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "experiment": "local-reduction",
+  "variants": [
+    "serial_gpp",
+    "serial_local_update",
+    "serial_row_update",
+    "mpi_sendrecv"
+  ],
+  "builds": [
+    {
+      "label": "serial_gpp",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-fopt-info-vec-all=/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/serial_gpp_vectorization.txt",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/jacobi.cpp",
+        "-o",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "serial_local_update",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-fopt-info-vec-all=/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/serial_local_update_vectorization.txt",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/jacobi_serial_local_update.cpp",
+        "-o",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "serial_row_update",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-fopt-info-vec-all=/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/serial_row_update_vectorization.txt",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/jacobi_serial_row_update.cpp",
+        "-o",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "mpi",
+      "command": [
+        "mpicxx",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-fopt-info-vec-all=/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/mpi_vectorization.txt",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/jacobi_mpi.cpp",
+        "-o",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "runs": [
+    {
+      "id": "correctness_0_serial_gpp_n7",
+      "variant": "serial_gpp",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "7",
+        "31",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 7,
+        "threads": 1,
+        "iterations": 31,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.011623392467299709,
+        "max_error": 0.1355021752533503,
+        "residual_inf": 2.5641888249636366,
+        "boundary_error": 0,
+        "compute_seconds": 4.965e-06,
+        "grid": [
+          [
+            0,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.625,
+            0.75,
+            0.875,
+            1
+          ],
+          [
+            0.125,
+            0.23052123382879763,
+            0.3388220849856254,
+            0.4527162060505162,
+            0.5734664532136404,
+            0.7023502816594419,
+            0.8382975155175318,
+            0.9801553094284827,
+            1.125
+          ],
+          [
+            0.25,
+            0.3388220849856254,
+            0.433203404627311,
+            0.5371757859965898,
+            0.6548604195623353,
+            0.7864904041171228,
+            0.9322471994964872,
+            1.0881367030876772,
+            1.25
+          ],
+          [
+            0.375,
+            0.4527162060505162,
+            0.5371757859965898,
+            0.6352242194897866,
+            0.7499039506178546,
+            0.8843408024413293,
+            1.0359093675251445,
+            1.20183278897975,
+            1.375
+          ],
+          [
+            0.5,
+            0.5734664532136404,
+            0.6548604195623353,
+            0.7499039506178546,
+            0.8644978247466497,
+            0.9989346765701244,
+            1.1535081440897033,
+            1.3224971791397737,
+            1.5
+          ],
+          [
+            0.625,
+            0.7023502816594419,
+            0.7864904041171228,
+            0.8843408024413293,
+            0.9989346765701244,
+            1.133457385392872,
+            1.2852239856456775,
+            1.4514668645886757,
+            1.625
+          ],
+          [
+            0.75,
+            0.8382975155175318,
+            0.9322471994964872,
+            1.0359093675251445,
+            1.1535081440897033,
+            1.2852239856456775,
+            1.4312909943656633,
+            1.5876121336195836,
+            1.75
+          ],
+          [
+            0.875,
+            0.9801553094284827,
+            1.0881367030876772,
+            1.20183278897975,
+            1.3224971791397737,
+            1.4514668645886757,
+            1.5876121336195836,
+            1.7297893850281678,
+            1.875
+          ],
+          [
+            1,
+            1.125,
+            1.25,
+            1.375,
+            1.5,
+            1.625,
+            1.75,
+            1.875,
+            2
+          ]
+        ]
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_serial_local_update_n7",
+      "variant": "serial_local_update",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "7",
+        "31",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 7,
+        "threads": 1,
+        "iterations": 31,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.011623392467299709,
+        "max_error": 0.1355021752533503,
+        "residual_inf": 2.5641888249636366,
+        "boundary_error": 0,
+        "compute_seconds": 4.956e-06,
+        "grid": [
+          [
+            0,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.625,
+            0.75,
+            0.875,
+            1
+          ],
+          [
+            0.125,
+            0.23052123382879763,
+            0.3388220849856254,
+            0.4527162060505162,
+            0.5734664532136404,
+            0.7023502816594419,
+            0.8382975155175318,
+            0.9801553094284827,
+            1.125
+          ],
+          [
+            0.25,
+            0.3388220849856254,
+            0.433203404627311,
+            0.5371757859965898,
+            0.6548604195623353,
+            0.7864904041171228,
+            0.9322471994964872,
+            1.0881367030876772,
+            1.25
+          ],
+          [
+            0.375,
+            0.4527162060505162,
+            0.5371757859965898,
+            0.6352242194897866,
+            0.7499039506178546,
+            0.8843408024413293,
+            1.0359093675251445,
+            1.20183278897975,
+            1.375
+          ],
+          [
+            0.5,
+            0.5734664532136404,
+            0.6548604195623353,
+            0.7499039506178546,
+            0.8644978247466497,
+            0.9989346765701244,
+            1.1535081440897033,
+            1.3224971791397737,
+            1.5
+          ],
+          [
+            0.625,
+            0.7023502816594419,
+            0.7864904041171228,
+            0.8843408024413293,
+            0.9989346765701244,
+            1.133457385392872,
+            1.2852239856456775,
+            1.4514668645886757,
+            1.625
+          ],
+          [
+            0.75,
+            0.8382975155175318,
+            0.9322471994964872,
+            1.0359093675251445,
+            1.1535081440897033,
+            1.2852239856456775,
+            1.4312909943656633,
+            1.5876121336195836,
+            1.75
+          ],
+          [
+            0.875,
+            0.9801553094284827,
+            1.0881367030876772,
+            1.20183278897975,
+            1.3224971791397737,
+            1.4514668645886757,
+            1.5876121336195836,
+            1.7297893850281678,
+            1.875
+          ],
+          [
+            1,
+            1.125,
+            1.25,
+            1.375,
+            1.5,
+            1.625,
+            1.75,
+            1.875,
+            2
+          ]
+        ]
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_serial_row_update_n7",
+      "variant": "serial_row_update",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "7",
+        "31",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 7,
+        "threads": 1,
+        "iterations": 31,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.011623392467299709,
+        "max_error": 0.1355021752533503,
+        "residual_inf": 2.5641888249636366,
+        "boundary_error": 0,
+        "compute_seconds": 2.923e-06,
+        "grid": [
+          [
+            0,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.625,
+            0.75,
+            0.875,
+            1
+          ],
+          [
+            0.125,
+            0.23052123382879763,
+            0.3388220849856254,
+            0.4527162060505162,
+            0.5734664532136404,
+            0.7023502816594419,
+            0.8382975155175318,
+            0.9801553094284827,
+            1.125
+          ],
+          [
+            0.25,
+            0.3388220849856254,
+            0.433203404627311,
+            0.5371757859965898,
+            0.6548604195623353,
+            0.7864904041171228,
+            0.9322471994964872,
+            1.0881367030876772,
+            1.25
+          ],
+          [
+            0.375,
+            0.4527162060505162,
+            0.5371757859965898,
+            0.6352242194897866,
+            0.7499039506178546,
+            0.8843408024413293,
+            1.0359093675251445,
+            1.20183278897975,
+            1.375
+          ],
+          [
+            0.5,
+            0.5734664532136404,
+            0.6548604195623353,
+            0.7499039506178546,
+            0.8644978247466497,
+            0.9989346765701244,
+            1.1535081440897033,
+            1.3224971791397737,
+            1.5
+          ],
+          [
+            0.625,
+            0.7023502816594419,
+            0.7864904041171228,
+            0.8843408024413293,
+            0.9989346765701244,
+            1.133457385392872,
+            1.2852239856456775,
+            1.4514668645886757,
+            1.625
+          ],
+          [
+            0.75,
+            0.8382975155175318,
+            0.9322471994964872,
+            1.0359093675251445,
+            1.1535081440897033,
+            1.2852239856456775,
+            1.4312909943656633,
+            1.5876121336195836,
+            1.75
+          ],
+          [
+            0.875,
+            0.9801553094284827,
+            1.0881367030876772,
+            1.20183278897975,
+            1.3224971791397737,
+            1.4514668645886757,
+            1.5876121336195836,
+            1.7297893850281678,
+            1.875
+          ],
+          [
+            1,
+            1.125,
+            1.25,
+            1.375,
+            1.5,
+            1.625,
+            1.75,
+            1.875,
+            2
+          ]
+        ]
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_mpi_sendrecv_n7",
+      "variant": "mpi_sendrecv",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "7",
+        "31",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 7,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 31,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.011623392467299709,
+        "max_error": 0.1355021752533503,
+        "residual_inf": 2.5641888249636366,
+        "boundary_error": 0,
+        "compute_seconds": 6.59e-06,
+        "grid": [
+          [
+            0,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.625,
+            0.75,
+            0.875,
+            1
+          ],
+          [
+            0.125,
+            0.23052123382879763,
+            0.3388220849856254,
+            0.4527162060505162,
+            0.5734664532136404,
+            0.7023502816594419,
+            0.8382975155175318,
+            0.9801553094284827,
+            1.125
+          ],
+          [
+            0.25,
+            0.3388220849856254,
+            0.433203404627311,
+            0.5371757859965898,
+            0.6548604195623353,
+            0.7864904041171228,
+            0.9322471994964872,
+            1.0881367030876772,
+            1.25
+          ],
+          [
+            0.375,
+            0.4527162060505162,
+            0.5371757859965898,
+            0.6352242194897866,
+            0.7499039506178546,
+            0.8843408024413293,
+            1.0359093675251445,
+            1.20183278897975,
+            1.375
+          ],
+          [
+            0.5,
+            0.5734664532136404,
+            0.6548604195623353,
+            0.7499039506178546,
+            0.8644978247466497,
+            0.9989346765701244,
+            1.1535081440897033,
+            1.3224971791397737,
+            1.5
+          ],
+          [
+            0.625,
+            0.7023502816594419,
+            0.7864904041171228,
+            0.8843408024413293,
+            0.9989346765701244,
+            1.133457385392872,
+            1.2852239856456775,
+            1.4514668645886757,
+            1.625
+          ],
+          [
+            0.75,
+            0.8382975155175318,
+            0.9322471994964872,
+            1.0359093675251445,
+            1.1535081440897033,
+            1.2852239856456775,
+            1.4312909943656633,
+            1.5876121336195836,
+            1.75
+          ],
+          [
+            0.875,
+            0.9801553094284827,
+            1.0881367030876772,
+            1.20183278897975,
+            1.3224971791397737,
+            1.4514668645886757,
+            1.5876121336195836,
+            1.7297893850281678,
+            1.875
+          ],
+          [
+            1,
+            1.125,
+            1.25,
+            1.375,
+            1.5,
+            1.625,
+            1.75,
+            1.875,
+            2
+          ]
+        ]
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_serial_gpp_n32",
+      "variant": "serial_gpp",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "32",
+        "100000",
+        "1e-12"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 32,
+        "threads": 1,
+        "iterations": 5006,
+        "tolerance": 1e-12,
+        "status": "update_tolerance_reached",
+        "max_update": 9.985345883478658e-13,
+        "max_error": 2.1949764228423874e-10,
+        "residual_inf": 4.3300303342874705e-09,
+        "boundary_error": 0,
+        "compute_seconds": 0.02320357
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_serial_local_update_n32",
+      "variant": "serial_local_update",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "32",
+        "100000",
+        "1e-12"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 32,
+        "threads": 1,
+        "iterations": 5006,
+        "tolerance": 1e-12,
+        "status": "update_tolerance_reached",
+        "max_update": 9.985345883478658e-13,
+        "max_error": 2.1949764228423874e-10,
+        "residual_inf": 4.3300303342874705e-09,
+        "boundary_error": 0,
+        "compute_seconds": 0.023184616
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_serial_row_update_n32",
+      "variant": "serial_row_update",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "32",
+        "100000",
+        "1e-12"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 32,
+        "threads": 1,
+        "iterations": 5006,
+        "tolerance": 1e-12,
+        "status": "update_tolerance_reached",
+        "max_update": 9.985345883478658e-13,
+        "max_error": 2.1949764228423874e-10,
+        "residual_inf": 4.3300303342874705e-09,
+        "boundary_error": 0,
+        "compute_seconds": 0.008139216
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "correctness_0_mpi_sendrecv_n32",
+      "variant": "mpi_sendrecv",
+      "phase": "correctness",
+      "round": 0,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "32",
+        "100000",
+        "1e-12",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 32,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 5006,
+        "tolerance": 1e-12,
+        "status": "update_tolerance_reached",
+        "max_update": 9.985345883478658e-13,
+        "max_error": 2.1949764228423874e-10,
+        "residual_inf": 4.3300303342874705e-09,
+        "boundary_error": 0,
+        "compute_seconds": 0.012052443
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "warmup_-1_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "warmup",
+      "round": -1,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 4.51426798
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "warmup_-1_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "warmup",
+      "round": -1,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.471144621
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "warmup_-1_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "warmup",
+      "round": -1,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.672126003
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "warmup_-1_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "warmup",
+      "round": -1,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.725685474
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_0_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.62609066
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_0_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.641372375
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_0_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 0,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.808066427
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_0_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 0,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.827227269
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_1_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 1,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.639915168
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_1_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 1,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.809275237
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_1_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 1,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.814410092
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_1_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 1,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.649765943
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_2_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 2,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.815710961
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_2_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 2,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.761756024
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_2_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 2,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.500055119
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_2_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 2,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.46677433
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_3_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 3,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.722309937
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_3_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 3,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.459048419
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_3_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 3,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.463527463
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_3_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 3,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.692559058
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_4_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 4,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.7697991929999999
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_4_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 4,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.750099074
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_4_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 4,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.533182967
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_4_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 4,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.505018508
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_5_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 5,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.492745727
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_5_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 5,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.726623373
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_5_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 5,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.686582818
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_5_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 5,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.468034993
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_6_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 6,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.461321546
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_6_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 6,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.456307786
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_6_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 6,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.715395953
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_6_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 6,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.696170295
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_7_serial_row_update_n1024",
+      "variant": "serial_row_update",
+      "phase": "measured",
+      "round": 7,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_row_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.68609902
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_7_serial_local_update_n1024",
+      "variant": "serial_local_update",
+      "phase": "measured",
+      "round": 7,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_local_update",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.470004608
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_7_serial_gpp_n1024",
+      "variant": "serial_gpp",
+      "phase": "measured",
+      "round": 7,
+      "command": [
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/serial_gpp",
+        "1024",
+        "1000",
+        "0"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "serial",
+        "n": 1024,
+        "threads": 1,
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 3.466486931
+      },
+      "validation": "PASS"
+    },
+    {
+      "id": "measured_7_mpi_sendrecv_n1024",
+      "variant": "mpi_sendrecv",
+      "phase": "measured",
+      "round": 7,
+      "command": [
+        "mpirun",
+        "-np",
+        "1",
+        "--bind-to",
+        "none",
+        "/app1/ebapps/arches/flat-avx2/software/Python/3.10.8-GCCcore-12.2.0/bin/python3",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/sources/diagnose_single_rank.py",
+        "--pin-exec",
+        "61",
+        "/nfs/home/svu/yangaier/dsa5208_project3/ab_diagnostic/results/Vanda_single_rank_1499842.stdct-mgmt-02/diagnostic/bin/mpi",
+        "1024",
+        "1000",
+        "0",
+        "--exchange",
+        "sendrecv"
+      ],
+      "exit_code": 0,
+      "affinity_before_exec": {
+        "host": "CN-161",
+        "cpus": [
+          61
+        ]
+      },
+      "result": {
+        "mode": "mpi",
+        "n": 1024,
+        "mpi_processes": 1,
+        "threads": 1,
+        "nodes": 1,
+        "exchange": "sendrecv",
+        "iterations": 1000,
+        "tolerance": 0,
+        "status": "fixed_iterations",
+        "max_update": 0.0007077056141939764,
+        "max_error": 1.8590659809641223,
+        "residual_inf": 2972.8766375355312,
+        "boundary_error": 0,
+        "compute_seconds": 1.732037979
+      },
+      "validation": "PASS"
+    }
+  ],
+  "groups": [
+    {
+      "variant": "serial_gpp",
+      "median_seconds": 3.496400423,
+      "min_seconds": 3.456307786,
+      "max_seconds": 3.649765943,
+      "ratio_vs_serial_gpp": 1.0
+    },
+    {
+      "variant": "serial_local_update",
+      "median_seconds": 3.4690198005,
+      "min_seconds": 3.461321546,
+      "max_seconds": 3.641372375,
+      "ratio_vs_serial_gpp": 1.007892898880558
+    },
+    {
+      "variant": "serial_row_update",
+      "median_seconds": 1.7231346845,
+      "min_seconds": 1.68609902,
+      "max_seconds": 1.815710961,
+      "ratio_vs_serial_gpp": 2.0290929400069193
+    },
+    {
+      "variant": "mpi_sendrecv",
+      "median_seconds": 1.7468970015,
+      "min_seconds": 1.715395953,
+      "max_seconds": 1.827227269,
+      "ratio_vs_serial_gpp": 2.0014920284354267
+    }
+  ],
+  "source_sha256": {
+    "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+    "jacobi_mpi.cpp": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+    "vanda_single_rank.pbs": "5d2289bda9b1bf384502f1e9acbc3688b3addea1001d02393e639714361f5745",
+    "prepare_team_references.py": "8d506cdc744732e0e0e81fb4dc75ef75e03740665414a100a9ca9534585ff7a6",
+    "jacobi_serial_local_update.cpp": "a0180ee943d8de17bf86bfaea80f1bfbbe253dfe5fe2be91b7fc5b969396e185",
+    "diagnose_single_rank.py": "87f150e40d51bfc914603796965b632c3491b7cbb70c19aaa2d79bd985c805a0",
+    "vanda_modules.example.sh": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc",
+    "jacobi_serial_row_update.cpp": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f"
+  },
+  "inherited_affinity": [
+    61,
+    63
+  ],
+  "environment": {
+    "PBS_QUEUE": "cpu_parallel",
+    "PBS_NODEFILE": "/var/spool/pbs/aux/1499842.stdct-mgmt-02",
+    "PBS_NCPUS": null,
+    "NCPUS": "1",
+    "LOADEDMODULES": "shared:apptainer/1.4.1:GCCcore/12.2.0:zlib/1.2.12-GCCcore-12.2.0:binutils/2.39-GCCcore-12.2.0:GCC/12.2.0:ncurses/6.3-GCCcore-12.2.0:numactl/2.0.16-GCCcore-12.2.0:XZ/5.2.7-GCCcore-12.2.0:libxml2/2.10.3-GCCcore-12.2.0:libpciaccess/0.17-GCCcore-12.2.0:hwloc/2.8.0-GCCcore-12.2.0:OpenSSL/1.1:libevent/2.1.12-GCCcore-12.2.0:UCX/1.13.1-GCCcore-12.2.0:libfabric/1.16.1-GCCcore-12.2.0:PMIx/4.2.2-GCCcore-12.2.0:UCC/1.1.0-GCCcore-12.2.0:OpenMPI/4.1.5-GCC-12.2.0:bzip2/1.0.8-GCCcore-12.2.0:libreadline/8.2-GCCcore-12.2.0:Tcl/8.6.12-GCCcore-12.2.0:SQLite/3.39.4-GCCcore-12.2.0:GMP/6.2.1-GCCcore-12.2.0:libffi/3.4.4-GCCcore-12.2.0:Python/3.10.8-GCCcore-12.2.0"
+  },
+  "selected_logical_cpu": 61,
+  "executable_sha256": {
+    "serial_local_update": "bb61bfa1d59d17057c1f5e1b49b6f9a72f6fbc7835401b4ff3da90712a156a93",
+    "mpi": "b1072002916a6ca1b5be6ba94068c040c1694bb72aaf7c94ff60912abbbf7f6a",
+    "serial_gpp": "28d9f207cc0fb1a592988796197488da9cfa6ef47567d40ce791d0f9ed0dbda9",
+    "serial_row_update": "44dc8fffa7fb657a2cd8d63a475cca94d95e7d712e32ca6721763aae3c2b93d2"
+  }
+}

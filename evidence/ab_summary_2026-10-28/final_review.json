@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "date": "2026-10-28",
+  "job": "1501884.stdct-mgmt-02",
+  "primary_audit": "evidence/vanda_1501884_ab_supplement/audit.json",
+  "supplemental_audit": "evidence/vanda_1501884_ab_supplement/supplemental_review.json",
+  "raw_archive_files": 646,
+  "raw_archive_members_rechecked": true,
+  "raw_directory_matches_archive": true,
+  "reproduction_byte_equal": {
+    "new_job_review.json": true,
+    "summary.json": true,
+    "performance_comparison.csv": true,
+    "measurement_samples.csv": true,
+    "communication_comparison.csv": true,
+    "asymmetric_validation.csv": true,
+    "source_binary_identity.csv": true,
+    "execution_sequence_1501884.csv": true,
+    "same_allocation_scale_ratios.csv": true,
+    "round_times.png": true,
+    "dual_scale_scaling.png": true,
+    "historical_context.png": true
+  },
+  "markdown_relative_links_checked": 53,
+  "utf8_text_checked": true,
+  "plots_visually_reviewed": [
+    "evidence/ab_summary_2026-10-28/round_times.png",
+    "evidence/ab_summary_2026-10-28/dual_scale_scaling.png",
+    "evidence/ab_summary_2026-10-28/historical_context.png",
+    "evidence/vanda_1501884_ab_supplement/n1024/mpi_scaling.png",
+    "evidence/vanda_1501884_ab_supplement/n2048/mpi_scaling.png"
+  ],
+  "reviewed_files_sha256": {
+    "docs/AB_RESULTS_SUMMARY.md": "c6c4e14fd08f579228f588e393ac17f4e8485dbe52d828176c0ab6fb48f437bc",
+    "docs/AB_PROGRESS_CHECKLIST.md": "065168c0552b7c4240161294f07ff12e30df1e522466fee6003cb9b4d1233649",
+    "docs/VANDA_AB_SUPPLEMENT.md": "2d832f9ffed81eba432c3b5e9c6c91d1530d3cb0535e08562bfd3206511b8a01",
+    "docs/AI_USAGE.md": "31fdd25d54540480c4182215ec360fabd5a5f8b2328a5c51b39295b2ea9f829b",
+    "docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md": "2393288e3bd553fcf9afc8e484e7c8aff5c2382d65c1a2ba850b82e0e7cdff25",
+    "evidence/vanda_1501884_ab_supplement/analysis_reviewed.md": "406dd2c37e5aabb74c3c7b646f2b8d90c9ed0758a7c921f2acbed6a065db2ec4",
+    "evidence/ab_summary_2026-10-28/README.md": "184a114665377b8e4400e32bc5d0d326ac9f7e9751c7bff92952eaab52918c05"
+  },
+  "reproduction_script_sha256": "eae58ea746827a5bf0a422d528899dfcf214b3b73a580f4707f442e2287f0333",
+  "experiment1": "completed and audited",
+  "experiment3": "completed and audited",
+  "experiment2": "deferred",
+  "samples_removed": 0,
+  "new_cluster_runs_during_audit": 0,
+  "git_committed_or_pushed": false,
+  "email_sent": false
+}

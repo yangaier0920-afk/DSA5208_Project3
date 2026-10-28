@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "job_id": "1499802.stdct-mgmt-02",
+  "host": "CN-161",
+  "pbs_exit_status": 0,
+  "pbs_walltime": "00:02:10",
+  "source_and_binary_hashes_checked": true,
+  "raw_stdout_and_affinity_checked": 44,
+  "numerical_executions_revalidated": 44,
+  "correctness_executions": 8,
+  "warmups": 4,
+  "measured_executions": 32,
+  "selected_logical_cpu": 4,
+  "original_cpp_sources_unchanged": true,
+  "libpbs_warning_executions": 22,
+  "compiler_observation": "Both stencil loops not vectorized; original serial max-update spills per cell, MPI max-update stays in register",
+  "causal_status": "Code-generation difference directly observed; size of its runtime contribution requires candidate experiment",
+  "raw_archive": "results/raw_archives/Vanda_single_rank_1499802.stdct-mgmt-02.tar.gz",
+  "raw_archive_sha256": "7494cc22d5b4c5f4bce0b85ab646aa4383de041122fc6a6e53d55ea609335f89"
+}

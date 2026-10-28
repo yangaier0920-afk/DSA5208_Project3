@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "date": "2026-10-28",
+  "scope": "Local document/data checks only; no solver execution or new experiment",
+  "report": "docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md",
+  "report_sha256": "705379c1cb3475da1eb48cb01ac0f42ab8ee931d90b56b8cdfeb3b58483205e0",
+  "report_backup_sha256": "397477d33fe7a40507635ef17c34c11e2f89cfde90d135783313b600dae347cb",
+  "review_note_sha256": "5dc0f1c8b8983d3f0631a97a81b10ec1e8ee0a9611339b3fcaef4158cf33366b",
+  "scaling_groups_recomputed": 45,
+  "scaling_execution_records_cross_checked": 450,
+  "diagnostic_groups_recomputed": 9,
+  "diagnostic_comparisons_recomputed": 9,
+  "main_report_numeric_table_entries_checked": 50,
+  "asymmetric_validation_records_checked": 31,
+  "diagnostic_validation_records_checked": 45,
+  "markdown_local_links_checked": 18,
+  "preexisting_files": 4296,
+  "unchanged_preexisting_files": 4295,
+  "changed_preexisting_files": [
+    "docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md"
+  ],
+  "missing_preexisting_files": [],
+  "archive_sha256_rechecked": 7,
+  "historical_member_audit_record": {
+    "files": 2271,
+    "member_audit_repeated_this_turn": false
+  },
+  "plot_review": {
+    "visually_reviewed_this_turn": [
+      "evidence/ab_summary_2026-10-28/round_times.png",
+      "evidence/ab_summary_2026-10-28/dual_scale_scaling.png",
+      "evidence/ab_summary_2026-10-28/historical_context.png",
+      "evidence/vanda_1502229_mpi_wait/round_times.png"
+    ],
+    "round_trace_scope": "1501884 shows serial and P1/4/12, not P2; all nine rounds of displayed configurations.",
+    "figures_modified": false
+  },
+  "word_count_method": "Whitespace tokens; prose excludes Markdown table rows.",
+  "words_before": 1277,
+  "words_after": 1095,
+  "prose_words_before": 1094,
+  "prose_words_after": 896,
+  "prose_reduction_percent": 18.098720292504566,
+  "git_head_unchanged": true,
+  "preexisting_git_status_entries_preserved": true,
+  "git_committed_or_pushed": false,
+  "email_sent": false,
+  "human_confirmation": "Names/IDs, actual contributions, individual understanding, final review remain pending."
+}

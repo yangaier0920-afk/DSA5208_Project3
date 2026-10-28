@@ -1,0 +1,42 @@
+{
+  "local_python": "3.11.5",
+  "remote_python": "3.10.8",
+  "differences": [
+    {
+      "group_index": 1,
+      "n": 2048,
+      "p": 2,
+      "exchange": "immediate",
+      "field": "sample_cv_percent",
+      "local": 0.13616869155750602,
+      "archived": 0.136168691557506,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "group_index": 2,
+      "n": 2048,
+      "p": 2,
+      "exchange": "overlap",
+      "field": "sample_cv_percent",
+      "local": 0.4525517948655467,
+      "archived": 0.45255179486554675,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "group_index": 4,
+      "n": 2048,
+      "p": 12,
+      "exchange": "immediate",
+      "field": "sample_cv_percent",
+      "local": 1.2487431458765945,
+      "archived": 1.2487431458765947,
+      "absolute_difference": 2.220446049250313e-16
+    }
+  ],
+  "only_cv_tolerance": {
+    "relative": 1e-12,
+    "absolute": 1e-14
+  },
+  "tampered_median_cv_samples_comparison_rejected": true,
+  "raw_data_modified": false
+}

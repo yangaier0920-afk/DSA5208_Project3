@@ -1,0 +1,50 @@
+{
+  "status": "READY_FOR_REMOTE_CHECK_AND_PBS",
+  "date": "2026-10-28",
+  "decision": "One bounded experiment2; no other new experiment types",
+  "combinations": [
+    [
+      2048,
+      2
+    ],
+    [
+      2048,
+      12
+    ],
+    [
+      1024,
+      12
+    ]
+  ],
+  "correctness_executions": 45,
+  "performance_executions": 54,
+  "performance_warmups": 9,
+  "performance_formal": 45,
+  "total_solver_executions": 99,
+  "expected_affinity_records": 673,
+  "source_transformation_roundtrip_checked": true,
+  "real_local_serial_workloads": 8,
+  "synthetic_tooling_and_seven_rejection_cases_checked": true,
+  "timeout_preserves_evidence_and_blocks_performance": true,
+  "python_and_embedded_python_syntax_checked": true,
+  "pbs_lf_no_bom": true,
+  "pbs_guard_rejected": true,
+  "real_mpi_compiled_or_run": false,
+  "bash_syntax_checked": false,
+  "new_cluster_job_submitted": false,
+  "production_sources_unchanged": {
+    "jacobi.cpp": true,
+    "jacobi_mpi.cpp": true,
+    "jacobi_serial_row_update.cpp": true
+  },
+  "prior_1501884_archive_unchanged": true,
+  "bundle": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\mpi_wait_upload_20261028_v1.tar.gz",
+  "bundle_sha256": "c42be835f92cf7e7b923fc2728c01025fa902f32e3ca1c33b6eb3190a57a7d80",
+  "bundle_files": 10,
+  "bundle_members_checked": true,
+  "instrumentation": "none",
+  "order_balance": "five rounds; each scheme occupies each position 1 or 2 times; not exact balance",
+  "stop_rule": "retain all results and summarize, including inconclusive drift; no automatic rerun",
+  "git_committed_or_pushed": false,
+  "email_sent": false
+}

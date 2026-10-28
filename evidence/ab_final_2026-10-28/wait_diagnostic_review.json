@@ -1,0 +1,139 @@
+{
+  "status": "PASS",
+  "job_id": "1502229.stdct-mgmt-02",
+  "host": "IN-006",
+  "walltime": "00:04:45",
+  "pin_cpus": [
+    25,
+    27,
+    29,
+    31,
+    33,
+    41,
+    43,
+    47,
+    51,
+    57,
+    59,
+    61
+  ],
+  "numa_nodes": [
+    1
+  ],
+  "upload_source_matches": [
+    {
+      "name": "benchmark_parallel.py",
+      "sha256": "fc3033b0145669509742de80bd02c0e60f641b73ee29f4d0a8b4c982ae337b02",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "jacobi_mpi.cpp",
+      "sha256": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "jacobi_mpi_wait_diagnostic.cpp",
+      "sha256": "e7256180b3060ecddd79272710099520385852cc0f04eea7f2cfd417ae0f8386",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "mpi_wait_diagnostic.py",
+      "sha256": "3e23c01ced1c393049e53ef9d83988733cfe1012aa99596ec9a0b61dc4a80b4b",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "mpi_wait_reference.json",
+      "sha256": "3b3ce0a39c280c6f77865b7c37f8a5e39cba3c3a4d6b8947d123bc8e830c0755",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "pin_cpu.py",
+      "sha256": "7ed290a856bd991e94b923626e1237fb845e20a3bf79acefa6a5b5a889d8a02a",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "vanda_modules.example.sh",
+      "sha256": "1dbf50a2e5ae26e5583c5a85239a18b423e370bc260772cad827cecd415665fc",
+      "identical_to_uploaded_bundle": true
+    },
+    {
+      "name": "vanda_mpi_wait_diagnostic.pbs",
+      "sha256": "d275b19cc04d9e7c6bd85f7f1937f8c7578195eea4601cac90eee14904a872a2",
+      "identical_to_uploaded_bundle": true
+    }
+  ],
+  "original_source_and_binary_identity": [
+    {
+      "prior_job": "Vanda_mpi_recheck_1499881",
+      "original_source_identical": true,
+      "original_binary_identical": true
+    },
+    {
+      "prior_job": "Vanda_mpi_recheck_1500222",
+      "original_source_identical": true,
+      "original_binary_identical": true
+    },
+    {
+      "prior_job": "Vanda_mpi_recheck_1500271",
+      "original_source_identical": true,
+      "original_binary_identical": true
+    },
+    {
+      "prior_job": "Vanda_ab_dual_1501884",
+      "original_source_identical": true,
+      "original_binary_identical": true
+    }
+  ],
+  "diagnostic_is_separate_binary": true,
+  "performance_only_uses_diagnostic_binary": true,
+  "validation_executions": 45,
+  "validation_original": 18,
+  "validation_diagnostic": 27,
+  "validation_full_grids": 35,
+  "validation_max_grid_difference": 2.220446049250313e-16,
+  "validation_converged": 5,
+  "performance_executions": 54,
+  "performance_warmups": 9,
+  "performance_formal": 45,
+  "validation_affinity_records": 205,
+  "performance_affinity_records": 468,
+  "total_affinity_records": 673,
+  "adjacent_formal_triplets_verified": 15,
+  "scheme_position_counts": "1 or 2, not exact balance",
+  "cv_cross_python_rounding_differences": [
+    {
+      "n": 2048,
+      "p": 2,
+      "exchange": "immediate",
+      "local": 0.13616869155750602,
+      "archived": 0.136168691557506
+    },
+    {
+      "n": 2048,
+      "p": 2,
+      "exchange": "overlap",
+      "local": 0.4525517948655467,
+      "archived": 0.45255179486554675
+    },
+    {
+      "n": 2048,
+      "p": 12,
+      "exchange": "immediate",
+      "local": 1.2487431458765945,
+      "archived": 1.2487431458765947
+    }
+  ],
+  "cv_tolerance": {
+    "relative": 1e-12,
+    "absolute": 1e-14
+  },
+  "raw_timings_medians_and_comparisons_checked_exactly": true,
+  "raw_archive": {
+    "path": "D:\\桌面文件\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\raw_archives\\Vanda_mpi_wait_1502229.stdct-mgmt-02.tar.gz",
+    "sha256": "dfa84e17e040c138a21493aa24d45d8e097f8bba3ead62bf3025aed866ac687a",
+    "files": 222,
+    "member_by_member_checked": true
+  },
+  "performance_samples_removed": 0,
+  "new_cluster_runs_during_audit": 0
+}
