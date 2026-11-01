@@ -1,118 +1,133 @@
-# DSA5208 Project 3 — Jacobi MPI + OpenMP
+# DSA5208 Project 3 — Jacobi / 3D Poisson
 
-## 最新共享状态：2026-10-28
+**更新日期：2026-11-01。当前阶段：根据老师反馈开展新增 3D、MPI 扩展与 OpenMP GPU 工作。**
 
-A的串行基准/正确性、B的纯MPI及三项补充实验均已完成并审计。本轮不再追加实验，进入10月29日阶段报告的人工确认；C/OpenMP/混合新实验、多节点、弱扩展、二维分区与内部插桩均不开展。
+**所有成员先读 [最新任务清单与 A/B/C 分工](10.30会议讨论要点与ABC分工.md)。**
+该文件给出了共同公式、参数、个人配置、交付日期及资源阻塞时的处理规则。
+早期文档中的“多节点/弱扩展/C 暂缓”和“本轮不再追加实验”属于 10 月 28 日阶段，
+当前按最新分工执行。
 
-**所有成员先读[本次同步说明](docs/TEAM_SYNC_2026-10-28.md)**：包括拉取步骤、阅读顺序、七份完整原始包的校验/解包、离线统计重建，以及尚需本人确认的信息。
+## 1. 目前做到哪里
 
-| 入口 | 当前用途 |
+| 内容 | 当前状态 | 入口 |
+|---|---|---|
+| 旧 2D 串行、MPI 与三项补充实验 | 已完成并保存审计材料，可直接用于历史结果和基准说明 | [A/B 结果](docs/AB_RESULTS_SUMMARY.md)、[原始证据入口](evidence/ab_final_2026-10-28/README.md) |
+| A：新 3D 串行、残差及停止逻辑 | 已实现，本地基本检查通过 | [A 完成记录](docs/A_PROGRESS_2026-11-01.md)、[本地证据](evidence/a_local_2026-11-01/README.md) |
+| A：数学说明、旧串行差距解释 | 英文草稿已完成 | [A 报告草稿](docs/final_A_numerics.md) |
+| A：正式收敛/精度及旧 2D 终点诊断 | 配置、运行及绘图脚本已准备，待维护恢复后在集群运行 | [A 运行说明](docs/A_NUMERICS_README.md) |
+| B：新 3D MPI、强扩展、弱扩展、有限混合 | 按最新分工推进；本仓库当前没有据此确认的新正式结果 | [B 执行卡](10.30会议讨论要点与ABC分工.md#6-b-的执行卡mpi-强扩展弱扩展与混合) |
+| C：OpenMP CPU/GPU | 按最新分工推进；本仓库当前没有据此确认的真实 GPU 新结果 | [C 执行卡](10.30会议讨论要点与ABC分工.md#7-c-的执行卡openmp-cpugpu) |
+
+本地小案例是开发证据；报告要求的 Atlas/Vanda 正式数据由恢复后的实验补齐。
+B/C 状态由各自负责人交付后更新，不根据任务已分配就标记为完成。
+
+## 2. 每个人负责什么，现在先做什么
+
+| 成员 | 独立负责的路线 | 维护期间先完成 | 恢复后的核心实验 | 交付 |
+|---|---|---|---|---|
+| **A** | 串行、数学、收敛/精度；最终报告汇总 | 已完成程序及本人小案例、方法草稿、运行/绘图脚本 | 3D n=15/31/63 求解；旧 2D n=1024/2048 的 R1000 | 11/6 数值章节；最终合稿 |
+| **B** | 3D MPI、强扩展、弱扩展、有限 MPI+OpenMP | 三维块分区、halo、PBS、矩阵及统计脚本 | 强扩展 16 配置，含代表规模目标 720 核；64³/rank 弱扩展；256³ 固定 72 核混合配比 | 11/6 强扩展；11/7 弱扩展/混合 |
+| **C** | 单机 OpenMP CPU 与单 GPU offload | CPU/target 内核、设备数据驻留、编译及计时脚本 | 64³/128³/256³；每规模 CPU T=1、T=Tc 与单 GPU，共 9 配置 | 11/6 GPU；11/7 CPU/GPU 对照 |
+
+**B/C 可以立即独立开发，无需等待 A 的正式结果。**共同定义已写在分工文档中：
+B 用自己的 MPI P1/72 核基准；C 测同一 GPU 节点上的 CPU 对照。
+
+每个人负责自己模块的代码、脚本、原始输出、CSV、图、分析和 README。
+弱扩展及 MPI+OpenMP 均归 B；C 专注 OpenMP CPU/GPU。
+每人随运行做本人基本检查，通过后直接整理；不安排跨人结果复核、
+交叉复现或额外独立性能复测。A 收各人成稿进行合并。
+
+## 3. 维护窗口与交付日期
+
+时间均为新加坡时间/北京时间（UTC+8），实际恢复以学校通知为准。
+
+| 时间 | 安排 |
 |---|---|
-| [英文阶段报告](docs/AB_STAGE_REPORT_DRAFT_2026-10-28.md) | 已校核精简，未获成员最终确认，未发送 |
-| [中文结果梳理](docs/AB_RESULTS_SUMMARY.md) | 历史与本轮结果、解释及边界；顶部最新状态优先 |
-| [最终证据入口](evidence/ab_final_2026-10-28/README.md) | 四作业五扩展数据集与独立等待诊断，始终分开统计 |
-| [报告校核/人工确认](docs/AB_REPORT_REVIEW_2026-10-28.md) | 数值、计时、双基准、图表检查及成员待填项 |
-| [进度清单](docs/AB_PROGRESS_CHECKLIST.md) | 三项补充完成；下方过程记录保留为历史 |
-| [原始包清单](evidence/ab_final_2026-10-28/raw_archives_manifest.json) | 七份完整包、2271文件的既有审计记录及SHA-256 |
+| 10/29 18:00 起 | 公告停止作业调度 |
+| 10/31 06:00 起 | 公告停止访问，终止运行中的作业；维护期间本地开发与准备材料 |
+| 11/2 17:00 | 计划恢复；各人检查自己路线的环境/队列 |
+| **11/3–11/7** | 核心正式实验窗口 |
+| 11/8–11/9 | 补缺失核心点或明确错误；11/9 交各人图文初稿 |
+| **11/10** | 冻结数据、源码和章节 |
+| 11/11 | 合稿、排版、本人文件完整性检查 |
+| **11/12 18:00 前** | 内部提交目标；课程要求为 11/13 之前，Canvas 精确时刻仍需本人确认 |
 
-后续A/B正式串行基准是 jacobi_serial_row_update.cpp。现有Makefile默认串行目标仍保留历史 jacobi.cpp，不能将默认构建误当新A/B基准。原源码和原始数据均保留，没有用新基准重算旧作业加速比。
+CPU/GPU 申请由提交者登记，避免全组配额冲突。大核数和 GPU 资源恢复后的
+实际可用性须各自确认；维护时间不是已完成恢复的保证。
 
-主要结论：同分配、固定绑定仍可能出现大幅时间变化与非单调扩展；2048/P2等待位置诊断未见明确收益，P12仅约1%的小幅观测，不证明统计显著或底层有效通信重叠。全部性能固定1000轮，不宣称收敛。原1498804完整原始包仍未取得；以下相关早期描述不代表已完成它的完整原件审计。
+## 4. 全组统一的数值与测量口径
 
-## 既有实现与操作指南
+- 新增主问题：**poisson3d_mms**，−Δu=f，Ω=(0,1)³；
+  u*=x+2y+3z+sin(πx)sin(2πy)sin(3πz)，
+  f=14π²sin(πx)sin(2πy)sin(3πz)，边界 u=x+2y+3z。
+- double、内部零初值、七点差分、双缓冲；nx/ny/nz 是内部点数，
+  各方向 h=1/(n+1)，RHS 预计算。长方体网格按各自方向步长计算。
+- B/C 性能主线固定 **K=1000**，不提前停止；最终输出真实相对 L2 残差 R1000。
+  固定工作量本身不表示已收敛。
+- A 求解每 10 轮检查真实相对 L2 残差；主收敛标准 1e−8，
+  精度实验继续到 1e−10，上限 100000 轮。
+- B/C 每个性能配置 **1 次预热 + 3 次正式测量**，报告中位数及 min/max；
+  保留有效负结果与波动。
+- 完整数学、时间范围、本人基本检查和各人矩阵以
+  [最新分工第 4–8 节](10.30会议讨论要点与ABC分工.md)为准。
 
-下列通用编译、Atlas/Vanda接入步骤作为参考保留，不构成本轮新增实验任务。个人代码理解、真实贡献和姓名学号须成员本人确认。
+## 5. A 新增文件与运行入口
 
-**成员 B 从 [MPI/HPC 交付与运行指南](docs/MEMBER_B.md) 开始**，包含 Mac 编译、验证、HPC 账号/VPN、Vanda 上传、作业配置、提交和验收。
-
-**第一次在学校 Atlas 系统操作，请先看 [Atlas 完整操作指南](docs/ATLAS.md)**：包含账号/网络、SSH 登录、Windows/Mac 上传源码、PBS 提交与状态查询、结果验收和下载，每一步标明在本机还是 Atlas 执行。
-
-## 文件入口
-
-| 文件/目录 | 用途 |
+| 文件 | 用途 |
 |---|---|
-| `jacobi_mpi.cpp` | MPI/混合 Jacobi；sendrecv 与 overlap 两种通信策略 |
-| `Makefile` | 编译 serial/openmp/mpi/hybrid 四种程序 |
-| `verify_parallel.py` | MPI/混合版对照串行及独立小网格验证 |
-| `analyze_results.py` | 审计下载的完整集群结果，生成表格、分析和可选图表 |
-| `benchmark_parallel.py` | 重复计时、原始输出、加速比和效率汇总 |
-| `atlas_jacobi.pbs` / `vanda_jacobi.pbs` | 正式算法作业模板（Vanda 模块/资源待现场核对） |
-| `jacobi.cpp` | 同一源码分别编译串行和 OpenMP Jacobi |
-| `verify_small.py` | 手算、精确解、残差、边界及线程一致性验证 |
-| `prepare_team_references.py` | 生成 10 个经检查的串行参考；可选本机规模试跑 |
-| `team_contract_v0.1.json` | 机器可读的参数与输出约定 |
-| [团队参数约定](docs/TEAM_CONTRACT.zh-CN.md) | 推荐数值、MPI 对接约定、计时与验收口径 |
-| [协作与交接](docs/HANDOFF.md) | A/B/C 分工、接收验收及下一步 |
-| [学校 Atlas 完整操作指南](docs/ATLAS.md) | SSH → SCP 上传 → qsub → qstat → 验收 → SCP 下载，含 Windows/Mac 命令 |
-| `reference/` | 已有本机串行数值参考与单次性能试跑 |
-| `evidence/` | 已有 Atlas 串行小样本及 MPI/OpenMP 环境检查结果 |
-| [AI 使用记录](docs/AI_USAGE.md) | AI 贡献与已有人工操作/验证边界 |
-| [整理说明](docs/FILES.md) | 共享文件、保留在原工作区的材料及完整性说明 |
+| [jacobi_numerics.cpp](jacobi_numerics.cpp) | A 独立串行入口：新 3D Poisson、旧 2D 残差诊断、fixed/solve |
+| [run_a_numerics.py](run_a_numerics.py) | 本人小案例 smoke / 正式 A2 五案例 formal；输出目录必须是新目录 |
+| [analyze_a_numerics.py](analyze_a_numerics.py) | 读取已有结果，生成残差曲线与精度表 |
+| [vanda_a_numerics.pbs](vanda_a_numerics.pbs) | 正式 A2 作业草稿，尚未在此次维护后的环境验证或提交 |
+| [A_NUMERICS_README.md](docs/A_NUMERICS_README.md) | Windows/Linux 编译、参数、运行、输出与恢复后步骤 |
+| [final_A_numerics.md](docs/final_A_numerics.md) | 数学、算法、收敛定义、旧基准解释和本地检查结果 |
 
-## 依赖
+A 的程序只需 C++17；运行脚本仅用 Python 标准库，绘图需要 matplotlib。
+Linux 可用 make numerics 构建新入口，不触发旧 MPI/OpenMP 构建。
 
-- 支持 C++17 的编译器；OpenMP 构建还需编译器支持 `-fopenmp`。
-- Python 3.10 或更新版本用于验证，脚本只使用标准库，无需 pip 安装包。
-- MPI/混合版需要 MPI-3 或更新版本；OpenMP 混合版需要 MPI_THREAD_FUNNELED。串行程序和参考生成不需要 MPI。
+Windows 本人小案例示例（并非 B/C 开工步骤，已有结果无需重跑）：
 
-已验证环境包括 Windows GCC 12.2、WSL GCC 11.4/Open MPI 4.1.2、Atlas GCC 12.2/Open MPI 4.1.5。这里列的是已保存的历史验证环境，不保证集群当前模块配置不变。
-
-## Windows 快速开始
-
-在本仓库根目录打开 PowerShell，先编译再验证：
-
-```powershell
+~~~powershell
 New-Item -ItemType Directory -Force build | Out-Null
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi.cpp -o build/jacobi_serial.exe
-if ($LASTEXITCODE -ne 0) { throw 'Serial build failed' }
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -fopenmp jacobi.cpp -o build/jacobi_omp.exe
-if ($LASTEXITCODE -ne 0) { throw 'OpenMP build failed' }
-python verify_small.py build/jacobi_serial.exe build/jacobi_omp.exe
-if ($LASTEXITCODE -ne 0) { throw 'Validation failed' }
-```
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_numerics.cpp -o build/jacobi_numerics.exe
+python run_a_numerics.py --binary build/jacobi_numerics.exe --suite smoke --out-dir results/my_A_smoke
+python analyze_a_numerics.py results/my_A_smoke
+~~~
 
-生成新参考时使用一个尚不存在的输出目录：
+build/、results/ 为本地生成目录，已被 Git 忽略；供团队共享的精选证据放 evidence/。
 
-```powershell
-python prepare_team_references.py --executable build/jacobi_serial.exe --out-dir results/my_reference_run
-```
+## 6. 各人材料交到哪里
 
-`--pilot` 会额外运行 n=256/512/1024/2048 的固定 1000 轮试跑。日常生成的 `build/`、`results/` 已加入 `.gitignore`；经审查的共享结果放在 `reference/` 或 `evidence/`。
+| 成员 | 结果目录 | 章节 |
+|---|---|---|
+| A | results/final_202611/A_numerics/ | docs/final_A_numerics.md |
+| B | results/final_202611/B_mpi/ | docs/final_B_mpi.md（由 B 创建） |
+| C | results/final_202611/C_openmp/ | docs/final_C_openmp.md（由 C 创建） |
 
-## Linux / WSL 快速开始
+各人将需要上传的原始记录、配置、汇总与图整理到 evidence/ 下自己的批次目录，
+连同源码、运行说明和章节一起提交。不要把未运行的配置写成实验结果。
+图表正文按问题、规模、实现和资源组织；job ID 放原始记录。
 
-```bash
-mkdir -p build
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi.cpp -o build/jacobi_serial &&
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -fopenmp jacobi.cpp -o build/jacobi_omp &&
-python3 verify_small.py build/jacobi_serial build/jacobi_omp
-```
+每位成员贡献和 AI 使用说明由本人填写。11/9 提交可直接进入报告的图文初稿，
+11/10 定稿，不把全组绘图或原始数据调查集中给 A/C。
 
-Mac 可以先用支持 C++17 的 `c++` 编译串行版；OpenMP 编译器与运行库由 C 确认，不能假定系统默认编译器支持 `-fopenmp`。Python 验证方式相同。
+## 7. 历史材料与操作指南
 
-## 统一参数和结果
+以下用于旧 2D 实现、已有结果及集群操作参考。
+其中旧任务分派、停止规则和“暂缓”安排不覆盖本页及最新分工。
 
-调用形式：`executable n max_iters tolerance`。n 是每边内部点数，完整网格为 `(n+2)×(n+2)`。固定边界为 u=x+y，内部初值为零，使用 double。
+| 入口 | 用途 |
+|---|---|
+| [MPI/HPC 操作指南](docs/MEMBER_B.md) | 早期 MPI 编译、上传、PBS、下载流程 |
+| [Atlas 操作指南](docs/ATLAS.md) | 账号/网络、SSH/SCP、PBS 与下载 |
+| [10/28 同步说明](docs/TEAM_SYNC_2026-10-28.md) | 旧原始包、离线统计和阶段材料 |
+| [A/B 结果分析](docs/AB_RESULTS_SUMMARY.md) | 旧结果、基准诊断与波动解释 |
+| [10/28 最终证据](evidence/ab_final_2026-10-28/README.md) | 历史归档、统计和原始包入口 |
+| [旧团队参数合同](docs/TEAM_CONTRACT.zh-CN.md) | 旧 2D 接口与最大更新量停止规则 |
+| [AI 使用记录](docs/AI_USAGE.md) | 早期 AI/人工工作记录；新工作各人补充 |
 
-| 用途 | n | max_iters | tolerance |
-|---|---:|---:|---:|
-| 开发默认 | 16 | 100000 | 1e-12 |
-| 共同收敛验收 | 32 | 100000 | 1e-12 |
-| MPI 不整除分区对接 | 7 | 31 | 0 |
-| MPI 全局收敛检查 | 31 | 100000 | 1e-12 |
-| 性能试跑起点 | 1024 | 1000 | 0 |
-
-正容差根据最大更新量停止；容差 0 表示严格运行指定轮数，不声称已经收敛。收敛状态、更新量、真误差和残差分别检查。
-
-n=32 的本机串行参考为 5006 轮，最大误差约 2.195e-10，残差约 4.330e-9，边界误差 0。n=7、固定 31 轮时 `grid[4][4]=0.8644978247466497`。小规模收敛验收建议真误差≤1e-8、残差≤1e-7；固定轮数不使用这些收敛门槛。
-
-## 验证证据的范围
-
-- `reference/reference_results.json`：10 个串行案例通过；小网格另与独立 Python 二维实现核对。
-- `reference/local_pilot.json`：本机单次规模试跑，不能当作 Atlas 性能结果或重复实验中位数。
-- `evidence/atlas_serial/`：2026-10-23 的 n=1/2/16/32 原始数值输出。
-- `evidence/atlas_smoke/`：MPI 2/4/12 进程、OpenMP 4/12 线程环境检查。
-
-共享参考汇总中的命令路径已改为相对路径，数值对象保持原样；原件校验值和变化说明保存在汇总文件中。完整原始日志在原工作区保留。历史参考使用的参数状态快照与当前 A 已采纳状态不同，数值参数一致。
-
-MPI/混合本地验证的历史记录见 evidence/member_b_local/。当前A/B已覆盖1024/2048、串行诊断和全部三项补充；以顶部及[同步说明](docs/TEAM_SYNC_2026-10-28.md)为准。本轮只做成员审阅，不要求重新运行集群作业。
+旧 jacobi.cpp 是历史串行/OpenMP 源码，jacobi_mpi.cpp 是历史 2D MPI/混合源码。
+Makefile 的默认 all 仍构建这些旧程序。旧 A/B 修正后的串行基准为
+jacobi_serial_row_update.cpp；新 A 数值入口是 jacobi_numerics.cpp。
+这三者应按对应问题和实验区分，不能把旧默认构建当成新 3D 程序，
+也不能把新基准计时拿去重算不同历史作业的加速比。
