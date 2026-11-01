@@ -1,0 +1,2 @@
+n,h,continuous_error_inf,coarse_to_fine_error_ratio,observed_order,relative_residual,iterations,first_check_le_1e8,single_run_seconds
+7,0.125,0.09444881979348163,,,7.140180881433884e-11,280,220,0.000465

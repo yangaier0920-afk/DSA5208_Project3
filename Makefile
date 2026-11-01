@@ -28,3 +28,10 @@ check: all
 
 clean:
 	rm -f $(BUILD)/jacobi_serial $(BUILD)/jacobi_omp $(BUILD)/jacobi_mpi $(BUILD)/jacobi_hybrid
+
+# A numerical route, independent of MPI/OpenMP and historical all/check.
+.PHONY: numerics
+numerics: $(BUILD)/jacobi_numerics
+
+$(BUILD)/jacobi_numerics: jacobi_numerics.cpp | $(BUILD)
+	$(CXX) $(CXXFLAGS) $< -o $@

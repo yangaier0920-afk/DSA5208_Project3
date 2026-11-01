@@ -1,0 +1,14 @@
+{
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.5 | packaged by Anaconda, Inc. | (main, Sep 11 2023, 13:26:23) [MSC v.1916 64 bit (AMD64)]",
+  "suite": "smoke",
+  "purpose": "local basic check",
+  "pbs_job_id": null,
+  "host": "LAPTOP-JB7Q8D5R",
+  "sha256": {
+    "D:\\\u684c\u9762\u6587\u4ef6\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\build\\jacobi_numerics.exe": "228829e672f1a447afa710a4baeb82c5fe99547cbb40020c90366a8a601b7015",
+    "D:\\\u684c\u9762\u6587\u4ef6\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\jacobi_numerics.cpp": "eb3b74fd0ce070539dfc42aaf6378358927c3601f9472e3f09be311bef34ce9f",
+    "D:\\\u684c\u9762\u6587\u4ef6\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\run_a_numerics.py": "aa7bcceded285a4eaa83e4f4b17a3e0d4a48a80735b68cfbd9c06c3b3b6fd7a8"
+  },
+  "compiler_note": "See compile.log in the build/job directory for compiler and flags."
+}

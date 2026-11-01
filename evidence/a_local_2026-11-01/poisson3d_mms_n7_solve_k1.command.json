@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "D:\\\u684c\u9762\u6587\u4ef6\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\build\\jacobi_numerics.exe",
+    "--problem",
+    "poisson3d_mms",
+    "--nx",
+    "7",
+    "--mode",
+    "solve",
+    "--max-iters",
+    "1",
+    "--tol",
+    "1e-10",
+    "--check-every",
+    "10",
+    "--history",
+    "D:\\\u684c\u9762\u6587\u4ef6\\NUS_sem1\\DSA5208\\Project3\\github_ready\\DSA5208_Project3\\results\\final_202611\\A_numerics\\local_20261101_r2\\poisson3d_mms_n7_solve_k1_history.csv"
+  ],
+  "exit_code": 2
+}
