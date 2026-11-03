@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/build/jacobi_numerics",
+    "--problem",
+    "poisson3d_mms",
+    "--nx",
+    "31",
+    "--mode",
+    "solve",
+    "--max-iters",
+    "100000",
+    "--tol",
+    "1e-10",
+    "--check-every",
+    "10",
+    "--history",
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/results/final_202611/A_numerics/Vanda_1512708.stdct-mgmt-02/data/poisson3d_mms_n31_solve_k100000_history.csv"
+  ],
+  "exit_code": 0
+}

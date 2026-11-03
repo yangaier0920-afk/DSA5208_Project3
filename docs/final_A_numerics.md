@@ -1,8 +1,7 @@
-# A: numerical problem, serial method and convergence — draft
+# A: numerical problem, serial method and convergence
 
-Prepared 1 November 2026. The mathematical and historical-baseline sections are
-ready for integration. New execution evidence currently consists of Windows
-local basic checks; the planned Vanda numerical study has not been executed.
+Updated 3 November 2026. A1/A2 are complete: the serial method, historical
+baseline explanation and five-case Vanda numerical study are ready for integration.
 
 ## Problem and discretization
 
@@ -44,7 +43,7 @@ iterations; reaching it without meeting the criterion is reported explicitly.
 Solve timing includes iteration-time residual checks and in-memory history
 updates. Initialization, final error evaluation and file output are excluded.
 
-Planned grid sizes are n=15,31,63. We calculate the interior L∞ error against
+The completed grid study uses n=15,31,63. We calculate the interior L∞ error against
 the continuous manufactured solution and the observed order log₂(Eh/Eh/2).
 These grid spacings halve exactly. Convergence and accuracy reuse the same
 runs. Old 2D Laplace cases n=1024/2048 use K=1000 and report R1000.
@@ -112,14 +111,66 @@ Sources:
 [compiler-driver diagnosis](../evidence/vanda_1499802_single_rank/analysis.md),
 [A/B summary](AB_RESULTS_SUMMARY.md).
 
-## Planned cluster result insertion
+## Vanda numerical results — 3 November 2026
 
-The n=15/31/63 convergence and precision tables will be generated from
-summary.csv and precision.csv. Old 2D R1000 values come from the
-laplace2d_legacy rows. Formal Atlas/Vanda data remain pending; the local smoke
-outputs above are labelled separately.
+The five planned cases completed on Vanda CN-161 using GCC 12.2.0 and -O2.
+PBS allocated two CPU slots; the serial program itself used one computational
+thread. Total job walltime was 34 seconds, with an exit status of zero.
+The sum of the five timed iteration/solve intervals was 23.453 seconds.
+The one-hour walltime request was a maximum allowance, not a duration estimate.
+The difference includes job setup, module loading, compilation, initialization,
+final diagnostics and output; these phases were not individually timed.
+
+### Three-dimensional convergence and accuracy
+
+| Interior grid | First checked R≤1e−8 | Iterations to R≤1e−10 | Final relative residual | Continuous L∞ error | Observed order | Solve seconds |
+|---|---:|---:|---:|---:|---:|---:|
+| 15³ | 840 | 1080 | 9.2665e−11 | 0.0227631872 | — | 0.016261 |
+| 31³ | 3170 | 4120 | 9.8634e−11 | 0.00563935389 | 2.0131 | 0.409443 |
+| 63³ | 11820 | 15640 | 9.9977e−11 | 0.00140667331 | 2.0032 | 11.157644 |
+
+Halving the grid spacing reduced the continuous error by factors of 4.0365
+and 4.0090, consistent with second-order spatial accuracy. All physical
+boundary errors were zero. The errors against the exact discrete solution
+were 4.87e−9, 1.43e−8 and 4.03e−8, respectively, much smaller than the
+continuous discretization errors reported above.
+
+The largest case contained 63³=250047 interior points. It stopped at the
+prescribed residual target after 15640 iterations, performing about 3.91
+billion point updates. These are optimized compiled stencil loops with
+precomputed source values and no per-iteration file output. Each configuration
+was solved once, with the same run providing convergence and accuracy results.
+
+![True relative residual histories on Vanda](../evidence/vanda_1512708_a_numerics/data/convergence.png)
+
+### Has Jacobi converged after 1000 iterations?
+
+| Problem | Interior size | R1000 | Meets R≤1e−8? |
+|---|---:|---:|---|
+| New 3D Poisson | 15³ | 4.3752e−10 | Yes |
+| New 3D Poisson | 31³ | 3.4236e−4 | No |
+| New 3D Poisson | 63³ | 4.6994e−3 | No |
+| Historical 2D Laplace | 1024² | 5.0143e−3 | No |
+| Historical 2D Laplace | 2048² | 5.0177e−3 | No |
+
+The 3D values are taken from the k=1000 samples of the same convergence
+histories. The two old 2D cases performed exactly 1000 iterations, taking
+1.926010 and 9.943647 seconds. Their final continuous L∞ errors were
+1.859066 and 1.924827. Thus the previous large-grid 1000-iteration experiments
+measure fixed work rather than a converged solution. A universal fixed
+iteration count does not give a universal residual accuracy across grid sizes.
+
+These are single-run numerical-study times, not repeated-sample scaling
+benchmarks. B's MPI and C's CPU/GPU measurements retain their own matched
+baselines and timing scopes.
+
+Evidence:
+[batch overview](../evidence/vanda_1512708_a_numerics/README.md),
+[raw summary](../evidence/vanda_1512708_a_numerics/data/summary.csv),
+[precision table](../evidence/vanda_1512708_a_numerics/data/precision.csv),
+[run log](../evidence/vanda_1512708_a_numerics/run.log).
+The downloaded source and runner hashes match the local files.
 
 AI usage: ChatGPT/Codex assisted with serial implementation, local basic checks,
 run/analysis scripts and drafting this section. Members remain responsible
 for understanding and reporting their assigned work.
-

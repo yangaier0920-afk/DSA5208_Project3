@@ -1,0 +1,33 @@
+#!/bin/bash
+#PBS -N jacobi_A_numerics
+#PBS -q auto_free
+#PBS -l select=1:ncpus=2:mpiprocs=1:ompthreads=1:mem=4gb
+#PBS -l walltime=01:00:00
+#PBS -j oe
+#PBS -S /bin/bash
+# Prepared only. Verify current queue/modules after maintenance; not submitted.
+set -euo pipefail
+: "${PBS_JOBID:?Submit with qsub}"
+cd "$PBS_O_WORKDIR"
+log_dir="$PBS_O_WORKDIR/results/final_202611/A_numerics/Vanda_${PBS_JOBID}"
+mkdir -p "$log_dir"
+exec > >(tee "$log_dir/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+if [ -f vanda_modules.sh ]; then
+    source ./vanda_modules.sh
+else
+    source ./vanda_modules.example.sh
+fi
+module list
+hostname
+date -Is
+mkdir -p build
+{
+    g++ --version
+    printf '%s\n' 'g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_numerics.cpp -o build/jacobi_numerics'
+    g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_numerics.cpp -o build/jacobi_numerics
+} > "$log_dir/compile.log" 2>&1
+python3 run_a_numerics.py --binary build/jacobi_numerics --suite formal --out-dir "$log_dir/data"
+# Download data and plot locally; matplotlib is not required on the cluster.
+printf 'RUN_STATUS=COMPLETED\n'
+

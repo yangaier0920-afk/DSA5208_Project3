@@ -1,6 +1,8 @@
 # A 数值路线运行说明
 
-2026-11-01。新增 jacobi_numerics.cpp，无 MPI/OpenMP 依赖。
+更新：2026-11-03。A2 已在 Vanda 完成，见 [本批完成记录](A_PROGRESS_2026-11-03.md)；已有结果无需重跑。
+
+2026-11-01 新增 jacobi_numerics.cpp，无 MPI/OpenMP 依赖。
 详细数学、基准解释和本地结果见 [A 报告草稿](final_A_numerics.md)。
 
 ## 编译和本人基本检查
@@ -44,7 +46,7 @@ build/jacobi_numerics --problem laplace2d_legacy --nx 1024 --mode fixed --max-it
 - continuous_error_inf和discrete_error_inf只计算内部点；
   boundary_error_inf单列物理边界。
 
-## A2正式矩阵（今天仅准备）
+## A2正式矩阵（11/3已完成；以下保留运行说明）
 
 ~~~bash
 python3 run_a_numerics.py --binary build/jacobi_numerics --suite formal --out-dir results/final_202611/A_numerics/formal_NEW
@@ -71,6 +73,5 @@ PBS草稿使用项目已有auto_free队列、2 CPU/4GB；程序单线程。
 恢复后仍需确认队列可用性。1小时walltime为预留预算，尚无此次集群试跑依据。
 脚本保存编译器、flags和退出状态。集群只用标准库，下载后本地绘图即可。
 
-本轮未连接集群、未提交作业、未执行正式A2或B/C任务。
+11/3用户已完成集群提交与下载；本地已整理A2数据和图文。B/C各自按分工推进。
 Canvas精确截止时间仍需本人登录确认。
-

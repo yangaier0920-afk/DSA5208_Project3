@@ -1,6 +1,6 @@
 # DSA5208 Project 3 — Jacobi / 3D Poisson
 
-**更新日期：2026-11-01。当前阶段：根据老师反馈开展新增 3D、MPI 扩展与 OpenMP GPU 工作。**
+**更新日期：2026-11-03。当前阶段：根据老师反馈开展新增 3D、MPI 扩展与 OpenMP GPU 工作。**
 
 **所有成员先读 [最新任务清单与 A/B/C 分工](10.30会议讨论要点与ABC分工.md)。**
 该文件给出了共同公式、参数、个人配置、交付日期及资源阻塞时的处理规则。
@@ -14,18 +14,19 @@
 | 旧 2D 串行、MPI 与三项补充实验 | 已完成并保存审计材料，可直接用于历史结果和基准说明 | [A/B 结果](docs/AB_RESULTS_SUMMARY.md)、[原始证据入口](evidence/ab_final_2026-10-28/README.md) |
 | A：新 3D 串行、残差及停止逻辑 | 已实现，本地基本检查通过 | [A 完成记录](docs/A_PROGRESS_2026-11-01.md)、[本地证据](evidence/a_local_2026-11-01/README.md) |
 | A：数学说明、旧串行差距解释 | 英文草稿已完成 | [A 报告草稿](docs/final_A_numerics.md) |
-| A：正式收敛/精度及旧 2D 终点诊断 | 配置、运行及绘图脚本已准备，待维护恢复后在集群运行 | [A 运行说明](docs/A_NUMERICS_README.md) |
+| A：正式收敛/精度及旧 2D 终点诊断 | 已完成：三个 3D 网格收敛、二阶精度；旧 2D 的 1000 轮未达标 | [11/3 完成记录](docs/A_PROGRESS_2026-11-03.md)、[Vanda 证据](evidence/vanda_1512708_a_numerics/README.md) |
 | B：新 3D MPI、强扩展、弱扩展、有限混合 | 按最新分工推进；本仓库当前没有据此确认的新正式结果 | [B 执行卡](10.30会议讨论要点与ABC分工.md#6-b-的执行卡mpi-强扩展弱扩展与混合) |
 | C：OpenMP CPU/GPU | 按最新分工推进；本仓库当前没有据此确认的真实 GPU 新结果 | [C 执行卡](10.30会议讨论要点与ABC分工.md#7-c-的执行卡openmp-cpugpu) |
 
-本地小案例是开发证据；报告要求的 Atlas/Vanda 正式数据由恢复后的实验补齐。
+A 的正式 Vanda 数值数据已保存：作业 walltime 34 秒，五案例求解/迭代计时合计 23.453 秒。
+3D 观察阶数为 2.0131、2.0032；旧 2D 两种规模在 1000 轮后相对残差约 0.005。
 B/C 状态由各自负责人交付后更新，不根据任务已分配就标记为完成。
 
 ## 2. 每个人负责什么，现在先做什么
 
 | 成员 | 独立负责的路线 | 维护期间先完成 | 恢复后的核心实验 | 交付 |
 |---|---|---|---|---|
-| **A** | 串行、数学、收敛/精度；最终报告汇总 | 已完成程序及本人小案例、方法草稿、运行/绘图脚本 | 3D n=15/31/63 求解；旧 2D n=1024/2048 的 R1000 | 11/6 数值章节；最终合稿 |
+| **A** | 串行、数学、收敛/精度；最终报告汇总 | A1/A2 代码、数据、图文已完成 | 五个案例已完成；接下来按计划汇总 B/C 成稿 | 数值章节已就绪；后续最终合稿 |
 | **B** | 3D MPI、强扩展、弱扩展、有限 MPI+OpenMP | 三维块分区、halo、PBS、矩阵及统计脚本 | 强扩展 16 配置，含代表规模目标 720 核；64³/rank 弱扩展；256³ 固定 72 核混合配比 | 11/6 强扩展；11/7 弱扩展/混合 |
 | **C** | 单机 OpenMP CPU 与单 GPU offload | CPU/target 内核、设备数据驻留、编译及计时脚本 | 64³/128³/256³；每规模 CPU T=1、T=Tc 与单 GPU，共 9 配置 | 11/6 GPU；11/7 CPU/GPU 对照 |
 
@@ -78,9 +79,9 @@ CPU/GPU 申请由提交者登记，避免全组配额冲突。大核数和 GPU �
 | [jacobi_numerics.cpp](jacobi_numerics.cpp) | A 独立串行入口：新 3D Poisson、旧 2D 残差诊断、fixed/solve |
 | [run_a_numerics.py](run_a_numerics.py) | 本人小案例 smoke / 正式 A2 五案例 formal；输出目录必须是新目录 |
 | [analyze_a_numerics.py](analyze_a_numerics.py) | 读取已有结果，生成残差曲线与精度表 |
-| [vanda_a_numerics.pbs](vanda_a_numerics.pbs) | 正式 A2 作业草稿，尚未在此次维护后的环境验证或提交 |
+| [vanda_a_numerics.pbs](vanda_a_numerics.pbs) | 本次 Vanda 正式 A2 使用的作业脚本（已完成） |
 | [A_NUMERICS_README.md](docs/A_NUMERICS_README.md) | Windows/Linux 编译、参数、运行、输出与恢复后步骤 |
-| [final_A_numerics.md](docs/final_A_numerics.md) | 数学、算法、收敛定义、旧基准解释和本地检查结果 |
+| [final_A_numerics.md](docs/final_A_numerics.md) | 数学、算法、旧基准解释、本地检查及正式 Vanda 收敛/精度结果 |
 
 A 的程序只需 C++17；运行脚本仅用 Python 标准库，绘图需要 matplotlib。
 Linux 可用 make numerics 构建新入口，不触发旧 MPI/OpenMP 构建。

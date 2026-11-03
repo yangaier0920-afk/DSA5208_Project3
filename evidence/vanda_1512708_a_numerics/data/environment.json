@@ -1,0 +1,14 @@
+{
+  "platform": "Linux-5.14.0-427.134.1.el9_4.x86_64-x86_64-with-glibc2.34",
+  "python": "3.10.8 (main, Mar 28 2023, 19:45:49) [GCC 12.2.0]",
+  "suite": "formal",
+  "purpose": "A numerical study; platform recorded",
+  "pbs_job_id": "1512708.stdct-mgmt-02",
+  "host": "CN-161",
+  "sha256": {
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/build/jacobi_numerics": "8902f7d2e475b4b29a14bc2b9902164543418e6d2f61d2ec1bc3cdff4a639707",
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/jacobi_numerics.cpp": "eb3b74fd0ce070539dfc42aaf6378358927c3601f9472e3f09be311bef34ce9f",
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/run_a_numerics.py": "aa7bcceded285a4eaa83e4f4b17a3e0d4a48a80735b68cfbd9c06c3b3b6fd7a8"
+  },
+  "compiler_note": "See compile.log in the build/job directory for compiler and flags."
+}

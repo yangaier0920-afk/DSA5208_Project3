@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/build/jacobi_numerics",
+    "--problem",
+    "laplace2d_legacy",
+    "--nx",
+    "1024",
+    "--mode",
+    "fixed",
+    "--max-iters",
+    "1000",
+    "--tol",
+    "1e-08",
+    "--check-every",
+    "10",
+    "--history",
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_numerics_20261103/results/final_202611/A_numerics/Vanda_1512708.stdct-mgmt-02/data/laplace2d_legacy_n1024_fixed_k1000_history.csv"
+  ],
+  "exit_code": 0
+}
