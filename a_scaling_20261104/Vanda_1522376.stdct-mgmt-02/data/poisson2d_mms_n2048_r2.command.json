@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/nfs/home/svu/yangaier/dsa5208_project3/a_scaling_20261104/build/jacobi_a_scaling",
+    "--problem",
+    "poisson2d_mms",
+    "--nx",
+    "2048",
+    "--mode",
+    "fixed",
+    "--max-iters",
+    "1000"
+  ],
+  "exit_code": 0
+}

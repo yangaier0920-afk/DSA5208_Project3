@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -N jacobi_A_scaling
+#PBS -q auto_free
+#PBS -l select=1:ncpus=2:mpiprocs=1:ompthreads=1:mem=4gb
+#PBS -l walltime=01:00:00
+#PBS -j oe
+#PBS -S /bin/bash
+set -euo pipefail
+: "${PBS_JOBID:?Submit using qsub}"
+cd "$PBS_O_WORKDIR"
+out="$PBS_O_WORKDIR/results/Vanda_${PBS_JOBID}"
+mkdir -p "$out"
+exec > >(tee "$out/run.log") 2>&1
+trap 'status=$?; printf "JOB_EXIT_STATUS=%s\n" "$status"; exit "$status"' EXIT
+module load GCC/12.2.0
+module load Python/3.10.8-GCCcore-12.2.0
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+module list
+hostname
+date -Is
+lscpu
+mkdir -p build "$out/source"
+cp jacobi_a_scaling.cpp run_a_scaling.py vanda_a_scaling.pbs "$out/source/"
+g++ --version
+printf '%s\n' 'g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_a_scaling.cpp -o build/jacobi_a_scaling'
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic jacobi_a_scaling.cpp -o build/jacobi_a_scaling
+python3 run_a_scaling.py --binary build/jacobi_a_scaling --out-dir "$out/data"

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "performance_samples": 40,
+  "formal_samples": 30,
+  "configurations": 10,
+  "source_hashes": {
+    "jacobi_a_scaling.cpp": "e9491f6ea41b058784c97e5329ad3e80776f517e98c4ee0beacda9401b59f44d",
+    "run_a_scaling.py": "c97fee5a60312aa75202ae1966e5602baaa65b80bcd471534d9fbc2412b2c1e9"
+  },
+  "endpoint_exponents": {
+    "2": 2.06601322975608,
+    "3": 2.9948253105241847
+  },
+  "all_boundary_errors_zero": true,
+  "max_formal_relative_range": 0.13181690424703865
+}

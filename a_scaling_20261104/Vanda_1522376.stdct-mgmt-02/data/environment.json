@@ -1,0 +1,17 @@
+{
+  "host": "CN-161",
+  "platform": "Linux-5.14.0-427.134.1.el9_4.x86_64-x86_64-with-glibc2.34",
+  "pbs_job_id": "1522376.stdct-mgmt-02",
+  "smoke_only": false,
+  "allowed_cpus_before_pin": [
+    65,
+    67
+  ],
+  "selected_cpu": 65,
+  "sha256": {
+    "jacobi_a_scaling": "6560be10d20f9f77ce0bb17115fcfabce90dc9b8cd81bdcdb359a9412d566019",
+    "jacobi_a_scaling.cpp": "e9491f6ea41b058784c97e5329ad3e80776f517e98c4ee0beacda9401b59f44d",
+    "run_a_scaling.py": "c97fee5a60312aa75202ae1966e5602baaa65b80bcd471534d9fbc2412b2c1e9"
+  },
+  "timing_scope": "K iterations only; initialization and final diagnostics excluded"
+}
