@@ -1,0 +1,24 @@
+{
+  "suite": "formal",
+  "host": "GN-A40-024",
+  "platform": "NVIDIA A40 + Intel Xeon Platinum 8452Y",
+  "samples_sha256": "56da25794da1d1555681b36d44d84839fab736cbbc9e69157a9788e998dda200",
+  "analyzer_sha256": "8278dde1fa53cfca1209a85cb9bf7d61349c040d825c29d5422ec02c764edc2e",
+  "runtime_axes": {
+    "x": "log2",
+    "y": "log10"
+  },
+  "speedup_axes": {
+    "x": "log2",
+    "y": "linear"
+  },
+  "runtime_error_bars": "observed min/max of 3 measured runs",
+  "speedup_error_bars": null,
+  "warmup_excluded": true,
+  "grids": [
+    64,
+    128,
+    256
+  ],
+  "matplotlib": "3.11.2"
+}

@@ -1,0 +1,11 @@
+/build/
+/results/
+/.venv/
+/__pycache__/
+/cluster_env.sh
+/*.pbs
+/reference/
+/docs/LOCAL_CHECKS.md
+/docs/NVHPC_WORKAROUND_20261106.md
+/docs/FORMAL_VERIFIED_20261106.json
+.DS_Store

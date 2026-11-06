@@ -1,0 +1,28 @@
+{
+  "description": "Trimmed environment metadata for reproducible plotting. Raw account, scheduler variables and filesystem paths are retained locally only.",
+  "host": "GN-A40-024",
+  "lscpu": {
+    "stdout": "Model name: Intel(R) Xeon(R) Platinum 8452Y\n"
+  },
+  "gpu": {
+    "stdout": "index, name, memory.total [MiB], driver_version\n0, NVIDIA A40, 46068 MiB, 575.57.08\n"
+  },
+  "compiler": "NVHPC 24.7 / CUDA 12.3.0 / GCC 13.2.0",
+  "allocation": {
+    "cpu_cores": 36,
+    "gpu_count": 1,
+    "cpu_baseline_threads": [
+      1,
+      12
+    ]
+  },
+  "numerical_protocol": {
+    "precision": "double",
+    "iterations": 1000,
+    "interior_side_lengths": [
+      64,
+      128,
+      256
+    ]
+  }
+}

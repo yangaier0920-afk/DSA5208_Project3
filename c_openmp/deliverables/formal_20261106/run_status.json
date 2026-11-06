@@ -1,0 +1,7 @@
+{
+  "status": "COMPLETED",
+  "cpu_only": false,
+  "suite": "formal",
+  "performance_samples": 36,
+  "validation_cases": 18
+}

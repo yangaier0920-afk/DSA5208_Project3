@@ -1,0 +1,6 @@
+validation,purpose,maximum_error,tolerance,result
+"2D 7x7, K=1000, CPU1/CPU12/GPU",Discrete solution accuracy,1.1944883016414743e-15,1e-09,Passed
+"3D 7x7x7, K=1000, CPU1/CPU12/GPU",Discrete solution accuracy,2.72465511752525e-15,1e-09,Passed
+"2D 9x7 and 3D 9x7x5, K=1/2",Independent step formula and odd/even buffers,6.661338147750939e-16,1e-12,Passed
+"Six CPU1/GPU pairs, including physical boundary",Full-grid agreement,0.0,1e-09,Passed
+All 18 small validation cases,Boundary preservation,0,1e-12,Passed

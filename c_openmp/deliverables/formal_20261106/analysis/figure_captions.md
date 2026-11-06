@@ -1,0 +1,3 @@
+**runtime.** NVIDIA A40 + Intel Xeon Platinum 8452Y. K=1000; median of 3 formal runs per configuration; warmup excluded. Bars span the observed minimum to maximum, not confidence intervals. Both axes are logarithmic. Resident and end-to-end GPU times come from the same run; formal data only.
+
+**speedup.** NVIDIA A40 + Intel Xeon Platinum 8452Y. K=1000; ratios of medians from 3 formal runs per configuration; warmup excluded. Numerator: CPU1 (left) or CPU12 (right); denominator: GPU resident or end-to-end time. Above 1 means GPU is faster. Size axes logarithmic; speedup axes linear with separate ranges. No error bars or confidence intervals.

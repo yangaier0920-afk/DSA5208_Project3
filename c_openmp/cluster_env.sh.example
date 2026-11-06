@@ -1,0 +1,8 @@
+# Confirmed in the user's minimum-target session, 2026-11-06.
+# Recheck module availability if a new allocation differs.
+if [ -f /app1/ebenv ]; then source /app1/ebenv; fi
+module load NVHPC/24.7-CUDA-12.3.0
+command -v gcc
+command -v nvc++
+# If python3 is missing, load a compatible module after checking module avail Python.
+command -v python3
