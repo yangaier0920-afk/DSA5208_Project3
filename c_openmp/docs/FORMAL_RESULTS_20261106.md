@@ -1,3 +1,5 @@
+> 2026-11-07 合稿更新：英文 C 章节和整体审阅 PDF 已补齐，见根目录 docs/final_C_openmp.md 与 output/pdf。下文“不写英文”的表述保留为 11/6 历史状态；本轮未重跑 GPU 或补造 PBS 历史状态，成员个人声明按用户要求省略。
+
 # C 正式三规模结果：2026-11-06
 
 本页使用正式 job **1525886.stdct-mgmt-02** 的本地已下载证据。已核对 run.log 的 COMPLETED / JOB_EXIT_STATUS=0、run_status、样本数量和每个配置的 repeat，以及样本 CSV 与逐次 stdout 时间一致性。当前下载中没有独立 PBS 最终 qstat 记录，因此不把日志退出码冒充 PBS 历史 Exit_status。

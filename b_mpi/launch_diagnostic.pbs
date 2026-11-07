@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -N B_MPI_launch_diag
+#PBS -P personal-e1561365
+#PBS -l select=1:ncpus=2:mpiprocs=2:mem=1gb:host=CN-152
+#PBS -l walltime=00:05:00
+#PBS -j oe
+set -u
+cd "$PBS_O_WORKDIR"
+source ./b_mpi/runtime_modules.sh
+out="results/final_202611/B_mpi/launch_${PBS_JOBID}"
+mkdir -p "$out"
+exec > >(tee "$out/run.log") 2>&1
+cp "$PBS_NODEFILE" "$out/nodefile"
+mpicxx mpi_hello.cpp -o "$out/hello"
+ps -u e1561365 -o pid,ppid,stat,pcpu,comm,wchan:25 > "$out/processes.txt"
+echo TM_TEST
+ timeout 30 mpirun -np 2 --bind-to none "$out/hello"
+echo TM_EXIT=$?
+echo HOSTFILE_TEST
+ timeout 30 mpirun --mca ras '^tm' --mca plm rsh --hostfile "$PBS_NODEFILE" -np 2 --bind-to none "$out/hello"
+echo HOSTFILE_EXIT=$?
+echo TM_BIND_TEST
+ timeout 20 mpirun --map-by ppr:2:node:PE=1 --bind-to core -np 2 "$out/hello"
+echo TM_BIND_EXIT=$?
+echo HOST_BIND_TEST
+ timeout 20 mpirun --mca ras '^tm' --mca plm rsh --hostfile "$PBS_NODEFILE" --map-by ppr:2:node:PE=1 --bind-to core -np 2 "$out/hello"
+echo HOST_BIND_EXIT=$?
+echo DIAGNOSTIC_FINISHED

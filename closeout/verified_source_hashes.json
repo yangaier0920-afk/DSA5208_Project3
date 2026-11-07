@@ -1,0 +1,12 @@
+{
+  "a_scaling_20261104/jacobi_a_scaling.cpp": "e9491f6ea41b058784c97e5329ad3e80776f517e98c4ee0beacda9401b59f44d",
+  "b_mpi/jacobi_cart.cpp": "5bf5be893cb1c2e6f6b3170f71f9be6a11f5bfdff7069c4d7abc15233d0fa93a",
+  "c_openmp/jacobi_c_openmp.cpp": "76081f7e34fe824229ee1c6b2f29e1fbe3cc3cced7bbd15b617b6e20afff9abe",
+  "c_openmp/jacobi_c_target.c": "fbc3d16d3ef2d3949806caef56b8f2b294cdeccad906ceda30dff772843ba171",
+  "c_openmp/jacobi_c_target.h": "17792ffe8c7630c623ec3e9042563a76cb0a901c88476bcf90384823977ab70c",
+  "jacobi.cpp": "ea2fdaad998c6b41eb6194c97db8fc4b0fece19127115e2c34eba4cad655acc9",
+  "jacobi_mpi.cpp": "652c63f648f65999bbe358605077bd856c8a12279c4ec4e78fe6a2dd74d51d10",
+  "jacobi_numerics.cpp": "f6f4f6442e0e14494307834b6a28859777d89d77ca8b618d607708653e1bdc56",
+  "jacobi_serial_local_update.cpp": "a0180ee943d8de17bf86bfaea80f1bfbbe253dfe5fe2be91b7fc5b969396e185",
+  "jacobi_serial_row_update.cpp": "831c62229a3f65b6570c0d053cc6dd7800c1deb9b48927eab47bdf1acdb6262f"
+}

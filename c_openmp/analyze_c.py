@@ -104,8 +104,8 @@ def main():
         environment=json.loads((batch/'environment.json').read_text())
         gpu_lines=environment.get('gpu',{}).get('stdout','').strip().splitlines()
         gpu_info=list(csv.DictReader(gpu_lines,skipinitialspace=True))
-        gpu_name=gpu_info[0].get('name','GPU').strip() if gpu_info else 'GPU'
-        cpu_name=next((line.split(':',1)[1].strip() for line in
+        gpu_name=environment.get('gpu_device',{}).get('name') or (gpu_info[0].get('name','GPU').strip() if gpu_info else 'GPU')
+        cpu_name=environment.get('cpu_model') or next((line.split(':',1)[1].strip() for line in
             environment.get('lscpu',{}).get('stdout','').splitlines()
             if line.startswith('Model name:')), 'CPU')
         cpu_name=cpu_name.replace('Intel(R) ','Intel ').replace('(R)','').replace('(TM)','')

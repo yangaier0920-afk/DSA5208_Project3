@@ -35,3 +35,13 @@ numerics: $(BUILD)/jacobi_numerics
 
 $(BUILD)/jacobi_numerics: jacobi_numerics.cpp | $(BUILD)
 	$(CXX) $(CXXFLAGS) $< -o $@
+
+# B's Cartesian MMS route; historical targets remain independent.
+.PHONY: b-mpi
+b-mpi: $(BUILD)/jacobi_cart_mpi $(BUILD)/jacobi_cart_hybrid
+
+$(BUILD)/jacobi_cart_mpi: b_mpi/jacobi_cart.cpp | $(BUILD)
+	$(MPICXX) $(CXXFLAGS) $< -o $@
+
+$(BUILD)/jacobi_cart_hybrid: b_mpi/jacobi_cart.cpp | $(BUILD)
+	$(MPICXX) $(CXXFLAGS) $(OMPFLAGS) $< -o $@

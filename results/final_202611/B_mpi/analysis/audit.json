@@ -1,0 +1,21 @@
+{
+  "formal_configurations": 26,
+  "diagnostics": 3,
+  "core_complete": true,
+  "hardware_scope": "Scaling: matched CPU topology and nominal 512-GB capacity family. Hybrid: paired baselines within explicitly separate allocations; 72-core hybrid remains a 1-TB single-node cohort.",
+  "missing_core": [],
+  "missing_diagnostics": [],
+  "missing_optional": [
+    "strong_512x512x512_p720_t1",
+    "weak_576x512x384_p432_t1",
+    "weak_640x576x512_p720_t1"
+  ],
+  "retained_from_interrupted_jobs": [],
+  "warnings": [],
+  "cohort_selection": "closeout/prepare_cohorts.py",
+  "supplementary_os_affinity_samples": 63,
+  "paired_baseline_configurations": 2,
+  "paired_baseline_formal_samples": 6,
+  "reported_cohort_configurations": 28,
+  "reported_formal_samples": 84
+}

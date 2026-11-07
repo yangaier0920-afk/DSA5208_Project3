@@ -1,0 +1,4 @@
+matplotlib>=3.6
+reportlab>=4
+Pillow>=9
+pypdf>=4

@@ -1,0 +1,9 @@
+# Local scheduler/connection diagnostics and generated intermediate views.
+/optional_queue_internal.txt
+/hardware_candidates.json
+/report_build.json
+/cohort_selection_result.json
+/submit_review.py
+/review144/audit.json
+/review144/*.png
+/review144/*.pdf

@@ -1,0 +1,32 @@
+#!/bin/bash
+#PBS -N B_cart_12
+#PBS -P personal-e1561365
+#PBS -l place=scatter
+#PBS -l select=1:ncpus=12:mpiprocs=12:ompthreads=1:mem=16gb
+#PBS -l walltime=01:00:00
+#PBS -j oe
+#PBS -S /bin/bash
+set -euo pipefail
+: "${PBS_JOBID:?Submit through PBS}"
+cd "$PBS_O_WORKDIR"
+source ./b_mpi/runtime_modules.sh
+out="results/final_202611/B_mpi/Vanda_${PBS_JOBID}"
+mkdir -p "$out/environment" "$out/source"
+exec > >(tee "$out/run.log") 2>&1
+trap 'status=$?; echo JOB_EXIT_STATUS=$status' EXIT
+module list
+lscpu > "$out/environment/lscpu.txt"
+mpirun --version > "$out/environment/mpi.txt"
+mpicxx --showme > "$out/environment/compiler_wrapper.txt"
+g++ --version > "$out/environment/compiler.txt"
+cat "$PBS_NODEFILE" > "$out/environment/pbs_nodefile.txt"
+qstat -f "$PBS_JOBID" > "$out/environment/qstat_start.txt"
+cp b_mpi/*.py b_mpi/*.cpp "$out/source/"
+mkdir -p build
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic b_mpi/jacobi_cart.cpp -o "$out/jacobi_cart_mpi"
+mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic -fopenmp b_mpi/jacobi_cart.cpp -o "$out/jacobi_cart_hybrid"
+printf '%s\n' 'mpicxx -std=c++17 -O2 -Wall -Wextra -Wpedantic -fopenmp' > "$out/environment/flags.txt"
+# Per-host physical CPU topology; binding evidence is also retained for every sample.
+mpirun --map-by ppr:1:node -np 1 sh -c 'hostname; lscpu' > "$out/environment/nodes.txt"
+python3 b_mpi/run_b.py --group 12 --mpi-binary "$out/jacobi_cart_mpi" --binary "$out/jacobi_cart_hybrid" --out "$out/data"
+echo RUN_STATUS=PASSED

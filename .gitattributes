@@ -12,7 +12,7 @@ Makefile text eol=lf
 docs/PROJECT_REQUIREMENTS.md -text
 
 # Preserve exported CSV bytes and original cluster log formatting.
-*.csv -text
+*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 evidence/**/*.txt whitespace=-blank-at-eol,-blank-at-eof
 evidence/**/*.log whitespace=-blank-at-eol,-blank-at-eof
 
@@ -20,3 +20,10 @@ evidence/**/*.log whitespace=-blank-at-eol,-blank-at-eof
 evidence/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 results/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 *.tar.gz -text
+
+# Generated PDF streams may be ASCII-only; always preserve them as binary.
+*.pdf binary
+
+# Preserve the exact compiled experiment source and generated report text.
+b_mpi/jacobi_cart.cpp whitespace=-blank-at-eol
+docs/final_report_review.md whitespace=-blank-at-eof

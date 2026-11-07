@@ -1,0 +1,64 @@
+[
+  {
+    "group": 72,
+    "job": "1529266.stdct-mgmt-02",
+    "hosts": [
+      "CN-035"
+    ],
+    "purpose": "standard_memory_cohort",
+    "select": "1:ncpus=72:mpiprocs=72:ompthreads=1:mem=16gb:host=CN-035:node_pool=cpu_node"
+  },
+  {
+    "group": 144,
+    "job": "1529267.stdct-mgmt-02",
+    "hosts": [
+      "CN-011",
+      "CN-039",
+      "CN-108",
+      "CN-152"
+    ],
+    "purpose": "independent_144_review",
+    "select": "1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=CN-011:node_pool=cpu_node+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=CN-039:node_pool=cpu_node+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=CN-108:node_pool=cpu_node+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=CN-152:node_pool=cpu_node"
+  },
+  {
+    "group": 288,
+    "job": "1529268.stdct-mgmt-02",
+    "hosts": [
+      "CN-003",
+      "CN-110",
+      "CN-126",
+      "CN-136",
+      "CN-139",
+      "CN-141",
+      "CN-143",
+      "CN-145",
+      "CN-146"
+    ],
+    "purpose": "standard_memory_cohort",
+    "select": "1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-003:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-110:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-126:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-136:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-139:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-141:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-143:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-145:node_pool=cpu_node+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=CN-146:node_pool=cpu_node"
+  },
+  {
+    "group": 144,
+    "job": "1529278.stdct-mgmt-02",
+    "purpose": "standard_memory_and_independent_review",
+    "select": "1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=cn-011+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=cn-039+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=cn-108+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=16gb:host=gn-a40-047"
+  },
+  {
+    "group": 288,
+    "job": "1529279.stdct-mgmt-02",
+    "purpose": "standard_memory_and_independent_review",
+    "select": "1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-003+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-110+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-126+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-136+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-139+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-141+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-143+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-145+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-146"
+  },
+  {
+    "group": 72,
+    "job": "1529288.stdct-mgmt-02",
+    "purpose": "standard_memory_scaling",
+    "select": "1:ncpus=24:mpiprocs=24:ompthreads=1:mem=16gb:host=cn-088+1:ncpus=24:mpiprocs=24:ompthreads=1:mem=16gb:host=cn-150+1:ncpus=24:mpiprocs=24:ompthreads=1:mem=16gb:host=gn-a40-054"
+  },
+  {
+    "group": 288,
+    "job": "1529289.stdct-mgmt-02",
+    "purpose": "standard_memory_scaling",
+    "select": "1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-003+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-110+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-126+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-136+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-139+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-141+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-143+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-145+1:ncpus=32:mpiprocs=32:ompthreads=1:mem=16gb:host=cn-146"
+  }
+]

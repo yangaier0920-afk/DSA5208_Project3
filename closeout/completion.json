@@ -1,0 +1,81 @@
+{
+  "standardized_scaling": true,
+  "main_configs": 26,
+  "main_formal_samples": 78,
+  "paired_baseline_configs": 2,
+  "paired_baseline_formal_samples": 6,
+  "reported_formal_samples": 84,
+  "diagnostics": 3,
+  "independent_review_job": 1529278,
+  "original_144_samples_retained": true,
+  "affinity_samples_verified": 63,
+  "scaling_sources": [
+    {
+      "P": 1,
+      "job": 1529163,
+      "hosts": [
+        "GN-A40-074"
+      ]
+    },
+    {
+      "P": 8,
+      "job": 1529168,
+      "hosts": [
+        "CN-154"
+      ]
+    },
+    {
+      "P": 12,
+      "job": 1529166,
+      "hosts": [
+        "CN-152"
+      ]
+    },
+    {
+      "P": 36,
+      "job": 1529210,
+      "hosts": [
+        "CN-039"
+      ]
+    },
+    {
+      "P": 72,
+      "job": 1529288,
+      "hosts": [
+        "CN-088",
+        "CN-150",
+        "GN-A40-054"
+      ]
+    },
+    {
+      "P": 144,
+      "job": 1529165,
+      "hosts": [
+        "CN-011",
+        "CN-084",
+        "CN-108",
+        "CN-152"
+      ]
+    },
+    {
+      "P": 288,
+      "job": 1529289,
+      "hosts": [
+        "CN-003",
+        "CN-110",
+        "CN-126",
+        "CN-136",
+        "CN-139",
+        "CN-141",
+        "CN-143",
+        "CN-145",
+        "CN-146"
+      ]
+    }
+  ],
+  "hybrid_sources": [
+    1529164,
+    1529278
+  ],
+  "author_information": "intentionally omitted at user request"
+}

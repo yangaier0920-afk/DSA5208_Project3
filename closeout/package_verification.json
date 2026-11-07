@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": [
+    "ZIP integrity and all source/input manifest hashes PASS",
+    "All serial/MPI/hybrid/CPU sources compile from the standalone ZIP on this Mac",
+    "Packaged A 2D/3D discrete-solution examples PASS",
+    "Packaged B six mathematical/partition/thread checks PASS (local correctness only)",
+    "Packaged C CPU checks PASS; actual GPU evidence remains the formal Vanda run",
+    "All integrated report figures reproduce from packaged concise CSV, without logs",
+    "PDF regenerates from the standalone ZIP inputs"
+  ],
+  "package_sha256": "d03446acd377bc98308e1219f3a5da09390498887e7779c27558692b4d7e38c7",
+  "final_manifest_integrity": "PASS",
+  "tested_numerical_sources_unchanged_in_final_package": true,
+  "public_structured_metadata_and_C_plotting": "PASS",
+  "self_contained_public_repack": "PASS",
+  "final_pdf_visual_review": "15 pages rendered and visually checked; PASS"
+}

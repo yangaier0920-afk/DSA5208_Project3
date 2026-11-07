@@ -1,5 +1,8 @@
 # DSA5208 Project 3 — Jacobi / 3D Poisson
 
+**2026-11-07 技术收尾完成：**A/B/C 已合并为 [15 页英文审阅报告](output/pdf/DSA5208_Project3_Review_Report.pdf)，附 [独立源码/CSV/图表交付包](output/DSA5208_Project3_Review_Package.zip)。已补同内存容量族的扩展与 144 核独立复核；20 组扩展 + 8 组成对比较共 84 次正式观测。姓名、学号和个人贡献按用户要求暂不加入；432/720 可选点仍排队，未上传 Canvas。
+**2026-11-07 B 更新：**新增笛卡尔 2D/3D MPI、混合并行及正式矩阵，已通过本地与 Vanda 真实两节点验证。当前运行状态和已验收数值见 [B 实测结果](docs/B_RESULTS_2026-11-07.md)，设计及章节见 [B 章节](docs/final_B_mpi.md)，编译/运行见 [B README](b_mpi/README.md)。未完成作业不计为已完成实验。
+
 **更新日期：2026-11-05。A 的数值研究及 2D/3D 串行规模分析已完成；B/C 按最新评分分工推进。**
 
 **所有成员先读 [最新任务清单与 A/B/C 分工](10.30会议讨论要点与ABC分工.md)。**

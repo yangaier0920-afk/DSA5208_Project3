@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N B_cart_validate
+#PBS -q auto_free
+#PBS -l select=2:ncpus=8:mpiprocs=4:ompthreads=2:mem=2gb
+#PBS -l walltime=00:15:00
+#PBS -j oe
+#PBS -S /bin/bash
+set -euo pipefail
+cd "$PBS_O_WORKDIR"
+source ./b_mpi/runtime_modules.sh
+out="results/final_202611/B_mpi/validation_${PBS_JOBID}"
+mkdir -p "$out"
+exec > >(tee "$out/run.log") 2>&1
+mpicxx -std=c++17 -O2 -fopenmp b_mpi/jacobi_cart.cpp -o "$out/jacobi_cart_hybrid"
+python3 b_mpi/verify_b.py --binary "$out/jacobi_cart_hybrid" --expected-nodes 2 --launcher 'mpirun --map-by node --bind-to none --report-bindings' --out "$out/checks"
+echo RUN_STATUS=PASSED

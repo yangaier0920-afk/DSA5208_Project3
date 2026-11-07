@@ -1,0 +1,12 @@
+{
+  "A_serial_configs": 10,
+  "A_serial_calls": 40,
+  "A_summary_recalculation": "PASS",
+  "A_formal_source_hash": "PASS",
+  "C_performance_calls": 36,
+  "C_formal_samples": 27,
+  "C_device_evidence": "all GPU samples verified actual offload",
+  "C_summary_recalculation": "PASS",
+  "author_identification": "omitted at user request",
+  "personal_contributions": "not asserted"
+}

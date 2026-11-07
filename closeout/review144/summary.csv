@@ -1,0 +1,2 @@
+id,suite,nx,ny,nz,P,T,cores,nodes,grid,K,median,minimum,maximum,relative_residual,speedup,efficiency,baseline
+strong_256x256x256_p144_t1,strong,256,256,256,144,1,144,4,6x6x4,1000,14.113333592,13.825400306,14.342317003,0.006664739220892522,,,
