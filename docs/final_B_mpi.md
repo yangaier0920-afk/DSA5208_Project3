@@ -1,3 +1,5 @@
+> 2026-11-09 feedback correction: see B_FEEDBACK_ANALYSIS_2026-11-09.md for baseline sensitivity, complete scaling tables and alternative weak references. New disjoint-host/baseline/optimization jobs are prepared but have no accepted result while PBS is unavailable.
+
 # B: Cartesian MPI, hybrid execution and communication
 
 Status, 7 November 2026 (Singapore time): technical closeout is complete.
@@ -5,8 +7,8 @@ The report uses 20 scaling configurations and eight paired-layout configuration
 occurrences, each with three formal samples: 84 formal samples in total, plus
 three communication diagnostics. The main numerical table has 26 configuration
 IDs and 78 samples; two additional pure-MPI paired controls supply six samples.
-Local and real two-node validation passed. Optional 432/720-core points remain
-queued and are not reported as completed. Author identification and personal
+Local and real two-node validation passed. Optional 432/720-core points have no accepted result. They were last known
+to be queued; their current status cannot be queried while PBS is unreachable. Author identification and personal
 contribution declarations are omitted at the user's request.
 
 ## Parallel design
@@ -155,7 +157,7 @@ For 256³, the standardized P72 median is 1.238393 s (speedup 36.761, efficiency
 
 The original 256³/P144 median is 13.854904 s, with range
 [12.601303, 14.110585] s. It is retained even though the
-curve is nonmonotonic. The independent four-host review gives
+curve is nonmonotonic. The four-host repeat sharing CN-011 and CN-108 with the original allocation gives
 14.113334 s, range [13.825400, 14.342317] s.
 The host sets partly overlap and conditions are shared; this reproduces high
 waiting in the tested allocations, but does not establish a universal
@@ -200,7 +202,7 @@ loss but cannot isolate all system causes.
 
 At 72 cores, all three hybrids are slower than the single-node paired MPI
 control; even the best hybrid minimum exceeds the MPI maximum. At 144 cores
-in the explicitly controlled review allocation, all three mixed layouts are
+in the earlier high-wait allocation, all three mixed layouts are
 faster than its paired MPI control (gains approximately 1.79–2.03), and their
 ranges do not overlap that MPI range. Three samples are not a confidence
 interval or a guarantee on a different allocation.
@@ -223,7 +225,7 @@ instrumented runs are separate from formal performance medians.
 | 144 | 4 | 14.042913 | 0.240497 | 0.084609 | 13.716785 | 97.68% |
 | 288 | 9 | 0.628623 | 0.134376 | 0.053438 | 0.439661 | 69.94% |
 
-The large original P144 waiting interval persists in the independent review.
+The large original P144 waiting interval persists in the overlapping-node repeat.
 It is a blocking communication/wait interval, not pure wire time; rank
 scheduling, communication progress and fabric conditions can contribute.
 The cost model explains relative exposure as local domains shrink, but does
@@ -271,3 +273,23 @@ AI assisted implementation, independent checking, experiment tooling and
 this draft. The member must review the code and findings and fill in their
 own name, student ID and actual contribution. No personal understanding or
 member sign-off is asserted here.
+
+## Qualification after the 9 November feedback
+
+The two earlier four-node allocations share CN-011 and CN-108 and are not
+independent with respect to node identity. Their mixed-layout gains are
+conditional on a high-wait MPI reference; a healthy-platform benefit is not
+established. New disjoint-node nine-host pure MPI and four-host full-layout
+experiments are separate, with their own baselines. Directional diagnostics
+report both neighbors participating in each axis's Sendrecv calls; a large
+interval does not uniquely identify one faulty physical link.
+
+Parallel packing, genuine parallel first writes to uninitialized allocations,
+a persistent OpenMP region and their combination are implemented in a separate
+experimental source. The original measured source remains unchanged. An
+aligned experimental baseline separates allocation/container/compiler effects
+from the individual optimization switches. Thirty local mathematical checks
+pass across the five variants, but no cluster speedup is claimed without
+completed cluster measurements. In particular, ranks confined to one NUMA
+socket may show little first-touch benefit; page placement has not been
+independently measured.

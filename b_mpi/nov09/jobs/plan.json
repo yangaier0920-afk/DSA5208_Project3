@@ -1,0 +1,73 @@
+{
+  "good_hosts": [
+    "cn-003",
+    "cn-110",
+    "cn-126",
+    "cn-136",
+    "cn-139",
+    "cn-141",
+    "cn-143",
+    "cn-145",
+    "cn-146"
+  ],
+  "excluded_old144_hosts": [
+    "cn-011",
+    "cn-108",
+    "cn-084",
+    "cn-152",
+    "cn-039",
+    "gn-a40-047"
+  ],
+  "jobs": [
+    {
+      "name": "clean144",
+      "mode": "clean144",
+      "select": "1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-003+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-110+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-126+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-136+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-139+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-141+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-143+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-145+1:ncpus=16:mpiprocs=16:ompthreads=1:mem=8gb:host=cn-146",
+      "place": "scatter",
+      "walltime": "00:20:00"
+    },
+    {
+      "name": "paired144",
+      "mode": "paired144",
+      "select": "1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-003+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-110+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-126+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-136",
+      "place": "scatter",
+      "walltime": "00:20:00"
+    },
+    {
+      "name": "baseline",
+      "mode": "baseline",
+      "select": "1:ncpus=72:mpiprocs=1:ompthreads=1:mem=16gb",
+      "place": "scatter:exclhost",
+      "walltime": "00:45:00"
+    },
+    {
+      "name": "optimize72",
+      "mode": "optimize72",
+      "select": "1:ncpus=72:mpiprocs=72:ompthreads=1:mem=16gb",
+      "place": "scatter:exclhost",
+      "walltime": "00:45:00"
+    },
+    {
+      "name": "suspect_diag",
+      "mode": "suspect_diag",
+      "select": "1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-011+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-084+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-108+1:ncpus=36:mpiprocs=36:ompthreads=1:mem=8gb:host=cn-152",
+      "place": "scatter",
+      "walltime": "00:10:00"
+    },
+    {
+      "name": "link_reference",
+      "mode": "links",
+      "select": "1:ncpus=1:mpiprocs=1:ompthreads=1:mem=8gb:host=cn-003+1:ncpus=1:mpiprocs=1:ompthreads=1:mem=8gb:host=cn-110",
+      "place": "scatter",
+      "walltime": "00:10:00"
+    },
+    {
+      "name": "link_suspect",
+      "mode": "links",
+      "select": "1:ncpus=1:mpiprocs=1:ompthreads=1:mem=8gb:host=cn-011+1:ncpus=1:mpiprocs=1:ompthreads=1:mem=8gb:host=cn-108",
+      "place": "scatter",
+      "walltime": "00:10:00"
+    }
+  ],
+  "submission_order": "clean144 -> paired144 -> baseline -> optimize72; reference link after paired144; suspect links after suspect_diag to avoid same-user overlapping-host allocations"
+}

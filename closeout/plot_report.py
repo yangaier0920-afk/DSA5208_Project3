@@ -3,7 +3,7 @@ import csv,json,pathlib,math
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.ticker import ScalarFormatter
+from matplotlib.ticker import ScalarFormatter,LogLocator,FuncFormatter
 ROOT=pathlib.Path('.');OUT=ROOT/'closeout/figures';OUT.mkdir(parents=True,exist_ok=True)
 plt.rcParams.update({'font.size':10,'axes.labelsize':10,'legend.fontsize':8,'pdf.fonttype':42})
 def read(p):return list(csv.DictReader(open(p)))
@@ -44,15 +44,18 @@ for metric,name,ylab in [('median','mpi_time','Iteration time (s)'),('speedup','
   if metric=='median':value=v
   elif metric=='speedup':value=base/v
   else:value=base/v/p*100
-  ax.scatter([p],[value],marker='D',facecolors='none',edgecolors='#c22638',s=80,label='256³ independent 144 review',zorder=5)
+  ax.scatter([p],[value],marker='D',facecolors='none',edgecolors='#c22638',s=80,label='256³ repeat (shared hosts)',zorder=5)
  ax.legend(ncol=2,fontsize=8);save(fig,name)
 w=sorted([r for r in b if r['suite']=='weak'],key=lambda r:int(r['P']));fig,axs=plt.subplots(1,2,figsize=(7.2,3.25));xs=[int(r['P']) for r in w]
 axs[0].errorbar(xs,[1000*float(r['median'])/1000 for r in w],yerr=[[float(r['median'])-float(r['minimum']) for r in w],[float(r['maximum'])-float(r['median']) for r in w]],marker='o',capsize=3);axs[0].set_yscale('log');axs[0].set_ylabel('Milliseconds per sweep')
 axs[1].plot(xs,[100*float(r['efficiency']) for r in w],'o-');axs[1].set_ylabel('Weak efficiency (%)');axs[1].set_ylim(0,105)
+for base,style in [(8,'s--'),(72,'^:')]:
+ ref=next(float(r['median']) for r in w if int(r['P'])==base);part=[r for r in w if int(r['P'])>=base];axs[1].plot([int(r['P']) for r in part],[100*ref/float(r['median']) for r in part],style,label=f'P{base} reference')
+axs[1].lines[0].set_label('P1 reference');axs[1].legend(fontsize=7)
 for ax in axs:logx(ax,xs);ax.set_xlabel('MPI ranks / CPU cores')
 save(fig,'weak_scaling')
 hyb=read(ROOT/'closeout/hybrid_summary.csv') if (ROOT/'closeout/hybrid_summary.csv').exists() else [r for r in b if r['suite']=='hybrid' or (r['suite']=='strong' and r['nx']=='256' and r['P'] in ('72','144'))]
-hyb.sort(key=lambda r:(int(r['cores']),-int(r['P'])));fig,ax=plt.subplots(figsize=(7.2,3.3));x=list(range(len(hyb)));ax.errorbar(x,[float(r['median']) for r in hyb],yerr=[[float(r['median'])-float(r['minimum']) for r in hyb],[float(r['maximum'])-float(r['median']) for r in hyb]],fmt='o',capsize=3);ax.set_xticks(x,[r['P']+'×'+r['T'] for r in hyb],fontsize=9);ax.set_yscale('log');ax.set(xlabel='MPI ranks × threads per rank',ylabel='Iteration time (s)');ax.axvline(3.5,color='gray',ls=':');ax.grid(axis='y',alpha=.22);save(fig,'hybrid_layouts')
+hyb.sort(key=lambda r:(int(r['cores']),-int(r['P'])));fig,ax=plt.subplots(figsize=(7.2,3.3));x=list(range(len(hyb)));ax.errorbar(x,[float(r['median']) for r in hyb],yerr=[[float(r['median'])-float(r['minimum']) for r in hyb],[float(r['maximum'])-float(r['median']) for r in hyb]],fmt='o',capsize=3);ax.set_xticks(x,[r['P']+'×'+r['T'] for r in hyb],fontsize=9);ax.set_yscale('log');ax.set(xlabel='MPI ranks × threads per rank',ylabel='Iteration time (s)');ax.axvline(3.5,color='gray',ls=':');ax.yaxis.set_minor_locator(LogLocator(base=10,subs=[2,3,5]));ax.yaxis.set_minor_formatter(FuncFormatter(lambda y,pos:f'{y:g}' if y in (2,3,5) else ''));ax.tick_params(axis='y',which='minor',labelsize=8);ax.grid(axis='y',which='both',alpha=.22);save(fig,'hybrid_layouts')
 d=read(B/'diagnostics.csv');fig,ax=plt.subplots(figsize=(7.2,3.3))
 for j,(key,label) in enumerate([('update','Update'),('pack_unpack','Pack/unpack'),('communication_wait','Communication/wait')]):
  ax.scatter([float(r['P'])*(1+.06*(j-1)) for r in d],[float(r[key]) for r in d],label=label,s=35)
