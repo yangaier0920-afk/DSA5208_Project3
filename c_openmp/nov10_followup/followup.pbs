@@ -1,0 +1,62 @@
+#!/bin/bash
+#PBS -N C_nov10_followup
+#PBS -q auto
+# Set the project at submission with qsub -P.
+#PBS -l select=1:ncpus=36:ngpus=1:mem=240GB
+#PBS -l walltime=01:00:00
+#PBS -j oe
+set -euo pipefail
+cd "${PBS_O_WORKDIR:?Submit from the nov10_followup directory}"
+suite="${C_SUITE:?Use qsub -v C_SUITE=cpu, gpu, or scaling}"
+case "$suite" in cpu|gpu|scaling) ;; *) echo "Unknown suite: $suite"; exit 2;; esac
+out="$PWD/runs/${suite}_${PBS_JOBID:?}"
+mkdir -p "$PWD/runs"
+mkdir "$out"
+exec > >(tee "$out/run.log") 2>&1
+trap 'status=$?; echo "JOB_EXIT_STATUS=$status"; exit "$status"' EXIT
+cp -R source "$out/"
+cp "$0" "$out/submitted.pbs"
+cp run_followup.py "$out/"
+cd "$out"
+hostname
+date -Is
+lscpu
+nvidia-smi
+export OMP_TARGET_OFFLOAD=MANDATORY OMP_DYNAMIC=FALSE OMP_PLACES=cores OMP_PROC_BIND=close
+mkdir build
+source /app1/ebenv
+
+if [[ "$suite" = cpu ]]; then (
+    # Keep GCC 12.2 and its dependency modules out of the NVHPC environment.
+    module load GCC/12.2.0
+    g++ --version
+    flags=(-std=c++17 -O2 -Wall -Wextra -Wpedantic)
+    g++ "${flags[@]}" -fopt-info-vec-all=build/a_gcc.vec source/jacobi_a_scaling.cpp -o build/a_gcc
+    g++ "${flags[@]}" -DC_DIAG_SERIAL -fopt-info-vec-all=build/c_gcc_serial.vec source/jacobi_c_cpu_diag.cpp -o build/c_gcc_serial
+    g++ "${flags[@]}" -fopenmp -fopt-info-vec-all=build/c_gcc_omp.vec source/jacobi_c_cpu_diag.cpp -o build/c_gcc_omp
+); fi
+
+module load NVHPC/24.7-CUDA-12.3.0
+module list
+nvc++ --version
+gcc --version
+python3 --version
+toolchain="--gcc-toolchain=$(command -v gcc)"
+if [[ "$suite" = cpu || "$suite" = scaling ]]; then
+    bash source/build.sh nvidia
+    cp source/build/jacobi_c_gpu build/c_formal
+fi
+if [[ "$suite" = cpu ]]; then
+    flags=("$toolchain" -std=c++17 -O2 -Minfo=vec)
+    nvc++ "${flags[@]}" -DC_DIAG_SERIAL source/jacobi_c_cpu_diag.cpp -o build/c_nv_serial >build/c_nv_serial.vec 2>&1
+    nvc++ "${flags[@]}" -mp=multicore -Minfo=mp,vec source/jacobi_c_cpu_diag.cpp -o build/c_nv_collapse >build/c_nv_collapse.vec 2>&1
+    nvc++ "${flags[@]}" -mp=multicore -Minfo=mp,vec -DC_DIAG_OUTER source/jacobi_c_cpu_diag.cpp -o build/c_nv_outer >build/c_nv_outer.vec 2>&1
+fi
+if [[ "$suite" = gpu ]]; then
+    nvc++ "$toolchain" -std=c++17 -O2 -mp=multicore -DC_ENABLE_TARGET -c source/jacobi_c_openmp.cpp -o build/host.o
+    nvc "$toolchain" -std=c11 -O2 -mp=gpu -Minfo=mp -c source/jacobi_c_target_diag.c -o build/target.o
+    nvc++ "$toolchain" -mp=gpu build/host.o build/target.o -o build/c_gpu_phases
+    nvc "$toolchain" -O2 -mp=gpu source/target_probe.c -o build/target_probe
+fi
+python3 run_followup.py "$suite"
+echo RUN_STATUS=COMPLETED

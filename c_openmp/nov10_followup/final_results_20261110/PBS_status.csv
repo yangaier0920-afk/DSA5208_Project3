@@ -1,0 +1,5 @@
+suite,job_id,node,exit_status,walltime,timed_calls,retained_calls
+formal,1525886.stdct-mgmt-02,GN-A40-024,0,00:05:29,36,27
+cpu,1536409.stdct-mgmt-02,GN-A40-024,0,00:18:38,32,24
+gpu,1536382.stdct-mgmt-02,GN-A40-094,0,00:00:47,12,9
+scaling,1536540.stdct-mgmt-02,GN-A40-024,0,00:07:44,28,21

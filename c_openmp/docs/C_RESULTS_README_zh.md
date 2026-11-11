@@ -1,8 +1,6 @@
-> 2026-11-07：用户已授权技术收尾；英文 C 章节及合稿审阅版现已形成，见根目录 docs/final_C_openmp.md 与 output/pdf。姓名、学号及个人贡献声明按用户要求未添加。下文 11/6“不写英文”的安排是历史记录。
-
 # C 模块中文成果说明：OpenMP CPU 与单 GPU Jacobi
 
-更新：2026-11-06。本文件是供本人理解、核对和后续合稿使用的中文 README 稿；当前不撰写英文 C 章节，不补 contribution / AI usage，也不执行向 A 发送材料。
+更新至 2026-11-11。本页保留正式实验的中文说明。英文 C 章节已纳入三项补测、PBS 证据与汇编诊断。[英文 C 章节](final_C_openmp.md) · [评语处理表](../nov10_followup/final_results_20261110/REVIEW_RESPONSE_20261111.md)
 
 **当前结果：正式三规模实验已经完成。** 本文只使用同一正式批次的 64³ / 128³ / 256³ 数据，不混入早前 64³ pilot。正式图、统计 CSV 和验证摘要已生成，无需重跑实验或增加规模。
 
@@ -201,4 +199,4 @@ python3 -m venv .venv
 
 仓库中用于绘图的数值输入位于 `deliverables/formal_20261106/`；environment.json 仅保留绘图必需的平台字段和实验配置，不包含账号变量或原始调度环境。绘图只读取已有实验数据，不重新运行求解器，不访问 Vanda。原始日志、stdout/stderr、网格和完整作业目录保留为内部证据；未来课程提交按约定只选源码、README、必要脚本、图及数值 CSV，不把终端记录塞进最终报告。
 
-当前交付边界：先审阅本中文稿；英文 `final_C_openmp.md` 暂不撰写，contribution / AI usage 与向 A 发送材料不在本次执行范围。
+合稿使用已更新的英文 C 章节和正式图表。成员贡献和 AI 使用声明由本人核实并补齐身份信息。[英文 C 章节](final_C_openmp.md) · [声明草稿](../nov10_followup/final_results_20261110/CONTRIBUTION_AI_DRAFT.md)

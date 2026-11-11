@@ -1,8 +1,6 @@
-> 2026-11-07 合稿更新：英文 C 章节和整体审阅 PDF 已补齐，见根目录 docs/final_C_openmp.md 与 output/pdf。下文“不写英文”的表述保留为 11/6 历史状态；本轮未重跑 GPU 或补造 PBS 历史状态，成员个人声明按用户要求省略。
-
 # C 正式三规模结果：2026-11-06
 
-本页使用正式 job **1525886.stdct-mgmt-02** 的本地已下载证据。已核对 run.log 的 COMPLETED / JOB_EXIT_STATUS=0、run_status、样本数量和每个配置的 repeat，以及样本 CSV 与逐次 stdout 时间一致性。当前下载中没有独立 PBS 最终 qstat 记录，因此不把日志退出码冒充 PBS 历史 Exit_status。
+本页使用正式 job **1525886.stdct-mgmt-02** 的本地已下载证据。已核对 run.log 的 COMPLETED / JOB_EXIT_STATUS=0、run_status、样本数量和每个配置的 repeat，以及样本 CSV 与逐次 stdout 时间一致性。11 月 10 日复核的独立 PBS 作业历史显示 `job_state = F`、`Exit_status = 0`，实耗时 5 分 29 秒。[调度历史摘录与核验说明](../nov10_followup/evidence/README.md)
 
 ## 验收与环境
 
@@ -55,4 +53,4 @@ resident 含 K 次 kernel 启动和同步，并非 kernel-only 设备事件时�
 - [裁剪后的平台配置 environment.json](../deliverables/formal_20261106/environment.json)
 - 本地详细核验记录仅保留在作者本机；仓库提供 [验证简表](../deliverables/formal_20261106/analysis/validation_summary.csv)。
 
-已生成并检查 runtime.png / speedup.png（300 dpi）与同名矢量 PDF；`.venv` 绘图环境已建立，依赖版本保存在 requirements-plots.txt。实现、设置、验证表和讨论见 [中文成果 README](C_RESULTS_README_zh.md)。当前先审阅中文稿，英文 final_C_openmp.md 暂不撰写；contribution / AI usage 与向 A 发送材料未执行。无需重新排队 formal。
+已生成并检查 runtime.png / speedup.png（300 dpi）与同名矢量 PDF；`.venv` 绘图环境已建立，依赖版本保存在 requirements-plots.txt。实现、设置、验证表和讨论见 [中文成果 README](C_RESULTS_README_zh.md)。英文 C 章节已纳入正式结果和三项补测。贡献和 AI 使用声明待本人确认。[英文 C 章节](final_C_openmp.md) · [合稿包](../nov10_followup/final_results_20261110/README.md)

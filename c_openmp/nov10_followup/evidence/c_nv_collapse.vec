@@ -1,0 +1,75 @@
+main:
+         638, Loop not vectorized/parallelized: not countable
+         638, Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+         667, Loop not vectorized/parallelized: not countable
+        3564, Loop not vectorized/parallelized: not countable
+         638, Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3718, Loop not vectorized/parallelized: potential early exits
+              Loop not vectorized/parallelized: not countable
+        3564, Loop not vectorized/parallelized: not countable
+     85, Loop not vectorized/parallelized: contains call
+    110, #omp parallel
+        114, Begin single region
+             End single region
+             Barrier
+        130, Barrier
+    117, Loop not vectorized/parallelized: contains call
+    125, Loop not vectorized: data dependency
+    149, Loop not vectorized/parallelized: potential early exits
+    161, Loop not vectorized/parallelized: potential early exits
+main::'lambda'(double const*)::operator()(double const*) const:
+     92, Generated vector simd code for the loop containing reductions
+std::char_traits<char>::compare(char const*, char const*, unsigned long):
+     19, include "fstream"
+          40, include "istream"
+               40, include "ios"
+                    42, include "char_traits.h"
+                        391, Loop not vectorized/parallelized: potential early exits
+std::char_traits<char>::length(char const*):
+         203, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_check_length(unsigned long, unsigned long, char const*) const:
+     19, include "fstream"
+          40, include "istream"
+               40, include "ios"
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         407, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&):
+         638, Loop not vectorized/parallelized: not countable
+__gnu_cxx::char_traits<char>::length(char const*):
+     19, include "fstream"
+          40, include "istream"
+               40, include "ios"
+                    42, include "char_traits.h"
+                        203, Loop not vectorized/parallelized: not countable
+std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*):
+         407, Loop not vectorized/parallelized: not countable
+bool std::operator==<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*):
+         391, Loop not vectorized/parallelized: potential early exits
+         407, Loop not vectorized/parallelized: not countable
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::operator+<char, std::char_traits<char>, std::allocator<char>>(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&):
+         407, Loop not vectorized/parallelized: not countable
+bool std::operator!=<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*):
+        3718, Loop not vectorized/parallelized: not countable
+              Loop not vectorized/parallelized: potential early exits
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> std::__str_concat<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::allocator_type const&):
+     19, include "fstream"
+          40, include "istream"
+               40, include "ios"
+__gnu_cxx::__enable_if<std::__is_scalar<double>::__value, void>::__type std::__fill_a1<double*, double>(double*, double*, double const&):
+     19, include "fstream"
