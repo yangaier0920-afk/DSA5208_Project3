@@ -72,6 +72,15 @@
         "depend=afterok:1536850.stdct-mgmt-02",
         "b_mpi/nov09/jobs/link_reference.pbs"
       ]
+    },
+    {
+      "name": "twod",
+      "job": "1546883.stdct-mgmt-02",
+      "depends_on": null,
+      "command": [
+        "qsub",
+        "b_mpi/nov12/twod.pbs"
+      ]
     }
   ],
   "revision_notes": [

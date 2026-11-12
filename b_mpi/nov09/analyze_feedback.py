@@ -2,7 +2,7 @@
 """Audit completed cluster results; never select measurements by speed."""
 import argparse,collections,csv,hashlib,json,math,pathlib,statistics
 p=argparse.ArgumentParser();p.add_argument('--input',required=True);p.add_argument('--out',required=True);a=p.parse_args();root=pathlib.Path(a.input);out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
-groups=collections.defaultdict(list);axis=[];links=[];seen_jobs=set()
+numerics=collections.defaultdict(list);groups=collections.defaultdict(list);axis=[];links=[];seen_jobs=set()
 for meta_file in root.rglob('metadata.json'):
  data_dir=meta_file.parent;meta=json.loads(meta_file.read_text())
  if meta.get('local_smoke'):continue
@@ -28,8 +28,10 @@ for meta_file in root.rglob('metadata.json'):
  for record in data_dir.glob('*.record.json'):
   r=json.loads(record.read_text());c=r['config'];v=r['result'];raw=json.loads(pathlib.Path(str(record).replace('.record.json','.stdout.json')).read_text());assert raw==v and r['process_returncode']==0
   assert v['iterations']==1000 and v['status']=='fixed_iterations' and v['boundary_error_inf']<=1e-12
-  assert [v[k] for k in ['nx','ny','nz']]==c['n'] and all(math.isfinite(v[k]) for k in ['compute_seconds','relative_residual'])
+  assert [v[k] for k in ['nx','ny','nz']]==c['n'] and all(math.isfinite(v[k]) for k in ['compute_seconds','relative_residual','residual_l2','discrete_error_inf','continuous_error_inf','boundary_error_inf'])
+  numerics[tuple(c['n'])].append(v['relative_residual'])
   if c['binary']!='serial':
+   assert v['process_grid']==c['grid']
    log=pathlib.Path(str(record).replace('.record.json','.stderr.txt')).read_text();masks=[]
    for line in log.splitlines():
     if 'AFFINITY_JSON ' in line:masks.append(json.JSONDecoder().raw_decode(line.split('AFFINITY_JSON ',1)[1])[0])
@@ -45,6 +47,7 @@ for meta_file in root.rglob('metadata.json'):
      lo,hi=t[3+2*d:5+2*d];axis.append(dict(job=meta['job'],mode=mode,case=c['id'],rank=rank,host=names[rank],axis=label,low_neighbor=lo,high_neighbor=hi,low_host=names[lo] if lo>=0 else 'boundary',high_host=names[hi] if hi>=0 else 'boundary',communication_wait_seconds=xyz[d],pack_unpack_seconds=xyz[d+3],rank_total_seconds=timing[0],is_slowest_rank=int(rank==slow)))
    continue
   if r['repeat']>=0:groups[(meta['job'],mode,c['id'])].append(r)
+for mesh,values in numerics.items():assert max(values)-min(values)<1e-9,(mesh,'cross-layout residual mismatch')
 summary=[]
 for (job,mode,id),samples in groups.items():
  reps=5 if mode=='baseline' else 3

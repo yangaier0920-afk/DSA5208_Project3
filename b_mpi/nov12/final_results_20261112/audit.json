@@ -1,10 +1,14 @@
 {
   "accepted_jobs": [
     "1536849.stdct-mgmt-02",
-    "1536855.stdct-mgmt-02"
+    "1536850.stdct-mgmt-02",
+    "1536855.stdct-mgmt-02",
+    "1546654.stdct-mgmt-02",
+    "1546655.stdct-mgmt-02",
+    "1546883.stdct-mgmt-02"
   ],
-  "performance_configurations": 4,
-  "axis_rows": 432,
+  "performance_configurations": 43,
+  "axis_rows": 1116,
   "link_measurements": 4,
   "speed_filter_applied": false
 }

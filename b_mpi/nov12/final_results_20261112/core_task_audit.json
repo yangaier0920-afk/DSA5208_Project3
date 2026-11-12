@@ -1,0 +1,28 @@
+{
+  "core_complete": true,
+  "required_configurations": 39,
+  "accepted_core_configurations": 39,
+  "missing": [],
+  "new_formal_samples": 137,
+  "core_formal_samples": 125,
+  "new_diagnostic_runs": 5,
+  "core_diagnostic_runs": 4,
+  "baseline_five_percent_target_met": true,
+  "optional_2d_complete": true,
+  "optional_original_host_jobs": [
+    {
+      "experiment": "suspect_diag",
+      "job": "1536853.stdct-mgmt-02",
+      "state": "Q",
+      "exit_status": null,
+      "comment": "Not Running: Insufficient amount of resource: host "
+    },
+    {
+      "experiment": "link_suspect",
+      "job": "1546667.stdct-mgmt-02",
+      "state": "Q",
+      "exit_status": null,
+      "comment": "Not Running: Insufficient amount of resource: host "
+    }
+  ]
+}

@@ -2,14 +2,14 @@
 
 ## Status
 
-> **12 November update:** PBS has recovered. The original fixed-host requests
-> were revised after two days in the queue. The 9-host pure-MPI run and reference
-> link probe have completed; the exclusive P1 baseline is running. Actual
-> scheduler evidence and revised requests are collected under `b_mpi/nov12/`.
-> New submissions default to scheduler-selected hosts, reject all six old
-> 144-core hosts (including FQDN aliases), and run the baseline independently.
-> `--fixed-reference-hosts` reproduces the original Nov9 request. The original
-> design/status below is retained as history; it is not current job status.
+> **12 November update:** PBS has recovered. All 39 required follow-up
+> configurations (125 formal samples) and four new diagnostics have passed the
+> independent audit. Exclusive P1, P72 ablation and both P144 allocations are
+> complete; see `../nov12/final_results_20261112/README.md`. Original-host probes
+> are queued supplements; the optional 2D extension has also completed. New submissions use
+> scheduler-selected hosts with FQDN-normalized exclusions, and the baseline
+> runs independently. `--fixed-reference-hosts` reproduces the original Nov9
+> request. The design/status below is retained as a historical protocol.
 
 
 Prepared and locally validated. **No new formal Vanda runtime is claimed.**

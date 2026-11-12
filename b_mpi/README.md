@@ -1,3 +1,11 @@
+> **12 November 2026:** the required B feedback suite is complete and audited.
+> See [final results and raw evidence](nov12/final_results_20261112/README.md),
+> [the revised B chapter](../docs/final_B_mpi.md), and
+> [reproduction instructions](nov12/README.md). The original `jacobi_cart.cpp`
+> remains frozen. Experimental variants are in `nov09/jacobi_cart_tuned.cpp`;
+> use an explicit `--variant` (the packing-only treatment has the clearest
+> measured benefit). Historical instructions and observations below are retained.
+
 > 2026-11-07 技术收尾：主扩展曲线改为同 CPU/内存容量族；P72/P144/P288 实际为 3/4/9 主机。混合配比独立成对，不能从主曲线换用分母。20 组扩展加 8 组成对比较，共 84 次正式样本；主表 26 个 ID 的 78 次与配对专用基准 6 次分开记录。最新章节和合稿见 docs/final_B_mpi.md、docs/final_report_review.md。
 
 # Member B: Cartesian MPI and MPI+OpenMP experiments

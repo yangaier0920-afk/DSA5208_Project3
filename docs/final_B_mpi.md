@@ -1,297 +1,208 @@
-> **2026-11-12 补充：** PBS 已恢复，9 节点 144 核复测、432/720 核可选点和参考通信探针已取得并核验。新增结果、原始证据与待完成项见 [B 补充结果](../b_mpi/nov12/final_results_20261112/README.md) 和 [完成状态](B_COMPLETION_STATUS_2026-11-12.md)。下方 11 月 7 日数据保留为历史记录；尚未采集完成的基线与配对实验不得当作新结论。
-
-> 2026-11-09 feedback correction: see B_FEEDBACK_ANALYSIS_2026-11-09.md for baseline sensitivity, complete scaling tables and alternative weak references. New disjoint-host/baseline/optimization jobs are prepared but have no accepted result while PBS is unavailable.
-
 # B: Cartesian MPI, hybrid execution and communication
 
-Status, 7 November 2026 (Singapore time): technical closeout is complete.
-The report uses 20 scaling configurations and eight paired-layout configuration
-occurrences, each with three formal samples: 84 formal samples in total, plus
-three communication diagnostics. The main numerical table has 26 configuration
-IDs and 78 samples; two additional pure-MPI paired controls supply six samples.
-Local and real two-node validation passed. Optional 432/720-core points have no accepted result. They were last known
-to be queued; their current status cannot be queried while PBS is unreachable. Author identification and personal
-contribution declarations are omitted at the user's request.
+Final core follow-up: 12 November 2026. All 39 required configurations,
+125 new formal samples and four separate diagnostic runs passed the audit.
+The completed optional P432/P720 jobs add three configurations and nine
+formal samples. Remaining queued supplements are explicitly identified below.
+Author identities and personal contribution declarations remain omitted.
 
-## Parallel design
+## Parallel design and timing contract
 
-P denotes the MPI rank count, T the OpenMP threads per rank, C=P×T the
-physical core count, K the sweep count, and N the total interior unknowns.
-A halo is a layer holding neighboring ranks' values.
+The solver uses a Cartesian block decomposition of the interior grid with
+uneven remainders assigned to low-coordinate ranks. Five-/seven-point Jacobi
+stencils need face halos but no edge/corner exchange. Each face is packed,
+exchanged with blocking MPI_Sendrecv, and unpacked before the update; swapping
+two solution arrays preserves Jacobi semantics. MPI_THREAD_FUNNELED restricts
+MPI calls to the main thread. The original Nov7 solver is byte-preserved.
 
-The manufactured Poisson problem uses a five-point stencil in two dimensions
-and a seven-point stencil in three. Nonperiodic Cartesian block decomposition
-maps each rank to a rectangular subdomain. Quotient/remainder partitioning
-supports nondivisible global dimensions. Each rank stores its own interior,
-one halo layer, two solution buffers and the precomputed right-hand side.
-Initialization uses global coordinates; Dirichlet boundaries are initialized
-in both buffers and never overwritten by communication.
+Performance runs execute exactly K=1000 sweeps. Initialization, residual
+evaluation and host/topology collection are outside the iteration timer;
+the maximum rank time is reported. Every non-baseline configuration uses
+one warmup plus three measured repetitions; the exclusive P1 controls use
+five measured repetitions. Separate instrumented runs record per-rank phase
+and x/y/z communication/packing intervals. CPU masks are audited for size,
+allocation containment and overlap. Mathematical checks cover dimensions,
+uneven partitions and hybrid variants; all five variants passed six local
+oracle cases each, maximum error 7.55e-15.
 
-The primary strategy explicitly packs faces and uses blocking MPI_Sendrecv.
-Only face neighbors are necessary. The two-dimensional path exchanges four
-faces and the three-dimensional path six. Every sweep updates the local
-interior from the previous buffer and then swaps buffers. Residual checks
-refresh the final halo before evaluating the global residual.
+The experimental baseline shares allocation representation with four
+treatments: parallel face packing, genuinely parallel first writes into
+uninitialized arrays, a persistent OpenMP team, and their combination.
+Only matched-baseline ratios isolate these switches; the original solver is
+retained as a separate external reference. Physical NUMA page placement is
+not independently measured. No measurement is rejected for being slow.
 
-Pure MPI is built without OpenMP. MPI+OpenMP distributes local rows through
-static work sharing while keeping MPI calls on the initializing thread;
-MPI_THREAD_FUNNELED support and actual team sizes are checked. Threads are
-placed within the cores assigned to their rank. This implementation enters a
-parallel region every sweep, so its measured cost includes repeated team
-entry/synchronization. Fewer ranks can reduce the number of messages but
-change face size, NUMA placement and thread overhead simultaneously.
+The primary pure-MPI P144 curve uses the predeclared nine-host layout. The
+four-host P144 matrix is a separate controlled layout comparison with its
+own pure-MPI denominator. It remains slow on different nodes, so a hardware
+fault claim about CN-011/CN-108 is not established. Historical high-wait
+samples remain in the archive and historical_summary.csv.
 
-## Validation
+See [the six-page supplement](../output/pdf/DSA5208_B_Completed_Experiments_20261112.pdf),
+[raw evidence and all derived tables](../b_mpi/nov12/final_results_20261112/README.md),
+[reproduction instructions](../b_mpi/nov12/README.md), and the
+[superseded chapter](archive/final_B_mpi_pre_20261112.md).
 
-The reference is the exact discrete manufactured solution, whose sine
-amplitude is the continuous RHS coefficient divided by the discrete stencil
-eigenvalue. This separates implementation error from spatial discretization
-error. An independent one-sweep check also tests the transient stencil and
-boundary contributions before convergence can mask a defect.
+## Scheduler status (snapshot, not live)
 
-| Purpose | Case | Result |
-|---|---|---|
-| Serial/rank equivalence and face exchange | 7³, P=1 and P=8, K=1000 | PASS |
-| Nondivisible ownership and threads | 9×7×5, P=8, T=2, K=1000 | PASS |
-| Nonzero 2D RHS | 7², P=2, T=2, K=1000 | PASS |
-| One-cell local axes | 2×3×2, P=4, K=1000 | PASS |
-| Independent transient stencil | 9×7×5, P=8, T=2, K=1 | PASS |
+Last collected: 2026-11-12T16:03:56.271157+08:00. This is a saved scheduler snapshot; uncompleted jobs may have progressed.
 
-The six local cases had maximum oracle error 7.55e-15. Vanda job
-1529159.stdct-mgmt-02 completed with PBS exit status zero and maximum oracle error
-7.11e-15, but actually ran on one node because the MPI PBS plugin could not
-load libpbs.so.0. This was detected from the program-reported node count.
-Corrected job 1529188.stdct-mgmt-02 passed with exit zero and an explicit
-assertion that P=8 used two physical nodes. Its maximum oracle error was
-7.11e-15. The fixed environment adds /opt/pbs/lib to LD_LIBRARY_PATH. Boundary error was within 1e-12 and converged discrete-solution error
-within 1e-9. A separate local pure-MPI 7³ result agreed with A's serial solver:
-identical reported discrete maximum error (2.72e-15) and global L2 residuals
-differing by approximately 1.10e-14. These checks establish numerical
-correctness, not the performance of large configurations.
+| experiment | job | state | exit_status |
+|---|---|---|---|
+| clean144 | 1536849.stdct-mgmt-02 | F | 0 |
+| paired144 | 1536850.stdct-mgmt-02 | F | 0 |
+| baseline | 1546654.stdct-mgmt-02 | F | 0 |
+| optimize72 | 1546655.stdct-mgmt-02 | F | 0 |
+| suspect_diag | 1536853.stdct-mgmt-02 | Q | None |
+| link_suspect | 1546667.stdct-mgmt-02 | Q | None |
+| link_reference | 1536855.stdct-mgmt-02 | F | 0 |
+| twod | 1546883.stdct-mgmt-02 | F | 0 |
 
-## Experimental method and acceptance
+## Audited new measurements
 
-Every performance case fixes K=1000, performs one warmup and retains three
-fresh-start measurements. Report median and actual min/max. Iteration time
-includes halo packing/exchange, local updates, OpenMP synchronization where
-applicable and buffer swaps. The maximum rank duration is reported. Setup,
-initial/final residual, final verification and file output are excluded.
-No per-sweep residual reduction is performed. Fixed iteration count does
-not imply convergence.
+| job | mode | case | P | T | median | minimum | maximum | max_deviation_pct |
+|---|---|---|---|---|---|---|---|---|
+| 1546655.stdct-mgmt-02 | optimize72 | parallel_pack_12x6 | 12 | 6 | 1.188800184 | 1.186284892 | 1.196125342 | 0.6161807592721669 |
+| 1546655.stdct-mgmt-02 | optimize72 | baseline_72x1 | 72 | 1 | 1.195644083 | 1.190062889 | 1.2020901959999999 | 0.5391330991933563 |
+| 1546655.stdct-mgmt-02 | optimize72 | original_6x12 | 6 | 12 | 1.535808966 | 1.5293013420000001 | 1.537122671 | 0.4237261367830758 |
+| 1546655.stdct-mgmt-02 | optimize72 | baseline_2x36 | 2 | 36 | 1.96689247 | 1.959642318 | 1.970772424 | 0.3686094746196189 |
+| 1546655.stdct-mgmt-02 | optimize72 | original_72x1 | 72 | 1 | 1.192018746 | 1.170902254 | 1.192689563 | 1.7714899258807426 |
+| 1546655.stdct-mgmt-02 | optimize72 | baseline_12x6 | 12 | 6 | 1.797116925 | 1.795308681 | 1.803171832 | 0.3369233751999712 |
+| 1546655.stdct-mgmt-02 | optimize72 | parallel_pack_2x36 | 2 | 36 | 1.4745058370000002 | 1.466709338 | 1.4855881119999998 | 0.7515924808102037 |
+| 1546655.stdct-mgmt-02 | optimize72 | parallel_pack_72x1 | 72 | 1 | 1.200713497 | 1.197772059 | 1.207327974 | 0.55087887464631 |
+| 1546655.stdct-mgmt-02 | optimize72 | persistent_2x36 | 2 | 36 | 1.930438851 | 1.922826929 | 1.95200225 | 1.117020567050342 |
+| 1546655.stdct-mgmt-02 | optimize72 | optimized_72x1 | 72 | 1 | 1.200970499 | 1.195755635 | 1.2336112830000001 | 2.7178672604513343 |
+| 1546655.stdct-mgmt-02 | optimize72 | persistent_72x1 | 72 | 1 | 1.202157424 | 1.194134875 | 1.211368759 | 0.7662336742346731 |
+| 1546655.stdct-mgmt-02 | optimize72 | optimized_2x36 | 2 | 36 | 1.477255169 | 1.471749046 | 1.487518574 | 0.6947618268919431 |
+| 1546655.stdct-mgmt-02 | optimize72 | first_touch_12x6 | 12 | 6 | 1.798264358 | 1.78892571 | 1.812853081 | 0.8112668715864135 |
+| 1546655.stdct-mgmt-02 | optimize72 | first_touch_2x36 | 2 | 36 | 1.944035307 | 1.939141622 | 1.9542059 | 0.5231691504458791 |
+| 1546655.stdct-mgmt-02 | optimize72 | first_touch_72x1 | 72 | 1 | 1.191822989 | 1.191486641 | 1.198462486 | 0.5570875089069061 |
+| 1546655.stdct-mgmt-02 | optimize72 | persistent_12x6 | 12 | 6 | 1.805986187 | 1.789378294 | 1.809829138 | 0.9196024376901812 |
+| 1546655.stdct-mgmt-02 | optimize72 | optimized_12x6 | 12 | 6 | 1.181961149 | 1.181351591 | 1.18954812 | 0.6418968175408324 |
+| 1546655.stdct-mgmt-02 | optimize72 | persistent_6x12 | 6 | 12 | 1.5867945049999999 | 1.5821652099999999 | 1.594909183 | 0.5113880829830553 |
+| 1546655.stdct-mgmt-02 | optimize72 | optimized_6x12 | 6 | 12 | 1.221885288 | 1.20383265 | 1.2245145100000001 | 1.477441309531502 |
+| 1546655.stdct-mgmt-02 | optimize72 | first_touch_6x12 | 6 | 12 | 1.596715251 | 1.595487153 | 1.596727076 | 0.07691402704588235 |
+| 1546655.stdct-mgmt-02 | optimize72 | baseline_6x12 | 6 | 12 | 1.591896685 | 1.585431227 | 1.604183686 | 0.7718466352607534 |
+| 1546655.stdct-mgmt-02 | optimize72 | original_2x36 | 2 | 36 | 1.88164862 | 1.873832286 | 1.886640904 | 0.4153981735442125 |
+| 1546655.stdct-mgmt-02 | optimize72 | original_12x6 | 12 | 6 | 1.706989876 | 1.691827296 | 1.712511906 | 0.8882642019840459 |
+| 1546655.stdct-mgmt-02 | optimize72 | parallel_pack_6x12 | 6 | 12 | 1.222017403 | 1.213725669 | 1.230998844 | 0.7349683382536831 |
+| 1536850.stdct-mgmt-02 | paired144 | pair_12x12 | 12 | 12 | 7.206986913 | 7.147927202 | 7.279309558 | 1.0035073724019572 |
+| 1536850.stdct-mgmt-02 | paired144 | strong256 | 144 | 1 | 12.777951577 | 11.627928791 | 13.006588706 | 9.000055909352579 |
+| 1536850.stdct-mgmt-02 | paired144 | strong128 | 144 | 1 | 11.603083963 | 11.27811402 | 12.731153515 | 9.722152796594408 |
+| 1536850.stdct-mgmt-02 | paired144 | weak64 | 144 | 1 | 11.589038591 | 11.512316077 | 12.659222715 | 9.234451292888956 |
+| 1536850.stdct-mgmt-02 | paired144 | pair_4x36 | 4 | 36 | 8.963796552 | 7.094253911 | 9.357585231 | 20.856593856794614 |
+| 1536850.stdct-mgmt-02 | paired144 | strong512 | 144 | 1 | 16.022962163 | 15.702235574 | 16.208283166 | 2.001668516328503 |
+| 1536850.stdct-mgmt-02 | paired144 | pair_24x6 | 24 | 6 | 6.418337659 | 6.357926692 | 6.43379765 | 0.9412245071788838 |
+| 1546654.stdct-mgmt-02 | baseline | serial_256 | 1 | 1 | 32.203192816 | 32.193881334 | 32.322382609 | 0.37011793731454024 |
+| 1546654.stdct-mgmt-02 | baseline | mpi_128 | 1 | 1 | 3.028341177 | 2.994950933 | 3.031047628 | 1.102591882763937 |
+| 1546654.stdct-mgmt-02 | baseline | mpi_256 | 1 | 1 | 29.971071108 | 29.892586458 | 30.033972448 | 0.26186801838740115 |
+| 1546654.stdct-mgmt-02 | baseline | serial_128 | 1 | 1 | 3.595405718 | 3.572281748 | 3.608961469 | 0.6431532854340283 |
+| 1536849.stdct-mgmt-02 | clean144 | strong256 | 144 | 1 | 1.199994487 | 0.984019688 | 1.244006979 | 17.997982602398423 |
+| 1536849.stdct-mgmt-02 | clean144 | strong128 | 144 | 1 | 0.354812486 | 0.25554742900000005 | 0.370043714 | 27.976765451258657 |
+| 1536849.stdct-mgmt-02 | clean144 | weak64 | 144 | 1 | 1.4708567179999998 | 1.389114813 | 1.549147981 | 5.5574349288861065 |
+| 1536849.stdct-mgmt-02 | clean144 | strong512 | 144 | 1 | 4.75848068 | 4.755006098 | 5.14623819 | 8.14876713968291 |
+| 1546883.stdct-mgmt-02 | twod | twod512_p12 | 12 | 1 | 0.11331647300000003 | 0.112232003 | 0.116419097 | 2.738016740072702 |
+| 1546883.stdct-mgmt-02 | twod | twod512_p1 | 1 | 1 | 1.123406092 | 1.119968836 | 1.226171796 | 9.147689756341482 |
+| 1546883.stdct-mgmt-02 | twod | twod512_p72 | 72 | 1 | 0.03247924 | 0.032065514 | 0.034252651 | 5.460136998279519 |
+| 1546883.stdct-mgmt-02 | twod | twod512_p36 | 36 | 1 | 0.044280888 | 0.043677733 | 0.045243633 | 2.174177265821764 |
 
-B1 covers 128³ and 256³ at P=1/12/36/72/144/288, and 512³ at
-P=72/144/288/720. B2 fixes 64³ points per rank at
-P=1/8/72/144/288/432/720. B3 compares four rank/thread layouts at each of
-72 and 144 total cores on 256³. B4 records one separate stage diagnostic at
-P=72/144/288. Actual resource layout is recorded per job. The 144- and
-288-core jobs request four 36-core nodes / nine 32-core nodes to use fragmented capacity.
-The final scaling P72 point uses three 24-core allocations in the same host
-memory-capacity class; its separate hybrid comparison retains the original
-single-node allocation and its own paired MPI baseline.
+## Optional 432/720-core results recovered from 8 November
 
-For strong scaling, S(P)=T(1)/T(P) and E(P)=S(P)/P. The 512³ series uses
-S72(P)=T(72)/T(P) and E72(P)=S72(P)/(P/72), explicitly relative to 72 cores.
-Weak efficiency is Ew(P)=Tweak(1)/Tweak(P); local work is fixed but the global
-mesh and its spacing change. Hybrid layout improvement at total core count C
-is G=T_MPI(C)/T_hybrid(P,T), with C=P×T. Node placement must be matched and
-reported when interpreting this comparison.
+| id | nodes | median | minimum | maximum |
+|---|---|---|---|---|
+| strong_512x512x512_p720_t1 | 10 | 1.521555195 | 1.4999461680000001 | 1.5655860019999999 |
+| weak_640x576x512_p720_t1 | 10 | 2.077773583 | 2.069086781 | 2.339810424 |
+| weak_576x512x384_p432_t1 | 6 | 1.991137045 | 1.944318718 | 2.002234596 |
 
-Before accepting results, check actual hardware, rank/core binding, node and
-thread counts, K, finite metrics, boundary values, source/compiler identity,
-cross-layout numerical agreement, three retained samples and successful PBS
-completion. CPU models must match across each plotted curve. Submission and
-resource allocation alone do not satisfy the >=256-core requirement.
+## Interpretation and limits
 
-## Communication model and planned interpretation
+- The nine-host P144 rerun is separate from the four-host hybrid control. Its host count/ranks per host changed; recovery cannot uniquely identify faulty hardware. No monotonicity acceptance filter is used.
 
-For an interior local domain lx×ly×lz with six neighbors, outgoing face data
-per sweep are Vsend=8(2lylz+2lxlz+2lxly) bytes in double precision. Faces
-without a physical neighbor are subtracted. This counts sent bytes once;
-receives contribute an equal volume. A qualitative per-sweep model is
+- The main P144 pure-MPI series uses the predeclared nine-host cohort; open diamonds show the four-host paired control. The old and new four-host high-wait observations are retained separately. This is a comparison of declared layouts, not sample selection by speed. Hybrid gains always use their own four-host MPI denominator.
 
-T ≈ γ lx ly lz + α m + β Vsend + Tpack + Tsync.
+- New exclusive P1 samples replace the old shared-node P1 denominator only when the full five-repeat job is audited. The old weak-P1 (64 cubed) denominator is retained and labelled by the reference efficiencies E1/E8/E72.
 
-Here m is the number of outgoing messages, α the message latency contribution,
-β the transfer cost per byte and γ the local update cost per point. These
-parameters are explanatory and are not fitted network microbenchmarks.
-At fixed global size, local computation decreases as N/P, whereas near-cubic
-face area decreases as (N/P)^(2/3); relative communication exposure therefore
-grows. At fixed local work, face dimensions are nearly constant, but neighbor
-counts, network contention and the fraction of remote neighbors can change.
+- Cross-core scaling combines allocations and dates on the same CPU model; occupancy, NUMA placement, CPU frequency and node topology can differ. A serial controls use the actual same core as MPI P1.
 
-Diagnostic timers separate local updates, packing/unpacking, blocking
-communication/wait and swaps. Use all components from the rank with the
-largest total duration, and separately report the spread of rank totals.
-Independent maxima from different ranks cannot be added. Communication
-intervals include waiting for slower peers and are not pure network time.
-Timer/loop overhead remains visible as uninstrumented time; diagnostic
-samples do not replace performance measurements.
+- Optimization gains must use the matched experimental baseline. The original binary is an external reference because the experimental source changes the allocation representation. First touch is implemented but actual NUMA page placement is not independently measured.
 
-## Measured scaling and hybrid results
+- Axis communication/wait totals aggregate both neighbors. Rank/host/neighbor tables identify participants, not a uniquely faulty one-way link. Link RTTs are descriptive windows, not fitted network alpha/beta constants.
 
-### Cohort definition and provenance
+- Optional 2D and 3D problems have different work sizes and decompositions; compare trends rather than claiming a dimension-only runtime advantage.
 
-All accepted CPU models are Xeon Platinum 8452Y, two 36-core sockets and SMT
-off. Primary scaling now matches the nominal 512-GB host capacity class
-(approximately 501 GB scheduler-advertised memory), checked against the node
-catalogue and CPU metadata. Actual node counts are 1 at P1/8/12/36, 3 at P72,
-4 at P144 and 9 at P288. Node placement and shared-system load still vary;
-matching capacity class is not proof that all system conditions are identical.
+## Report
 
-The single-node 72-core hybrid comparison remains on CN-162, a larger-memory
-host, and uses only its own MPI control. The final 144-core hybrid comparison
-uses the controlled review allocation, with explicit remote OpenMP environment
-propagation and actual OS masks. Its MPI control is separate from the original
-P144 main-curve point. These paired denominators must not be replaced by the
-main scaling CSV's P72/P144 times. `hybrid_summary.csv` contains all eight
-paired configurations and explicitly records their control times/cohorts.
+[Six-page B completion supplement](../../../output/pdf/DSA5208_B_Completed_Experiments_20261112.pdf).
 
-All original mixed-capacity results, the original slow 144-core observations,
-and earlier hybrid results remain in the legacy cohort. New sources were
-selected for the planned hardware/affinity review, not according to speed.
-The original P144 scaling samples remain in the main curve.
+## Figures
 
-### Strong scaling
+![Strong scaling](../b_mpi/nov12/final_results_20261112/strong_scaling.png)
 
-For 128³, the standardized P72 median is 0.337059 s (speedup 14.867, efficiency 20.65%). P288 takes 0.294310 s (speedup 17.026, efficiency 5.91%). The small-grid and large-grid efficiencies differ substantially.
+![Weak scaling](../b_mpi/nov12/final_results_20261112/weak_scaling.png)
 
-For 256³, the standardized P72 median is 1.238393 s (speedup 36.761, efficiency 51.06%). P288 takes 0.632244 s (speedup 72.005, efficiency 25.00%). The small-grid and large-grid efficiencies differ substantially.
 
-The original 256³/P144 median is 13.854904 s, with range
-[12.601303, 14.110585] s. It is retained even though the
-curve is nonmonotonic. The four-host repeat sharing CN-011 and CN-108 with the original allocation gives
-14.113334 s, range [13.825400, 14.342317] s.
-The host sets partly overlap and conditions are shared; this reproduces high
-waiting in the tested allocations, but does not establish a universal
-intrinsic defect at exactly 144 ranks or identify a unique root cause.
+![Optimization ablation](../b_mpi/nov12/final_results_20261112/optimization_ablation.png)
 
-For 512³, the P72 baseline is 9.755425 s on three hosts.
-P288 takes 3.273120 s, giving S72=2.980 and
-E72=74.51%. This is relative-to-72 scaling, not
-speedup relative to one rank. The 720-core point remains omitted.
 
-### Weak scaling
+## Measured conclusions
 
-Each rank owns 64³ interior points. The global domain remains the unit cube,
-so grid spacing and the discrete problem change with P. The controlled
-quantity is point-update work per rank, not precision or equal solution time.
+- Nine-host 256 cubed P144: 1.199994 s [0.984020, 1.244007], versus historical four-host 13.854904 s. This establishes a different observed operating regime, with host/layout/date confounding.
 
-| P | Nodes | ms per sweep | Weak efficiency T1/TP |
-|---:|---:|---:|---:|
-| 1 | 1 | 0.392329 | 100.00% |
-| 8 | 1 | 0.862284 | 45.50% |
-| 72 | 3 | 1.372183 | 28.59% |
-| 144 | 4 | 13.575610 | 2.89% |
-| 288 | 9 | 1.911628 | 20.52% |
+- Nine-host 128 cubed P144: 0.354812 s [0.255547, 0.370044], versus historical four-host 11.993227 s. This establishes a different observed operating regime, with host/layout/date confounding.
 
-The fixed local work does not keep time constant. Neighbor counts, cross-node
-messages, shared-memory resources and scheduling can change. The P144 anomaly
-is retained in both strong and weak curves; phase evidence helps locate the
-loss but cannot isolate all system causes.
+- Nine-host 512 cubed P144: 4.758481 s [4.755006, 5.146238], versus historical four-host 16.727098 s. This establishes a different observed operating regime, with host/layout/date confounding.
 
-### Paired MPI+OpenMP layouts
+- Diagnostic 1536849.stdct-mgmt-02, slowest rank 112 (CN-142): largest axis wait is y, 0.199253 s; participants CN-140 / CN-142. Instrumented and formal runtimes are separate.
 
-| Total cores | P×T | Nodes | Median [min, max] seconds | Paired MPI / time |
-|---:|---|---:|---:|---:|
-| 72 | 72×1 | 1 | 1.441737 [1.437858, 1.544236] | 1.000 |
-| 72 | 12×6 | 1 | 1.812523 [1.804147, 1.853521] | 0.795 |
-| 72 | 6×12 | 1 | 1.628238 [1.614789, 1.628980] | 0.885 |
-| 72 | 2×36 | 1 | 1.973561 [1.972097, 2.014452] | 0.731 |
-| 144 | 144×1 | 4 | 14.113334 [13.825400, 14.342317] | 1.000 |
-| 144 | 24×6 | 4 | 6.957972 [6.698904, 7.652053] | 2.028 |
-| 144 | 12×12 | 4 | 7.393277 [7.245681, 7.698748] | 1.909 |
-| 144 | 4×36 | 4 | 7.874100 [7.437435, 9.007569] | 1.792 |
+- Diagnostic 1536850.stdct-mgmt-02, slowest rank 43 (CN-041): largest axis wait is z, 6.701722 s; participants CN-041 / boundary. Instrumented and formal runtimes are separate.
 
-At 72 cores, all three hybrids are slower than the single-node paired MPI
-control; even the best hybrid minimum exceeds the MPI maximum. At 144 cores
-in the earlier high-wait allocation, all three mixed layouts are
-faster than its paired MPI control (gains approximately 1.79–2.03), and their
-ranges do not overlap that MPI range. Three samples are not a confidence
-interval or a guarantee on a different allocation.
+- Diagnostic 1546655.stdct-mgmt-02, slowest rank 3 (CN-094): largest axis wait is y, 0.221198 s; participants CN-094 / boundary. Instrumented and formal runtimes are separate.
 
-The earlier 144-core hybrid cohort had different outcomes and remains in the
-legacy tables. The review changes remote environment propagation and host
-placement/system state together; differences cannot be assigned to affinity
-alone. Reducing ranks changes messages, subdomains and cache/NUMA sharing as
-well as adding threads, so no single cause is quantitatively isolated.
+- Diagnostic 1546883.stdct-mgmt-02, slowest rank 50 (CN-068): largest axis wait is x, 0.010825 s; participants CN-068 / CN-068. Instrumented and formal runtimes are separate.
 
-### Communication/wait diagnostics
+- Exclusive same-core 128 cubed: MPI P1 3.028341 s, A serial 3.595406 s; maximum median deviations 1.10% / 0.64%. All five formal samples are retained, whether or not the 5% target is met.
 
-Each row below uses all phases from the rank with the largest total duration;
-no independent per-phase maxima from other ranks are added. The three
-instrumented runs are separate from formal performance medians.
+- Exclusive same-core 256 cubed: MPI P1 29.971071 s, A serial 32.203193 s; maximum median deviations 0.26% / 0.37%. All five formal samples are retained, whether or not the 5% target is met.
 
-| P | Nodes | Total s | Update s | Pack/unpack s | Communication/wait s | Wait fraction |
-|---:|---:|---:|---:|---:|---:|---:|
-| 72 | 3 | 1.172958 | 0.651368 | 0.120575 | 0.399991 | 34.10% |
-| 144 | 4 | 14.042913 | 0.240497 | 0.084609 | 13.716785 | 97.68% |
-| 288 | 9 | 0.628623 | 0.134376 | 0.053438 | 0.439661 | 69.94% |
 
-The large original P144 waiting interval persists in the overlapping-node repeat.
-It is a blocking communication/wait interval, not pure wire time; rank
-scheduling, communication progress and fabric conditions can contribute.
-The cost model explains relative exposure as local domains shrink, but does
-not explain the nonmonotonic point by core count alone. Timer overhead and
-small uninstrumented intervals remain in the full diagnostic CSV.
+### All optimization outcomes
 
-### Audit, numerical consistency and limits
+| layout | variant | median | baseline_over_variant |
+|---|---|---|---|
+| 12x6 | parallel_pack | 1.188800184 | 1.511706466054854 |
+| 72x1 | baseline | 1.195644083 | 1.0 |
+| 6x12 | original | 1.535808966 | 1.0365199840876564 |
+| 2x36 | baseline | 1.96689247 | 1.0 |
+| 72x1 | original | 1.192018746 | 1.0030413422709712 |
+| 12x6 | baseline | 1.797116925 | 1.0 |
+| 2x36 | parallel_pack | 1.4745058370000002 | 1.333933322367716 |
+| 72x1 | parallel_pack | 1.200713497 | 0.9957779986544116 |
+| 2x36 | persistent | 1.930438851 | 1.0188835916667944 |
+| 72x1 | optimized | 1.200970499 | 0.9955649068778665 |
+| 72x1 | persistent | 1.202157424 | 0.9945819566805753 |
+| 2x36 | optimized | 1.477255169 | 1.3314507278600018 |
+| 12x6 | first_touch | 1.798264358 | 0.9993619219583065 |
+| 2x36 | first_touch | 1.944035307 | 1.0117575863554005 |
+| 72x1 | first_touch | 1.191822989 | 1.0032060918737655 |
+| 12x6 | persistent | 1.805986187 | 0.995088964653305 |
+| 12x6 | optimized | 1.181961149 | 1.5204534654294295 |
+| 6x12 | persistent | 1.5867945049999999 | 1.0032154005978235 |
+| 6x12 | optimized | 1.221885288 | 1.3028200770021876 |
+| 6x12 | first_touch | 1.596715251 | 0.9969822008044439 |
+| 6x12 | baseline | 1.591896685 | 1.0 |
+| 2x36 | original | 1.88164862 | 1.0453027462693858 |
+| 12x6 | original | 1.706989876 | 1.0527988187084012 |
+| 6x12 | parallel_pack | 1.222017403 | 1.302679226246666 |
 
-The supplemental 63 calls, including warmups and diagnostics, passed actual
-OS CPU-mask size, allocation-subset and per-host nonoverlap checks for every
-rank. Explicit -x propagation carries OpenMP settings and runtime paths to
-remote workers. One-rank/whole-allocation PE=36 cases are thereby verified
-rather than relying only on Open MPI's all-available-processors message.
-The manufactured solution, K, source hash, finite metrics, boundary values,
-actual ranks/threads/hosts and residual agreement are checked independently.
 
-Earlier completed samples from an interrupted 288-core attempt remain in the
-legacy evidence. A failed startup has no accepted result. No valid slow
-sample was removed because of its speed. The standardized cohort is a
-separate documented experiment; it is not an undocumented replacement of
-individual observations in the old cohort.
+Ratios above one mean faster than the matched experimental baseline. Ratios for the original binary are descriptive, not isolated optimization effects. The combined treatment includes extra synchronization; parallel packing or a persistent region is not assumed beneficial at every subdomain/thread count.
 
-Figures and concise CSVs are under `results/final_202611/B_mpi/analysis/`.
-The integrated report uses `closeout/figures/`; these regenerate from numerical
-CSV, not terminal logs. Strong and weak curves use logarithmic CPU/time axes;
-efficiency is linear in percent, and min/max reflect all three formal samples.
 
-### Overall design discussion
+### Optional 2D 512 x 512, K=1000
 
-MPI makes distributed ownership and halo dependency explicit. OpenMP shares
-the local work over assigned cores but can change message count, memory
-sharing and synchronization costs. C's GPU uses a different device memory
-space; its own paired CPU/GPU baselines must remain within C's allocation.
-The study uses synthetic MMS inputs and makes no real-data inference.
-
-## Reproduction and AI usage
-
-Implementation, commands, PBS generation and measurement details are in
-`b_mpi/README.md`. The exact submitted job IDs and resource changes are in
-`b_mpi/jobs_submitted.json`. Internal evidence is under
-`results/final_202611/B_mpi/`; do not include logs or terminal transcripts in
-the final submission archive.
-
-AI assisted implementation, independent checking, experiment tooling and
-this draft. The member must review the code and findings and fill in their
-own name, student ID and actual contribution. No personal understanding or
-member sign-off is asserted here.
-
-## Qualification after the 9 November feedback
-
-The two earlier four-node allocations share CN-011 and CN-108 and are not
-independent with respect to node identity. Their mixed-layout gains are
-conditional on a high-wait MPI reference; a healthy-platform benefit is not
-established. New disjoint-node nine-host pure MPI and four-host full-layout
-experiments are separate, with their own baselines. Directional diagnostics
-report both neighbors participating in each axis's Sendrecv calls; a large
-interval does not uniquely identify one faulty physical link.
-
-Parallel packing, genuine parallel first writes to uninitialized allocations,
-a persistent OpenMP region and their combination are implemented in a separate
-experimental source. The original measured source remains unchanged. An
-aligned experimental baseline separates allocation/container/compiler effects
-from the individual optimization switches. Thirty local mathematical checks
-pass across the five variants, but no cluster speedup is claimed without
-completed cluster measurements. In particular, ranks confined to one NUMA
-socket may show little first-touch benefit; page placement has not been
-independently measured.
+| P | median | speedup | efficiency |
+|---|---|---|---|
+| 1 | 1.123406092 | 1.0 | 1.0 |
+| 12 | 0.11331647300000003 | 9.91388155895039 | 0.8261567965791992 |
+| 36 | 0.044280888 | 25.369999174361634 | 0.7047221992878232 |
+| 72 | 0.03247924 | 34.5884353205309 | 0.48039493500737357 |
