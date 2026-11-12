@@ -1,3 +1,5 @@
+> **2026-11-12 补充：** PBS 已恢复，9 节点 144 核复测、432/720 核可选点和参考通信探针已取得并核验。新增结果、原始证据与待完成项见 [B 补充结果](../b_mpi/nov12/final_results_20261112/README.md) 和 [完成状态](B_COMPLETION_STATUS_2026-11-12.md)。下方 11 月 7 日数据保留为历史记录；尚未采集完成的基线与配对实验不得当作新结论。
+
 > 2026-11-09 feedback correction: see B_FEEDBACK_ANALYSIS_2026-11-09.md for baseline sensitivity, complete scaling tables and alternative weak references. New disjoint-host/baseline/optimization jobs are prepared but have no accepted result while PBS is unavailable.
 
 # B: Cartesian MPI, hybrid execution and communication

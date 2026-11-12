@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Audit completed cluster results; never select measurements by speed."""
-import argparse,collections,csv,json,math,pathlib,statistics
+import argparse,collections,csv,hashlib,json,math,pathlib,statistics
 p=argparse.ArgumentParser();p.add_argument('--input',required=True);p.add_argument('--out',required=True);a=p.parse_args();root=pathlib.Path(a.input);out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
 groups=collections.defaultdict(list);axis=[];links=[];seen_jobs=set()
 for meta_file in root.rglob('metadata.json'):
@@ -10,7 +10,13 @@ for meta_file in root.rglob('metadata.json'):
  if not done.exists() or not qstat.exists():continue
  q=json.loads(qstat.read_text())
  if q.get('job_state')!='F' or q.get('Exit_status')!=0:continue
- mode=meta['mode'];seen_jobs.add(meta['job'])
+ mode=meta['mode']
+ assert json.loads(done.read_text())=={'status':'PASS','local_smoke':False}
+ for source,digest in meta['source_sha256'].items():
+  assert hashlib.sha256((data_dir/'source'/pathlib.Path(source).name).read_bytes()).hexdigest()==digest,'source snapshot mismatch'
+ if mode in ('clean144','paired144'):
+  assert not {h.lower().split('.')[0] for h in meta['hosts']}&{'cn-011','cn-108','cn-084','cn-152','cn-039','gn-a40-047'}
+ seen_jobs.add(meta['job'])
  if mode=='links':
   result=json.loads((data_dir/'link.stdout.json').read_text());assert len(set(result['hosts']))==2
   by_size=collections.defaultdict(list)

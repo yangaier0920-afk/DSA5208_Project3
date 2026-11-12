@@ -1,0 +1,84 @@
+{
+  "status": "SUBMITTED",
+  "submitted": [
+    {
+      "name": "clean144",
+      "job": "1536849.stdct-mgmt-02",
+      "depends_on": null,
+      "command": [
+        "qsub",
+        "b_mpi/nov09/jobs/clean144.pbs"
+      ]
+    },
+    {
+      "name": "paired144",
+      "job": "1536850.stdct-mgmt-02",
+      "depends_on": "1536849.stdct-mgmt-02",
+      "command": [
+        "qsub",
+        "-W",
+        "depend=afterok:1536849.stdct-mgmt-02",
+        "b_mpi/nov09/jobs/paired144.pbs"
+      ]
+    },
+    {
+      "name": "baseline",
+      "job": "1546654.stdct-mgmt-02",
+      "depends_on": null,
+      "command": [
+        "qsub",
+        "b_mpi/nov12/baseline.pbs"
+      ],
+      "superseded_job": "1536851.stdct-mgmt-02"
+    },
+    {
+      "name": "optimize72",
+      "job": "1546655.stdct-mgmt-02",
+      "depends_on": "1546654.stdct-mgmt-02",
+      "command": [
+        "qsub",
+        "-W",
+        "depend=afterok:1546654.stdct-mgmt-02",
+        "b_mpi/nov12/optimize72.pbs"
+      ],
+      "superseded_job": "1536852.stdct-mgmt-02"
+    },
+    {
+      "name": "suspect_diag",
+      "job": "1536853.stdct-mgmt-02",
+      "depends_on": null,
+      "command": [
+        "qsub",
+        "b_mpi/nov09/jobs/suspect_diag.pbs"
+      ]
+    },
+    {
+      "name": "link_suspect",
+      "job": "1546667.stdct-mgmt-02",
+      "depends_on": null,
+      "command": [
+        "qsub",
+        "b_mpi/nov09/jobs/link_suspect.pbs"
+      ],
+      "superseded_job": "1536854.stdct-mgmt-02"
+    },
+    {
+      "name": "link_reference",
+      "job": "1536855.stdct-mgmt-02",
+      "depends_on": "1536849.stdct-mgmt-02",
+      "command": [
+        "qsub",
+        "-W",
+        "depend=afterok:1536850.stdct-mgmt-02",
+        "b_mpi/nov09/jobs/link_reference.pbs"
+      ]
+    }
+  ],
+  "revision_notes": [
+    "2026-11-12: cancelled only unstarted baseline/optimization jobs and replaced independently of 144-core chain",
+    "clean144/paired144 now use scheduler-selected hosts; runner must reject all six old 144-core hosts",
+    "baseline/optimization use two 36-core NUMA chunks packed on a single exclusive host",
+    "reference link requested on CN-005/CN-083 instead of busy CN-003/CN-110",
+    "Original-node link probe no longer waits for the four-host diagnostic; reference link now follows clean144 rather than paired144"
+  ]
+}

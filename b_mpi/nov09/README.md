@@ -2,6 +2,16 @@
 
 ## Status
 
+> **12 November update:** PBS has recovered. The original fixed-host requests
+> were revised after two days in the queue. The 9-host pure-MPI run and reference
+> link probe have completed; the exclusive P1 baseline is running. Actual
+> scheduler evidence and revised requests are collected under `b_mpi/nov12/`.
+> New submissions default to scheduler-selected hosts, reject all six old
+> 144-core hosts (including FQDN aliases), and run the baseline independently.
+> `--fixed-reference-hosts` reproduces the original Nov9 request. The original
+> design/status below is retained as history; it is not current job status.
+
+
 Prepared and locally validated. **No new formal Vanda runtime is claimed.**
 SSH access works, but repeated PBS queries on 9 November returned connection
 refused / errno 15010. All submission code checks scheduler health first and

@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -N B09_link_reference
+#PBS -P personal-e1561365
+#PBS -l select=1:ncpus=1:mpiprocs=1:ompthreads=1:mem=8gb:host=cn-005+1:ncpus=1:mpiprocs=1:ompthreads=1:mem=8gb:host=cn-083
+#PBS -l place=scatter
+#PBS -l walltime=00:10:00
+#PBS -j oe
+#PBS -S /bin/bash
+set -euo pipefail
+: "${PBS_JOBID:?Submit through PBS}"
+cd "$PBS_O_WORKDIR"
+source ./b_mpi/runtime_modules.sh
+out="results/final_202611/B_nov09/link_reference_${PBS_JOBID}"
+mkdir -p "$out"
+exec > >(tee "$out/run.log") 2>&1
+trap 'status=$?; echo JOB_EXIT_STATUS=$status' EXIT
+qstat -f "$PBS_JOBID" > "$out/qstat_start.txt"
+cp "$PBS_NODEFILE" "$out/pbs_nodefile.txt"
+module list
+python3 b_mpi/nov09/run_feedback.py --mode links --out "$out/data"
+echo RUN_STATUS=PASSED

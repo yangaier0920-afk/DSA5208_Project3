@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -N B09_paired144
+#PBS -P personal-e1561365
+#PBS -l select=4:ncpus=36:mpiprocs=36:ompthreads=1:mem=250GB
+#PBS -l place=scatter:group=node_pool
+#PBS -l walltime=00:20:00
+#PBS -j oe
+#PBS -S /bin/bash
+set -euo pipefail
+: "${PBS_JOBID:?Submit through PBS}"
+cd "$PBS_O_WORKDIR"
+source ./b_mpi/runtime_modules.sh
+out="results/final_202611/B_nov09/paired144_${PBS_JOBID}"
+mkdir -p "$out"
+exec > >(tee "$out/run.log") 2>&1
+trap 'status=$?; echo JOB_EXIT_STATUS=$status' EXIT
+qstat -f "$PBS_JOBID" > "$out/qstat_start.txt"
+cp "$PBS_NODEFILE" "$out/pbs_nodefile.txt"
+module list
+python3 b_mpi/nov09/run_feedback.py --mode paired144 --out "$out/data"
+echo RUN_STATUS=PASSED

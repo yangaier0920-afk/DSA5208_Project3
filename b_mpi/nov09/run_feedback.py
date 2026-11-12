@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Predeclared November 9 experiments. No acceptance filter based on speed."""
 import argparse,collections,hashlib,json,math,os,pathlib,subprocess,time,sys
-p=argparse.ArgumentParser();p.add_argument('--mode',choices=['clean144','paired144','baseline','optimize72','suspect_diag','links'],required=True);p.add_argument('--out',required=True);p.add_argument('--local-smoke',action='store_true');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--mode',choices=['clean144','paired144','baseline','optimize72','suspect_diag','links','twod'],required=True);p.add_argument('--out',required=True);p.add_argument('--local-smoke',action='store_true');a=p.parse_args()
 if not a.local_smoke:assert os.getenv('PBS_JOBID'),'Use a PBS compute allocation'
 out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=False)
 build=out/'build';build.mkdir();sources=['b_mpi/jacobi_cart.cpp','b_mpi/nov09/jacobi_cart_tuned.cpp','b_mpi/nov09/mpi_link_probe.cpp','a_scaling_20261104/jacobi_a_scaling.cpp']
@@ -17,15 +17,15 @@ nodefile=os.getenv('PBS_NODEFILE');hosts=set(pathlib.Path(nodefile).read_text().
 meta={'mode':a.mode,'local_smoke':a.local_smoke,'job':os.getenv('PBS_JOBID'),'hosts':sorted(hosts),'source_sha256':{s:hashlib.sha256(pathlib.Path(s).read_bytes()).hexdigest() for s in sources},'compile_commands':compile_commands,'binary_sha256':{k:hashlib.sha256(v.read_bytes()).hexdigest() for k,v in binaries.items()}}
 if not a.local_smoke:
  hd=out/'hardware';hd.mkdir();probe="import pathlib,socket,subprocess,json,os,sys; pathlib.Path(sys.argv[1],socket.gethostname()+'.json').write_text(json.dumps({'host':socket.gethostname(),'lscpu':subprocess.check_output(['lscpu'],text=True),'meminfo':open('/proc/meminfo').read(),'allowed_cpus':sorted(os.sched_getaffinity(0))}))"
- subprocess.run(['mpirun','--map-by','ppr:1:node','--bind-to','none','-np',str(len(hosts)),'python3','-c',probe,str(hd.resolve())],check=True,timeout=90)
+ subprocess.run(['mpirun','--hostfile',nodefile,'--mca','ras','^tm','--mca','plm','rsh','--map-by','ppr:1:node','--bind-to','none','-np',str(len(hosts)),'python3','-c',probe,str(hd.resolve())],check=True,timeout=90)
  meta['hardware']=[json.loads(f.read_text()) for f in hd.glob('*.json')];assert len(meta['hardware'])==len(hosts)
  for h in meta['hardware']:
   fields={line.split(':',1)[0].strip():line.split(':',1)[1].strip() for line in h['lscpu'].splitlines() if ':' in line}
   assert 'Platinum 8452Y' in fields['Model name'] and fields['Thread(s) per core']=='1'
   mem_kib=int(h['meminfo'].splitlines()[0].split()[1]);h['mem_total_kib']=mem_kib
   if a.mode not in ('optimize72',):assert 490*1024**2<mem_kib<530*1024**2,'Require nominal 512-GiB hosts'
- if a.mode in ('clean144','paired144'):assert not {h.lower() for h in hosts}&{'cn-011','cn-108','cn-084','cn-152','cn-039','gn-a40-047'},'Review must exclude all old 144 hosts'
- if a.mode in ('baseline','optimize72'):assert len(hosts)==1 and len(meta['hardware'][0]['allowed_cpus'])==72,'Requires an entire 72-core allocation'
+ if a.mode in ('clean144','paired144'):assert not {h.lower().split('.')[0] for h in hosts}&{'cn-011','cn-108','cn-084','cn-152','cn-039','gn-a40-047'},'Review must exclude all old 144 hosts'
+ if a.mode in ('baseline','optimize72','twod'):assert len(hosts)==1 and len(meta['hardware'][0]['allowed_cpus'])==72,'Requires an entire 72-core allocation'
 (out/'metadata.json').write_text(json.dumps(meta,indent=2))
 def launch(P,T):
  if a.local_smoke:return ['mpirun','--oversubscribe','--bind-to','none','-np',str(P)]
@@ -39,7 +39,7 @@ if a.mode=='baseline' and not a.local_smoke:
 if a.mode=='links':
  cmd=launch(2,1)+[str(binaries['link'])];env=dict(os.environ,OMP_NUM_THREADS='1',OMP_DYNAMIC='FALSE',OMP_PLACES='cores',OMP_PROC_BIND='close');r=subprocess.run(cmd,env=env,capture_output=True,text=True,timeout=240);(out/'link.stdout.json').write_text(r.stdout);(out/'link.stderr.txt').write_text(r.stderr);assert r.returncode==0;r=json.loads(r.stdout);assert len(set(r['hosts']))==2 or a.local_smoke;(out/'COMPLETE.json').write_text(json.dumps({'status':'PASS','local_smoke':a.local_smoke}));print('LINK_PROBE_PASS');raise SystemExit
 G144=(6,6,4);G72=(6,4,3)
-def cfg(id,n,P,T,g,binary='mpi',variant=None,diag=False):return dict(id=id,n=n,P=P,T=T,grid=g,binary=binary,variant=variant,diagnostic=diag)
+def cfg(id,n,P,T,g,binary='mpi',variant=None,diag=False,dim=3):return dict(id=id,n=n,P=P,T=T,grid=g,binary=binary,variant=variant,diagnostic=diag,dimension=dim)
 configs=[]
 if a.mode=='clean144':
  configs=[cfg('strong'+str(n),(n,n,n),144,1,G144) for n in [128,256,512]]+[cfg('weak64',(384,384,256),144,1,G144),cfg('axis144',(256,)*3,144,1,G144,'axis','baseline',True)]
@@ -49,6 +49,9 @@ elif a.mode=='paired144':
  configs += [cfg(f'pair_{P}x{T}',(256,)*3,P,T,g,'hybrid') for P,T,g in [(24,6,(4,3,2)),(12,12,(3,2,2)),(4,36,(2,2,1))]]
  configs += [cfg('axis144',(256,)*3,144,1,G144,'axis','baseline',True)]
 elif a.mode=='baseline':configs=[cfg(f'{key}_{n}',(n,)*3,1,1,(1,1,1),key) for n in [128,256] for key in ['mpi','serial']]
+elif a.mode=='twod':
+ configs=[cfg(f'twod512_p{P}',(512,512,0),P,1,g,dim=2) for P,g in [(1,(1,1,1)),(12,(4,3,1)),(36,(6,6,1)),(72,(9,8,1))]]
+ configs+=[cfg('axis_twod72',(512,512,0),72,1,(9,8,1),'axis','baseline',True,dim=2)]
 else:
  for P,T,g in [(72,1,G72),(12,6,(3,2,2)),(6,12,(3,2,1)),(2,36,(2,1,1))]:
   configs+=[cfg(f'original_{P}x{T}',(256,)*3,P,T,g,'mpi' if T==1 else 'hybrid')]
@@ -67,7 +70,8 @@ for rep in [-1]+list(range(1 if a.local_smoke else repeats)):
   cmd+=[str(binaries[c['binary']])]
   if c['binary']=='serial':cmd+=['--problem','poisson3d_mms','--max-iters',str(5 if a.local_smoke else 1000)]
   else:cmd+=['--iterations',str(5 if a.local_smoke else 1000),'--px',str(c['grid'][0]),'--py',str(c['grid'][1]),'--pz',str(c['grid'][2]),'--diagnostic',str(int(c['diagnostic']))]
-  for k,v in zip(['nx','ny','nz'],c['n']):cmd+=['--'+k,str(v)]
+  if c['binary']!='serial':cmd+=['--dim',str(c.get('dimension',3))]
+  for k,v in zip(['nx','ny','nz'],c['n']):cmd+=['--'+k,str(max(1,v))]
   if c['variant']:cmd+=['--variant',c['variant']]
   pathlib.Path(str(prefix)+'.command.json').write_text(json.dumps({'argv':cmd,'config':c,'repeat':rep,'OMP':{k:v for k,v in env.items() if k.startswith('OMP_')}},indent=2))
   started=time.monotonic()

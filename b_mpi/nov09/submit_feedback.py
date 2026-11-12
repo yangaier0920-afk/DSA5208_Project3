@@ -8,7 +8,7 @@ if check.returncode:raise SystemExit('PBS unavailable; no jobs submitted:\n'+che
 file=pathlib.Path(a.out);file.parent.mkdir(parents=True,exist_ok=True)
 if file.exists():raise SystemExit('Submission manifest already exists; inspect it rather than duplicate jobs')
 rows=[];ids={}
-order=[('clean144',None),('paired144','clean144'),('baseline','paired144'),('optimize72','baseline'),('suspect_diag',None),('link_suspect','suspect_diag'),('link_reference','paired144')]
+order=[('clean144',None),('paired144','clean144'),('baseline',None),('optimize72','baseline'),('suspect_diag',None),('link_suspect',None),('link_reference','clean144')]
 for name,parent in order:
  cmd=['qsub']+(['-W','depend=afterok:'+ids[parent]] if parent else [])+['b_mpi/nov09/jobs/'+name+'.pbs']
  r=subprocess.run(cmd,text=True,capture_output=True)

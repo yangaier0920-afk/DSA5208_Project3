@@ -1,0 +1,4 @@
+job,mode,case,rank,host,axis,low_neighbor,high_neighbor,low_host,high_host,communication_wait_seconds,pack_unpack_seconds,rank_total_seconds,is_slowest_rank
+1536849.stdct-mgmt-02,clean144,axis144,112,CN-142,x,88,136,CN-118,CN-146,0.15759776399999623,0.024787980999996184,0.767813496,1
+1536849.stdct-mgmt-02,clean144,axis144,112,CN-142,y,108,116,CN-140,CN-142,0.19925251000000166,0.02691490800000542,0.767813496,1
+1536849.stdct-mgmt-02,clean144,axis144,112,CN-142,z,-2,113,boundary,CN-142,0.05552438299999952,0.02664213799999995,0.767813496,1
